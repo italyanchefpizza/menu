@@ -1120,10 +1120,10 @@ const CATEGORIES = [
     icon:"tag",
     type:"campaigns",
     campaigns:[
-      ["MENÜ 1","2 Adet Büyük Boy Ekonomik Pizza + 1 LT Kola","600 TL"],
-      ["MENÜ 2","2 Adet Orta Boy Ekonomik Pizza + 1 LT Kola","500 TL"],
-      ["MENÜ 3","1 Adet Orta Boy Ekonomik Pizza + Kutu Kola","280 TL"],
-      ["MENÜ 4","3 Adet Orta Boy Ekonomik Pizza","650 TL"]
+      ["MENÜ 1","2 Adet Büyük Boy Ekonomik Pizza + 1 LT Coca-Cola","600 TL","kampanya-1.webp"],
+      ["MENÜ 2","2 Adet Orta Boy Ekonomik Pizza + 1 LT Coca-Cola","500 TL","kampanya-2.webp"],
+      ["MENÜ 3","1 Adet Orta Boy Ekonomik Pizza + Kutu Coca-Cola","280 TL","kampanya-3.webp"],
+      ["MENÜ 4","3 Adet Orta Boy Ekonomik Pizza","650 TL","kampanya-4.webp"]
     ]
   },
   {
@@ -1477,12 +1477,9 @@ function openCategory(id, push=true){
   }
 
   if(cat.type==="campaigns"){
-    html+=`<div class="campaign-grid">`+cat.campaigns.map(c=>`
-      <article class="campaign-card">
-        <span class="campaign-label">${c[0]}</span>
-        <h3>${c[1]}</h3>
-        <p>Ekonomik pizza kampanyası</p>
-        <div class="campaign-price"><span>Kampanya fiyatı</span><strong>${c[2]}</strong></div>
+    html+=`<div class="campaign-grid campaign-poster-grid">`+cat.campaigns.map((c,i)=>`
+      <article class="campaign-card campaign-poster-card" data-campaign-index="${i}" role="button" tabindex="0" aria-label="${c[0]}: ${c[1]}, ${c[2]}">
+        <img src="${c[3]}" alt="${c[0]} - ${c[1]} - Kampanya fiyatı ${c[2]}" loading="${i===0 ? "eager" : "lazy"}">
       </article>
     `).join("")+`</div>`;
   }
@@ -1512,6 +1509,20 @@ function openCategory(id, push=true){
       card.addEventListener("click",()=>{
         viewerItems=viewerItemsForCategory(cat);
         openViewer(Number(card.dataset.index));
+      });
+    });
+  } else if(cat.type==="campaigns"){
+    const openCampaign=(index)=>{
+      viewerItems=cat.campaigns.map(c=>({title:c[0],src:c[3]}));
+      openViewer(index);
+    };
+    content.querySelectorAll(".campaign-poster-card").forEach(card=>{
+      card.addEventListener("click",()=>openCampaign(Number(card.dataset.campaignIndex)));
+      card.addEventListener("keydown",e=>{
+        if(e.key==="Enter"||e.key===" "){
+          e.preventDefault();
+          openCampaign(Number(card.dataset.campaignIndex));
+        }
       });
     });
   } else if(cat.type==="poster"){
@@ -1869,6 +1880,43 @@ body.viewer-open .bottom-nav{
 /* Tek görsellik ekranlarda "kaydır" mesajı gereksiz. */
 #viewer.single-viewer .swipe-tip{
   display:none!important;
+}
+</style>
+
+
+<style>
+/* ===== KAMPANYALAR / GÖRSEL ENTEGRASYON ===== */
+.campaign-poster-grid{
+  grid-template-columns:1fr!important;
+  gap:14px!important;
+  padding:10px 14px 28px!important;
+}
+.campaign-poster-card{
+  position:relative!important;
+  overflow:hidden!important;
+  padding:0!important;
+  border-radius:16px!important;
+  border:1px solid rgba(238,178,88,.36)!important;
+  background:#090705!important;
+  box-shadow:
+    0 0 0 1px rgba(255,190,96,.04),
+    0 12px 28px rgba(0,0,0,.34)!important;
+  cursor:pointer!important;
+  -webkit-tap-highlight-color:transparent;
+}
+.campaign-poster-card img{
+  display:block!important;
+  width:100%!important;
+  height:auto!important;
+  object-fit:contain!important;
+}
+.campaign-poster-card:active{
+  transform:scale(.992);
+}
+@media(min-width:620px){
+  .campaign-poster-grid{
+    grid-template-columns:1fr 1fr!important;
+  }
 }
 </style>
 
