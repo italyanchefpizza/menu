@@ -362,7 +362,7 @@ a{text-decoration:none;color:inherit}
   -webkit-user-drag:none;
 }
 .viewer-close{
-  position:absolute;top:max(12px,env(safe-area-inset-top));right:12px;z-index:5;
+  position:absolute;top:max(12px,env(safe-area-inset-top));left:12px;right:auto;z-index:6;
   width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.25);
   background:rgba(0,0,0,.52);backdrop-filter:blur(10px);display:grid;place-items:center;cursor:pointer;
 }
@@ -753,7 +753,7 @@ a{text-decoration:none;color:inherit}
 .pwa-install svg{width:13px;height:13px}
 
 .viewer-share{
-  position:absolute;top:max(12px,env(safe-area-inset-top));left:12px;z-index:6;width:40px;height:40px;
+  position:absolute;right:14px;left:auto;top:auto;bottom:calc(20px + env(safe-area-inset-bottom));z-index:7;width:40px;height:40px;
   border-radius:50%;border:1px solid rgba(255,255,255,.20);background:rgba(0,0,0,.46);color:#f3e6d4;
   backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);display:grid;place-items:center;cursor:pointer
 }
@@ -843,7 +843,7 @@ a{text-decoration:none;color:inherit}
         <a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=%C4%B0TALYAN%20CHEF%20P%C4%B0ZZA%20%C3%87ay%C4%B1rova&query_place_id=ChIJc1n9vJ3fyhQRMnqYBJrC7aw">Yorumları Gör</a>
         <a target="_blank" rel="noopener" href="https://search.google.com/local/writereview?placeid=ChIJc1n9vJ3fyhQRMnqYBJrC7aw">Yorum Yaz</a>
       </div>
-      <button class="pwa-install" id="installBtn" type="button">
+      <button class="pwa-install" id="installBtn" type="button" hidden>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12"/><path d="m8 11 4 4 4-4"/><path d="M5 19h14"/></svg>
         Menüyü Telefona Ekle
       </button>
@@ -1061,38 +1061,33 @@ const POPULAR = {
 const isPopular=(categoryId,name)=>Boolean(POPULAR[categoryId]?.has(name));
 
 
-const STORE_HOURS={
-  0:{open:660,close:1440},
-  1:{open:660,close:1440},
-  2:{open:660,close:1440},
-  3:{open:660,close:1440},
-  4:{open:660,close:1440},
-  5:{open:660,close:1500},
-  6:{open:660,close:1500}
-};
-
 function istanbulNowParts(){
   const parts=new Intl.DateTimeFormat("en-GB",{
-    timeZone:"Europe/Istanbul",weekday:"short",year:"numeric",month:"2-digit",day:"2-digit",
+    timeZone:"Europe/Istanbul",
+    year:"numeric",month:"2-digit",day:"2-digit",
     hour:"2-digit",minute:"2-digit",hourCycle:"h23"
   }).formatToParts(new Date());
   const map=Object.fromEntries(parts.map(p=>[p.type,p.value]));
-  const dayMap={Sun:0,Mon:1,Tue:2,Wed:3,Thu:4,Fri:5,Sat:6};
-  return {day:dayMap[map.weekday],year:Number(map.year),month:Number(map.month),date:Number(map.day),hour:Number(map.hour),minute:Number(map.minute)};
+  return {
+    year:Number(map.year),month:Number(map.month),date:Number(map.day),
+    hour:Number(map.hour),minute:Number(map.minute)
+  };
 }
-function formatCloseMinute(minute){
-  const h=Math.floor((minute%1440)/60),m=minute%60;
-  return `${String(h).padStart(2,"0")}:${String(m).padStart(2,"0")}`;
-}
+
 function renderStoreStatus(){
-  const host=document.getElementById("storeStatus"),label=document.getElementById("storeStatusText");
+  const host=document.getElementById("storeStatus");
+  const label=document.getElementById("storeStatusText");
   if(!host||!label)return;
-  const now=istanbulNowParts(),minute=now.hour*60+now.minute,today=STORE_HOURS[now.day],prev=STORE_HOURS[(now.day+6)%7];
-  const carried=minute<today.open&&prev.close>1440&&minute+1440<prev.close;
-  const openNow=carried||(minute>=today.open&&minute<Math.min(today.close,1440));
-  const closeMinute=carried?prev.close:today.close;
-  host.classList.toggle("open",openNow);host.classList.toggle("closed",!openNow);
-  label.textContent=openNow?`Açık • ${formatCloseMinute(closeMinute)}'a kadar`:`Kapalı • 11:00'de açılır`;
+
+  const now=istanbulNowParts();
+  const minute=now.hour*60+now.minute;
+
+  // Her gün 11:00–01:00
+  const openNow=(minute>=11*60)||(minute<60);
+
+  host.classList.toggle("open",openNow);
+  host.classList.toggle("closed",!openNow);
+  label.textContent=openNow?"Açık":"Kapalı";
 }
 setInterval(renderStoreStatus,60000);
 
@@ -1264,7 +1259,6 @@ function openCategory(id, push=true){
     <section class="category-hero${isPremium ? " premium-hero" : ""}">
       ${isPremium ? `<div class="premium-eyebrow">✦ ŞEFİN İMZA SERİSİ ✦</div>` : ""}
       <h1>${cat.title}</h1>
-      <p>${isPremium ? "En zengin içerikler, şef dokunuşu ve premium seri." : (cat.type==="pizza" ? "Bir pizzaya dokun; premium ürün görselini tam ekran incele." : cat.description || cat.sub)}</p>
       ${cat.prices ? `
         <div class="price-band">
           <div class="price-cell"><span>ORTA BOY</span><strong>${cat.prices[0]}</strong></div>
@@ -1441,14 +1435,44 @@ renderDailyFavorites();
 let deferredInstallPrompt=null;
 const installBtn=document.getElementById("installBtn");
 const isStandalone=window.matchMedia("(display-mode: standalone)").matches||window.navigator.standalone===true;
-if(installBtn)installBtn.hidden=isStandalone;
-window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();deferredInstallPrompt=e;if(installBtn&&!isStandalone)installBtn.hidden=false});
-installBtn?.addEventListener("click",async()=>{
-  if(deferredInstallPrompt){deferredInstallPrompt.prompt();await deferredInstallPrompt.userChoice;deferredInstallPrompt=null;return}
-  const isIOS=/iphone|ipad|ipod/i.test(navigator.userAgent);
-  showToast(isIOS?"Safari: Paylaş → Ana Ekrana Ekle":"Tarayıcı menüsü → Uygulamayı yükle");
+const isIOS=/iphone|ipad|ipod/i.test(navigator.userAgent);
+
+if(installBtn)installBtn.hidden=true;
+
+window.addEventListener("beforeinstallprompt",e=>{
+  e.preventDefault();
+  deferredInstallPrompt=e;
+  if(installBtn&&!isStandalone)installBtn.hidden=false;
 });
-window.addEventListener("appinstalled",()=>{if(installBtn)installBtn.hidden=true;showToast("Menü telefona eklendi")});
+
+if(isIOS&&!isStandalone&&installBtn){
+  installBtn.hidden=false;
+}
+
+installBtn?.addEventListener("click",async()=>{
+  if(deferredInstallPrompt){
+    deferredInstallPrompt.prompt();
+    const choice=await deferredInstallPrompt.userChoice;
+    if(choice.outcome==="accepted"){
+      installBtn.hidden=true;
+    }
+    deferredInstallPrompt=null;
+    return;
+  }
+
+  if(isIOS){
+    showToast("Safari: Paylaş → Ana Ekrana Ekle");
+    return;
+  }
+
+  // Chromium kurulum ölçütleri henüz hazır değilse sahte hata göstermiyoruz.
+  installBtn.hidden=true;
+});
+
+window.addEventListener("appinstalled",()=>{
+  if(installBtn)installBtn.hidden=true;
+  showToast("Menü telefona eklendi");
+});
 
 let refreshing=false;
 if("serviceWorker" in navigator){
@@ -1494,6 +1518,31 @@ if(directPizza){
   }
 }
 </script>
+
+<style>
+.viewer-close,
+.viewer-share{
+  box-sizing:border-box;
+}
+.viewer-share{
+  box-shadow:0 10px 28px rgba(0,0,0,.34);
+}
+.viewer-nav{
+  max-width:calc(100% - 116px);
+}
+.tool-chip{
+  justify-content:center;
+}
+#storeStatusText{
+  text-align:center;
+}
+</style>
+
 </body>
 </html>
 
+
+<style>
+.category-hero p{display:none!important}
+.category-hero{padding-bottom:10px}
+</style>
