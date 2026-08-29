@@ -3,366 +3,778 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#111111">
+<meta name="theme-color" content="#0b0806">
+<meta name="description" content="İtalyan Chef Pizza dijital menü">
 <title>İtalyan Chef Pizza | Dijital Menü</title>
+
 <style>
 :root{
-  --orange:#e65316;
-  --orange2:#ff6a1c;
-  --ink:#121212;
-  --cream:#f7efe5;
-  --paper:#fffaf3;
-  --muted:#746c64;
-  --line:#ead7c6;
-  --green:#0a6a46;
-  --shadow:0 10px 28px rgba(28,18,10,.09);
+  --bg:#0b0806;
+  --bg2:#16100b;
+  --paper:#f3eadc;
+  --orange:#ea5b18;
+  --gold:#d89a32;
+  --gold2:#f2c36b;
+  --cream:#f4ead8;
+  --muted:#b9a992;
+  --line:rgba(232,181,99,.25);
+  --glass:rgba(20,14,10,.50);
+  --glass2:rgba(10,8,6,.76);
+  --shadow:0 20px 60px rgba(0,0,0,.42);
+  --radius:22px;
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;background:var(--bg)}
 body{
-  margin:0;background:var(--cream);color:var(--ink);
-  font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;
-  padding-bottom:86px;
-}
-.hero{
+  margin:0;
+  min-height:100vh;
+  color:var(--cream);
   background:
-    radial-gradient(circle at 85% 0,rgba(230,83,22,.25),transparent 36%),
-    linear-gradient(145deg,#0d0d0d,#171717);
-  color:white;padding:24px 18px 22px;
+    radial-gradient(circle at 50% -10%,rgba(234,91,24,.16),transparent 32%),
+    linear-gradient(180deg,#100b08,#090705 58%,#0b0806);
+  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  overflow-x:hidden;
+  padding-bottom:88px;
 }
-.brand{max-width:760px;margin:auto}
-.kicker{
-  font-size:11px;font-weight:900;letter-spacing:.18em;color:#f0a274;
-  margin:0 0 8px;text-transform:uppercase
+button,a{font:inherit}
+button{color:inherit}
+a{text-decoration:none;color:inherit}
+.hidden{display:none!important}
+
+/* ----- shared brand ----- */
+.brand{
+  text-align:center;
+  user-select:none;
 }
-h1{
-  margin:0;font-family:Georgia,"Times New Roman",serif;
-  font-size:clamp(34px,10vw,58px);line-height:.92;letter-spacing:.01em
+.brand-kicker{
+  font-family:Georgia,"Times New Roman",serif;
+  letter-spacing:.08em;
+  font-size:13px;
+  color:var(--cream);
+  line-height:1;
 }
-h1 span{color:var(--orange2)}
-.tagline{
-  margin:10px 0 0;color:#f0a274;font-family:Georgia,serif;font-style:italic;
-  font-size:20px
+.brand-main{
+  margin-top:2px;
+  font-family:Georgia,"Times New Roman",serif;
+  font-weight:700;
+  font-size:32px;
+  letter-spacing:.02em;
+  line-height:.95;
 }
-.quick{
-  max-width:760px;margin:14px auto 0;display:flex;gap:8px;flex-wrap:wrap
+.brand-main span{color:var(--orange)}
+.brand-tag{
+  margin-top:7px;
+  color:var(--gold2);
+  font-family:Georgia,"Times New Roman",serif;
+  font-style:italic;
+  font-size:15px;
 }
-.quick a{
-  color:white;text-decoration:none;font-weight:850;font-size:12px;
-  padding:9px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.24)
+.brand-rule{
+  display:flex;align-items:center;gap:8px;justify-content:center;
+  margin:9px auto 0;width:150px;color:var(--gold)
 }
-.quick .primary{background:var(--orange);border-color:var(--orange)}
-main{max-width:760px;margin:auto;padding:18px 13px 36px}
-.intro{margin:4px 2px 15px}
-.intro h2{font-family:Georgia,serif;font-size:28px;margin:0 0 5px}
-.intro p{margin:0;color:var(--muted);font-size:14px;line-height:1.5}
-.category-list{display:grid;gap:10px}
-.category{
-  background:var(--paper);border:1px solid var(--line);
-  border-radius:18px;box-shadow:var(--shadow);overflow:hidden
+.brand-rule:before,.brand-rule:after{content:"";height:1px;flex:1;background:currentColor}
+.brand-rule i{width:5px;height:5px;border:1px solid currentColor;transform:rotate(45deg)}
+
+/* ----- landing: blurred menu chooser ----- */
+#landing{
+  position:fixed;
+  inset:0 0 72px;
+  z-index:30;
+  overflow:auto;
+  background:#0a0705;
 }
-.category-toggle{
-  width:100%;border:0;background:transparent;text-align:left;color:var(--ink);
-  padding:17px 16px;display:grid;grid-template-columns:42px 1fr auto;
-  align-items:center;gap:12px;cursor:pointer
+#landing:before{
+  content:"";
+  position:fixed;
+  inset:-24px;
+  background-image:
+    linear-gradient(rgba(5,3,2,.44),rgba(5,3,2,.62)),
+    url("assets/ekonomik.webp");
+  background-position:center 42%;
+  background-size:cover;
+  filter:blur(11px) saturate(.86);
+  transform:scale(1.08);
 }
-.cat-index{
-  width:42px;height:42px;border-radius:13px;background:#f8dfd0;color:var(--orange);
-  display:grid;place-items:center;font-family:Georgia,serif;font-weight:900;font-size:18px
+#landing:after{
+  content:"";
+  position:fixed;inset:0 0 72px;
+  pointer-events:none;
+  background:
+    radial-gradient(circle at 50% 25%,rgba(220,133,50,.20),transparent 28%),
+    linear-gradient(180deg,rgba(4,3,2,.22),rgba(4,3,2,.58) 52%,rgba(5,4,3,.82));
 }
-.cat-copy strong{
-  display:block;font-family:Georgia,serif;font-size:19px;line-height:1.1
+.landing-inner{
+  position:relative;z-index:2;
+  width:min(100%,520px);
+  margin:auto;
+  min-height:100%;
+  padding:34px 18px 34px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
 }
-.cat-copy small{display:block;color:var(--muted);margin-top:4px;font-size:12px}
-.chev{font-size:22px;color:var(--orange);transition:.2s transform}
-.category.open .chev{transform:rotate(180deg)}
-.category-panel{
-  max-height:0;overflow:hidden;transition:max-height .32s ease;
-  border-top:0 solid var(--line)
+.landing-logo{
+  margin-bottom:24px;
+  filter:drop-shadow(0 6px 18px rgba(0,0,0,.45));
 }
-.category.open .category-panel{border-top-width:1px}
-.panel-inner{padding:13px 13px 15px}
-.price-strip{
-  display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px
+.landing-logo .brand-main{font-size:37px}
+.landing-logo .brand-tag{font-size:17px}
+
+.menu-stack{
+  display:grid;
+  gap:9px;
 }
-.price-chip{
-  border:1px solid #efc0a4;background:#fff;border-radius:13px;padding:9px 10px;text-align:center
+.menu-choice{
+  width:100%;
+  border:1px solid rgba(244,234,216,.38);
+  background:
+    linear-gradient(90deg,rgba(18,12,8,.61),rgba(56,37,23,.31)),
+    rgba(22,14,9,.35);
+  color:white;
+  min-height:58px;
+  border-radius:15px;
+  padding:10px 13px;
+  display:grid;
+  grid-template-columns:40px 1fr auto;
+  align-items:center;
+  text-align:left;
+  gap:10px;
+  cursor:pointer;
+  backdrop-filter:blur(13px);
+  -webkit-backdrop-filter:blur(13px);
+  box-shadow:0 8px 28px rgba(0,0,0,.18), inset 0 1px rgba(255,255,255,.06);
+  transition:.16s transform,.16s background,.16s border-color;
 }
-.price-chip small{
-  display:block;color:var(--orange);font-size:10px;font-weight:900;text-transform:uppercase
+.menu-choice:active{transform:scale(.985)}
+.menu-choice:hover{border-color:rgba(232,154,61,.72);background:rgba(38,24,14,.66)}
+.choice-icon{
+  width:38px;height:38px;border-radius:12px;
+  display:grid;place-items:center;
+  border:1px solid rgba(226,169,86,.42);
+  background:rgba(210,139,52,.10);
+  color:var(--gold2);
 }
-.price-chip strong{display:block;font-size:21px;margin-top:2px}
-.product-list{display:grid;gap:8px}
-.product{
-  border:1px solid #ecded2;background:white;border-radius:14px;overflow:hidden
+.choice-icon svg{width:21px;height:21px}
+.choice-copy strong{display:block;font-size:15px;font-weight:750;letter-spacing:.01em}
+.choice-copy small{display:block;color:#d0c1ad;margin-top:3px;font-size:10.5px}
+.choice-arrow{font-size:24px;color:#f1d6aa;font-weight:200;padding-right:2px}
+
+/* ----- app/category screen ----- */
+#app{
+  width:min(100%,720px);
+  margin:auto;
+  min-height:calc(100vh - 72px);
 }
-.product-toggle{
-  border:0;background:white;width:100%;padding:13px 13px;display:flex;
-  align-items:center;justify-content:space-between;gap:10px;text-align:left;cursor:pointer
+.app-head{
+  position:sticky;top:0;z-index:12;
+  min-height:76px;
+  padding:12px 14px;
+  display:grid;
+  grid-template-columns:44px 1fr 44px;
+  gap:8px;align-items:center;
+  background:linear-gradient(rgba(10,7,5,.95),rgba(10,7,5,.82));
+  border-bottom:1px solid rgba(225,170,88,.15);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
 }
-.product-toggle strong{font-size:15px}
-.product-toggle span{color:var(--orange);font-size:18px;transition:.2s transform}
-.product.open .product-toggle span{transform:rotate(45deg)}
-.product-detail{display:none;padding:0 13px 13px}
-.product.open .product-detail{display:block}
-.ingredients{margin:0;color:var(--muted);font-size:13px;line-height:1.55}
-.photo-slot{
-  margin-top:11px;border-radius:13px;overflow:hidden;background:#f3e5d8
+.icon-btn{
+  width:42px;height:42px;border-radius:50%;
+  border:1px solid rgba(240,210,168,.22);
+  background:rgba(255,255,255,.04);
+  display:grid;place-items:center;
+  cursor:pointer;
 }
-.photo-slot img{display:block;width:100%;height:auto}
-.photo-note{
-  margin-top:10px;border:1px dashed #e2c6b0;border-radius:12px;
-  padding:10px 11px;color:#9a7864;font-size:11px
+.icon-btn svg{width:20px;height:20px}
+.app-title{text-align:center}
+.app-title strong{
+  display:block;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:19px;line-height:1.05;
 }
-.campaign-grid{display:grid;gap:9px}
-.campaign{
-  position:relative;border:1px solid #ecd3c1;background:white;border-radius:14px;padding:13px
+.app-title small{
+  display:block;margin-top:4px;color:var(--gold);
+  font-size:10px;letter-spacing:.08em;text-transform:uppercase
 }
-.campaign small{
-  display:inline-block;background:var(--orange);color:white;font-weight:900;
-  padding:5px 8px;border-radius:999px;font-size:10px
+
+.category-hero{
+  padding:22px 17px 8px;
 }
-.campaign h3{font-size:16px;margin:9px 82px 0 0;line-height:1.35}
+.category-hero h1{
+  margin:0;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:34px;line-height:1.05;
+}
+.category-hero p{
+  color:var(--muted);
+  margin:7px 0 0;
+  line-height:1.5;
+  font-size:13px;
+}
+.price-band{
+  margin:15px 0 0;
+  display:grid;grid-template-columns:1fr 1fr;gap:9px;
+}
+.price-cell{
+  border:1px solid rgba(218,151,56,.40);
+  background:rgba(31,20,12,.60);
+  border-radius:15px;
+  padding:10px 12px;
+  text-align:center;
+}
+.price-cell span{
+  display:block;color:var(--gold);font-weight:800;font-size:10px;letter-spacing:.08em
+}
+.price-cell strong{
+  display:block;font-size:22px;margin-top:2px
+}
+
+.product-grid{
+  padding:10px 14px 28px;
+  display:grid;
+  grid-template-columns:1fr;
+  gap:11px;
+}
+.product-card{
+  position:relative;
+  min-height:108px;
+  display:grid;
+  grid-template-columns:96px 1fr 30px;
+  align-items:center;
+  gap:12px;
+  padding:9px 12px 9px 9px;
+  border-radius:17px;
+  border:1px solid rgba(224,170,92,.22);
+  background:
+    linear-gradient(110deg,rgba(34,22,14,.91),rgba(15,11,8,.91));
+  box-shadow:0 10px 30px rgba(0,0,0,.20);
+  overflow:hidden;
+  cursor:pointer;
+}
+.product-card:after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(120deg,rgba(231,91,23,.06),transparent 40%);
+  pointer-events:none;
+}
+.thumb{
+  width:96px;height:90px;border-radius:13px;overflow:hidden;
+  border:1px solid rgba(235,192,127,.17);
+  background:#120d09;
+}
+.thumb img{
+  width:100%;height:100%;object-fit:cover;
+  object-position:center 43%;
+  transform:scale(1.02);
+}
+.prod-copy{position:relative;z-index:1}
+.prod-copy strong{
+  display:block;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:18px;
+}
+.prod-copy p{
+  margin:5px 0 0;
+  font-size:11px;color:#c6b7a2;line-height:1.4;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+}
+.prod-price{
+  margin-top:7px;
+  display:inline-flex;gap:5px;align-items:center;
+  color:var(--gold2);font-weight:800;font-size:11px
+}
+.prod-go{font-size:23px;color:var(--orange);position:relative;z-index:1}
+
+/* campaigns */
+.campaign-grid{padding:10px 14px 28px;display:grid;gap:11px}
+.campaign-card{
+  border:1px solid rgba(222,168,91,.24);
+  background:
+    radial-gradient(circle at 100% 0,rgba(230,84,18,.13),transparent 35%),
+    linear-gradient(110deg,rgba(38,25,16,.95),rgba(15,11,8,.94));
+  padding:17px;border-radius:18px;
+  box-shadow:var(--shadow);
+}
+.campaign-label{
+  display:inline-block;padding:5px 9px;border-radius:999px;
+  background:var(--orange);color:#fff;font-size:10px;font-weight:850
+}
+.campaign-card h3{margin:10px 0 3px;font-family:Georgia,serif;font-size:20px}
+.campaign-card p{margin:0;color:#c8b9a6;font-size:12px;line-height:1.45}
 .campaign-price{
-  position:absolute;right:11px;bottom:11px;background:#151515;color:#fff;
-  border-radius:11px;padding:8px 10px;font-weight:950;font-size:18px
+  margin-top:13px;
+  display:flex;justify-content:space-between;align-items:center;
+  border-top:1px solid var(--line);padding-top:11px
 }
-.simple-list{display:grid;gap:7px}
-.simple-row{
-  background:white;border:1px solid #ecded2;border-radius:13px;padding:11px 12px;
-  display:flex;justify-content:space-between;gap:12px;align-items:center
+.campaign-price span{color:var(--muted);font-size:11px}
+.campaign-price strong{font-size:25px;color:var(--gold2)}
+
+/* visual category (drinks / sides / extras) */
+.poster-card{
+  margin:10px 14px 28px;
+  padding:8px;
+  border-radius:20px;
+  border:1px solid rgba(231,174,85,.25);
+  background:rgba(255,255,255,.025);
+  box-shadow:var(--shadow);
+  cursor:pointer;
 }
-.simple-row span{font-size:14px}.simple-row strong{white-space:nowrap;color:var(--orange)}
-.note{
-  margin:17px 2px 0;padding:12px 13px;background:#fff;border:1px solid var(--line);
-  border-radius:14px;color:var(--muted);font-size:12px;line-height:1.5
+.poster-card img{
+  display:block;width:100%;height:auto;border-radius:14px;
 }
-.bottom-bar{
-  position:fixed;z-index:30;left:0;right:0;bottom:0;background:#111;color:white;
-  display:grid;grid-template-columns:repeat(3,1fr);
-  padding:9px max(9px,env(safe-area-inset-left)) calc(9px + env(safe-area-inset-bottom));
-  border-top:1px solid #333
+.poster-hint{
+  text-align:center;color:#b8a690;font-size:11px;padding:10px 4px 5px
 }
-.bottom-bar a{
-  color:white;text-decoration:none;text-align:center;font-size:11px;font-weight:850;
-  padding:6px 3px
+
+/* ----- full screen poster viewer ----- */
+#viewer{
+  position:fixed;inset:0;z-index:80;
+  background:rgba(4,3,2,.94);
+  display:flex;align-items:center;justify-content:center;
+  touch-action:pan-y;
 }
-.bottom-bar b{display:block;color:var(--orange);font-size:18px;margin-bottom:2px}
-@media(min-width:650px){
+#viewer:before{
+  content:"";position:absolute;inset:0;
+  background:var(--viewer-bg) center/cover no-repeat;
+  filter:blur(24px) brightness(.34) saturate(.7);
+  transform:scale(1.12);
+  opacity:.52;
+}
+.viewer-inner{
+  position:relative;z-index:2;
+  width:100%;height:100%;
+  display:flex;align-items:center;justify-content:center;
+  padding:12px 10px calc(18px + env(safe-area-inset-bottom));
+}
+#viewerImage{
+  display:block;
+  max-width:100%;
+  max-height:100%;
+  width:auto;height:auto;
+  border-radius:16px;
+  box-shadow:0 26px 70px rgba(0,0,0,.65);
+  user-select:none;
+  -webkit-user-drag:none;
+}
+.viewer-close{
+  position:absolute;top:max(12px,env(safe-area-inset-top));right:12px;z-index:5;
+  width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.25);
+  background:rgba(0,0,0,.52);backdrop-filter:blur(10px);display:grid;place-items:center;cursor:pointer;
+}
+.viewer-close svg{width:21px}
+.viewer-nav{
+  position:absolute;left:50%;bottom:calc(18px + env(safe-area-inset-bottom));
+  transform:translateX(-50%);
+  display:flex;align-items:center;gap:9px;
+  background:rgba(8,6,4,.72);border:1px solid rgba(255,255,255,.14);
+  border-radius:999px;padding:7px 9px;backdrop-filter:blur(12px)
+}
+.viewer-nav button{
+  width:37px;height:37px;border-radius:50%;border:0;background:rgba(255,255,255,.08);
+  color:#fff;font-size:19px;cursor:pointer
+}
+#viewerCounter{font-size:11px;color:#ddcdb7;min-width:48px;text-align:center}
+.swipe-tip{
+  position:absolute;top:14px;left:50%;transform:translateX(-50%);
+  color:rgba(255,255,255,.72);font-size:10px;letter-spacing:.06em;
+  background:rgba(0,0,0,.32);padding:6px 9px;border-radius:999px
+}
+
+/* ----- bottom nav ----- */
+.bottom-nav{
+  position:fixed;bottom:0;left:0;right:0;z-index:50;
+  min-height:72px;
+  padding:7px 9px calc(7px + env(safe-area-inset-bottom));
+  background:rgba(8,7,6,.97);
+  border-top:1px solid rgba(232,170,75,.20);
+  display:grid;grid-template-columns:1fr 1fr 1fr;
+  backdrop-filter:blur(14px);
+}
+.bottom-nav a{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:3px;color:#eee2d2;font-size:10px;font-weight:750;
+}
+.bottom-nav svg{width:21px;height:21px;color:var(--orange)}
+.bottom-nav .order{
+  margin:0 3px;border-radius:12px;background:var(--orange);color:white;
+}
+.bottom-nav .order svg{color:white}
+
+/* toast */
+.toast{
+  position:fixed;z-index:120;left:50%;bottom:92px;transform:translate(-50%,20px);
+  opacity:0;pointer-events:none;
+  background:#f3e8d7;color:#1a120d;border-radius:999px;padding:9px 13px;
+  font-size:11px;font-weight:750;box-shadow:0 10px 30px rgba(0,0,0,.35);
+  transition:.22s;
+}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+@media(min-width:620px){
+  .product-grid{grid-template-columns:1fr 1fr}
   .campaign-grid{grid-template-columns:1fr 1fr}
-  .product-list{grid-template-columns:1fr 1fr}
-  .simple-list{grid-template-columns:1fr 1fr}
 }
 </style>
 </head>
+
 <body>
 
-<header class="hero">
-  <div class="brand">
-    <p class="kicker">Çayırova • Kocaeli</p>
-    <h1>İTALYAN <span>CHEF</span> PİZZA</h1>
-    <p class="tagline">Lezzetin İtalyan imzası</p>
-    <div class="quick">
-      <a class="primary" href="tel:05333822104">Alo Paket</a>
-      <a target="_blank" rel="noopener"
-         href="https://www.google.com/maps/search/?api=1&query=%C3%96zg%C3%BCrl%C3%BCk%20%C4%B0stiklal%20Cd.%20No%3A83%2FC%20%C3%87ay%C4%B1rova%20Kocaeli">
-         Yol Tarifi
-      </a>
+<!-- İlk açılış: blur arka plan + kategori yönlendirmesi -->
+<section id="landing">
+  <div class="landing-inner">
+    <div class="brand landing-logo">
+      <div class="brand-kicker">İTALYAN</div>
+      <div class="brand-main"><span>CHEF</span> PİZZA</div>
+      <div class="brand-rule"><i></i></div>
+      <div class="brand-tag">Lezzetin İtalyan imzası</div>
     </div>
+
+    <div class="menu-stack" id="menuStack"></div>
   </div>
-</header>
+</section>
 
-<main>
-  <section class="intro">
-    <h2>Menü</h2>
-    <p>Bir kategori seçin. Ürünlere dokunarak içeriklerini görüntüleyebilirsiniz.</p>
-  </section>
+<!-- Seçilen kategori -->
+<main id="app" class="hidden">
+  <header class="app-head">
+    <button class="icon-btn" id="backBtn" aria-label="Menüye dön">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+    </button>
 
-  <div class="category-list" id="categories"></div>
+    <div class="app-title">
+      <strong id="headTitle">Menü</strong>
+      <small>İtalyan Chef Pizza</small>
+    </div>
 
-  <div class="note">
-    Fiyatlara KDV dahildir. Ürün içerikleri ve fiyatlar işletme tarafından güncellenebilir.
-  </div>
+    <button class="icon-btn" id="homeBtn" aria-label="Ana menü">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10.5V20h13v-9.5"/></svg>
+    </button>
+  </header>
+
+  <section id="categoryContent"></section>
 </main>
 
-<nav class="bottom-bar">
-  <a href="tel:05333822104"><b>☎</b>ARA</a>
-  <a target="_blank" rel="noopener"
-     href="https://www.google.com/maps/search/?api=1&query=%C3%96zg%C3%BCrl%C3%BCk%20%C4%B0stiklal%20Cd.%20No%3A83%2FC%20%C3%87ay%C4%B1rova%20Kocaeli"><b>●</b>YOL TARİFİ</a>
-  <a href="#siparis"><b>▣</b>SİPARİŞ</a>
+<!-- Tam ekran premium poster -->
+<div id="viewer" class="hidden" aria-modal="true" role="dialog">
+  <div class="viewer-inner">
+    <div class="swipe-tip">YUKARI / AŞAĞI KAYDIR</div>
+    <button class="viewer-close" id="viewerClose" aria-label="Kapat">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6 6 18"/></svg>
+    </button>
+    <img id="viewerImage" alt="">
+    <div class="viewer-nav">
+      <button id="prevBtn" aria-label="Önceki">↑</button>
+      <span id="viewerCounter">1 / 1</span>
+      <button id="nextBtn" aria-label="Sonraki">↓</button>
+    </div>
+  </div>
+</div>
+
+<nav class="bottom-nav">
+  <a href="tel:05333822104">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6.6 10.8c1.8 3.6 3 4.8 6.6 6.6l2.2-2.2c.3-.3.7-.4 1.1-.2 1.2.4 2.5.7 3.8.7.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.8 21 3 13.2 3 3.7c0-.6.4-1 1-1h3.3c.6 0 1 .4 1 1 0 1.3.2 2.6.7 3.8.1.4 0 .8-.3 1.1z"/></svg>
+    ARA
+  </a>
+
+  <a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=%C3%96zg%C3%BCrl%C3%BCk%20Mh.%20%C4%B0stiklal%20Cd.%20No%3A83%2FC%20%C3%87ay%C4%B1rova%20Kocaeli">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0z"/><circle cx="12" cy="10" r="2.5"/></svg>
+    YOL TARİFİ
+  </a>
+
+  <a class="order" href="tel:05333822104">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 8h12l-1 13H7L6 8z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg>
+    SİPARİŞ
+  </a>
 </nav>
 
+<div class="toast" id="toast"></div>
+
 <script>
-const DATA = [
+const CATEGORIES = [
   {
-    title:"Kampanya Menüleri", sub:"4 avantajlı menü", type:"campaign",
-    items:[
-      {label:"MENÜ 1",name:"2 Adet Büyük Boy Ekonomik Pizza + 1 LT Kola",price:"600 TL"},
-      {label:"MENÜ 2",name:"2 Adet Orta Boy Ekonomik Pizza + 1 LT Kola",price:"500 TL"},
-      {label:"MENÜ 3",name:"1 Adet Orta Boy Ekonomik Pizza + Kutu Kola",price:"280 TL"},
-      {label:"MENÜ 4",name:"3 Adet Orta Boy Ekonomik Pizza",price:"650 TL"}
+    id:"kampanyalar",
+    title:"Kampanyalar",
+    sub:"Avantajlı menüler",
+    icon:"tag",
+    type:"campaigns",
+    campaigns:[
+      ["MENÜ 1","2 Adet Büyük Boy Ekonomik Pizza + 1 LT Kola","600 TL"],
+      ["MENÜ 2","2 Adet Orta Boy Ekonomik Pizza + 1 LT Kola","500 TL"],
+      ["MENÜ 3","1 Adet Orta Boy Ekonomik Pizza + Kutu Kola","280 TL"],
+      ["MENÜ 4","3 Adet Orta Boy Ekonomik Pizza","650 TL"]
     ]
   },
   {
-    title:"Ekonomik Pizzalar", sub:"Orta 230 TL • Büyük 280 TL", type:"pizza",
+    id:"ekonomik",
+    title:"Ekonomik Pizzalar",
+    sub:"Orta 230 TL • Büyük 280 TL",
+    icon:"pizza",
+    type:"pizza",
     prices:["230 TL","280 TL"],
-    items:[
-      ["Ekonomik Pizza","Pizza sosu, mozzarella, sucuk, mantar, mısır"],
-      ["Üç Malzemeli Pizza","Pizza sosu, mozzarella, sucuk, mantar"],
-      ["Sucuk Sever Pizza","Pizza sosu, mozzarella, sucuk"],
-      ["Margarita Pizza","Pizza sosu, mozzarella"]
+    products:[
+      ["Ekonomik Pizza","Pizza sosu, mozzarella, sucuk, mantar, mısır","assets/ekonomik.webp"],
+      ["Üç Malzemeli Pizza","Pizza sosu, mozzarella, sucuk, mantar","assets/uc-malzemeli.webp"],
+      ["Sucuk Sever Pizza","Pizza sosu, mozzarella, sucuk","assets/sucuk-sever.webp"],
+      ["Margarita","Pizza sosu, mozzarella","assets/margarita.webp"]
     ]
   },
   {
-    title:"En Sevilen Pizzalar", sub:"Orta 250 TL • Büyük 310 TL", type:"pizza",
-    prices:["250 TL","310 TL"],
-    items:[
-      ["Sosyetik Pizza","Pizza sosu, mozzarella, sucuk, mantar, mısır, domates, kekik"],
-      ["Sevilen Dörtlü Pizza","Pizza sosu, mozzarella, sosis, sucuk, mantar, mısır"],
-      ["Sevilen Chef Pizza","Pizza sosu, mozzarella, sucuk, mantar, jambon, zeytin"],
-      ["Benim Karışık Pizza","Pizza sosu, mozzarella, sucuk, sosis, mantar, yeşil biber, mısır"],
-      ["Chef Pizza","Pizza sosu, mozzarella, sucuk, sosis, zeytin"],
-      ["Sosislim Pizza","Pizza sosu, mozzarella, sosis, mısır, mantar, domates"]
+    id:"sevilen",
+    title:"En Sevilen Pizzalar",
+    sub:"Orta 230 TL • Büyük 280 TL",
+    icon:"heart",
+    type:"pizza",
+    prices:["230 TL","280 TL"],
+    products:[
+      ["Sevilen Dörtlü Pizza","Pizza sosu, mozzarella, sosis, sucuk, mantar, mısır","assets/sevilen-dortlu.webp"],
+      ["Sevilen Chef Pizza","Pizza sosu, mozzarella, sucuk, mantar, jambon, zeytin","assets/sevilen-chef.webp"],
+      ["Benim Karışık Pizza","Pizza sosu, mozzarella, sucuk, sosis, mantar, yeşil biber, mısır","assets/benim-karisik.webp"],
+      ["Chef Pizza","Pizza sosu, mozzarella, sucuk, sosis, zeytin","assets/chef-pizza.webp"],
+      ["Sosislim Pizza","Pizza sosu, mozzarella, sosis, mısır, mantar, domates","assets/sosislim.webp"]
     ]
   },
   {
-    title:"Bol Malzemeli Pizzalar", sub:"Orta 290 TL • Büyük 340 TL", type:"pizza",
+    id:"bol-malzemeli",
+    title:"Bol Malzemeli Pizzalar",
+    sub:"Orta 290 TL • Büyük 340 TL",
+    icon:"pizza",
+    type:"pizza",
     prices:["290 TL","340 TL"],
-    items:[
-      ["Karışık Pizza","Pizza sosu, mozzarella, sucuk, sosis, mantar, mısır, domates, zeytin"],
-      ["Tavuklu Pizza","Pizza sosu, mozzarella, sosis, tavuk döner, domates"],
-      ["Dört Peynirli Pizza","Pizza sosu, mozzarella, kaşar, beyaz peynir, parmesan"],
-      ["Sebzeli Pizza","Pizza sosu, mozzarella, soğan, mantar, yeşil biber, mısır, domates"]
+    products:[
+      ["Karışık Pizza","Pizza sosu, mozzarella, sucuk, sosis, mantar, mısır, domates, zeytin","assets/karisik.webp"],
+      ["Tavuklu Pizza","Pizza sosu, mozzarella, sosis, tavuk döner, domates","assets/tavuklu.webp"],
+      ["Dört Peynirli Pizza","Pizza sosu, mozzarella, kaşar, beyaz peynir, parmesan","assets/dort-peynirli.webp"],
+      ["Sebzeli Pizza","Pizza sosu, mozzarella, soğan, mantar, yeşil biber, mısır, domates","assets/sebzeli.webp"]
     ]
   },
   {
-    title:"Chef Süperos Pizzaları", sub:"Orta 330 TL • Büyük 390 TL", type:"pizza",
+    id:"chef",
+    title:"Chef Süperos Pizzaları",
+    sub:"Orta 330 TL • Büyük 390 TL",
+    icon:"chef",
+    type:"pizza",
     prices:["330 TL","390 TL"],
-    items:[
-      ["Bol Pizza","Pizza sosu, mozzarella, sucuk, sosis, jambon, mantar, yeşil biber, soğan, mısır, domates, kekik, susam"],
-      ["Chef Süperos Pizza","Pizza sosu, mozzarella, sucuk, sosis, mantar, mısır, zeytin, köz biber, jalapeno, domates"],
-      ["Etlim Pizza","Pizza sosu, mozzarella, et döner, soğan, domates"],
-      ["Acılı Chef Pizza","Pizza sosu, mozzarella, küp sucuk, mantar, jalapeno, zeytin, köz biber, kekik"],
-      ["İtalyan Chef Pizza","Pizza sosu, mozzarella, küp sucuk, mantar, zeytin, köz biber, kekik"],
-      ["Chef Et Dolusu Pizza","Pizza sosu, mozzarella, sucuk, sosis, jambon, pastırma, jalapeno biber"],
-      ["Chef Pastırmalı Pizza","Pizza sosu, mozzarella, sucuk, pastırma, mantar, yeşil biber"],
-      ["Balıklı Pizza","Pizza sosu, mozzarella, ton balığı, mısır, soğan"],
-      ["Turkishim Pizza","Pizza sosu, mozzarella, sucuk, pastırma, mantar, yeşil biber, beyaz peynir"],
-      ["Kavurmalı Pizza","Pizza sosu, mozzarella, kavurma, soğan, köz biber, yöresel baharat"]
+    products:[
+      ["Bol Pizza","Pizza sosu, mozzarella, sucuk, sosis, jambon, mantar, yeşil biber, soğan, mısır, domates, kekik, susam","assets/bol.webp"],
+      ["Chef Süperos Pizza","Pizza sosu, mozzarella, sucuk, sosis, mantar, mısır, zeytin, köz biber, jalapeno, domates","assets/chef-superos.webp"],
+      ["Etlim Pizza","Pizza sosu, mozzarella, et döner, soğan, domates","assets/etlim.webp"],
+      ["Acılı Chef Pizza","Pizza sosu, mozzarella, küp sucuk, mantar, jalapeno, zeytin, köz biber, kekik","assets/acili-chef.webp"],
+      ["İtalyan Chef Pizza","Pizza sosu, mozzarella, küp sucuk, mantar, zeytin, köz biber, kekik","assets/italyan-chef.webp"],
+      ["Chef Et Dolusu Pizza","Pizza sosu, mozzarella, sucuk, sosis, jambon, pastırma, jalapeno biber","assets/chef-et-dolusu.webp"],
+      ["Chef Pastırmalı Pizza","Pizza sosu, mozzarella, sucuk, pastırma, mantar, yeşil biber","assets/chef-pastirmali.webp"],
+      ["Balıklı Pizza","Pizza sosu, mozzarella, ton balığı, mısır, soğan","assets/balikli.webp"],
+      ["Turkishim Pizza","Pizza sosu, mozzarella, sucuk, pastırma, mantar, yeşil biber, beyaz peynir","assets/turkishim.webp"],
+      ["Kavurmalı Pizza","Pizza sosu, mozzarella, kavurma, soğan, köz biber, yöresel baharat","assets/kavurmali.webp"]
     ]
   },
   {
-    title:"İçecekler", sub:"Kutu ve 1 litre içecekler", type:"simple",
-    items:[
-      ["Kutu İçecek 330 ml","70 TL"],
-      ["1 Litre İçecek","90 TL"]
-    ]
+    id:"icecekler",
+    title:"İçecekler",
+    sub:"Kutu 70 TL • 1 Litre 90 TL",
+    icon:"drink",
+    type:"poster",
+    poster:"assets/icecekler.webp",
+    description:"Coca-Cola, Fanta ve Sprite • Kutu ve 1 litre seçenekleri"
   },
   {
-    title:"Yan Ürünler", sub:"Patates, sufle ve ekmek çeşitleri", type:"simple",
-    items:[
-      ["Patates","130 TL"],["Sufle","120 TL"],
-      ["Sarımsaklı Ekmek","250 TL"],["Sucuklu Ekmek","300 TL"]
-    ]
+    id:"yan-urunler",
+    title:"Yan Ürünler",
+    sub:"Patates, sufle ve ekmek çeşitleri",
+    icon:"fries",
+    type:"poster",
+    poster:"assets/yan-urunler.webp",
+    description:"Patates • Sufle • Sarımsaklı Ekmek • Sucuklu Ekmek"
   },
   {
-    title:"Ekstra Malzemeler / Kenar", sub:"Ekstra malzeme ve kenar seçenekleri", type:"simple",
-    items:[
-      ["Mozzarella","150 TL"],["Sucuk","100 TL"],["Sosis","100 TL"],["Jambon","100 TL"],
-      ["Tavuk Döner","100 TL"],["Pastırma","170 TL"],["Et Döner","120 TL"],["Kavurma","200 TL"],
-      ["Sebze Ürünleri","90 TL"],["Bol Peynir Kenar Orta","100 TL"],["Simit Kenar Orta","100 TL"],
-      ["Bol Peynir Kenar Büyük","130 TL"],["Simit Kenar Büyük","130 TL"],
-      ["Sarımsak Kenar Orta","100 TL"],["Sarımsak Kenar Büyük","120 TL"]
-    ]
+    id:"ekstralar",
+    title:"Ekstra Malzemeler / Kenar Seçenekleri",
+    sub:"Ekstra malzeme ve kenar seçenekleri",
+    icon:"plus",
+    type:"poster",
+    poster:"assets/ekstralar.webp",
+    description:"Ekstra malzemeler ve üç farklı kenar seçeneği"
   }
 ];
 
-// Daha sonra fotoğraf eklemek için:
-// ürün dizisini ["Ürün Adı","İçerik","assets/fotograf.webp"] biçiminde yap.
-// Ürüne dokunulduğunda fotoğraf otomatik olarak içeriğin altında açılır.
+const ICONS = {
+ tag:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M20 13 13 20 4 11V4h7l9 9z"/><circle cx="8" cy="8" r="1.5"/></svg>`,
+ pizza:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 19 20 4c1.7 5.2-.3 11.9-5.6 15.1C10.7 21.4 6.7 20.8 4 19z"/><circle cx="13" cy="10" r="1"/><circle cx="10" cy="14" r="1"/><circle cx="16" cy="15" r="1"/></svg>`,
+ heart:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M20.8 4.6a5.4 5.4 0 0 0-7.7 0L12 5.7l-1.1-1.1a5.4 5.4 0 0 0-7.7 7.7L12 21l8.8-8.7a5.4 5.4 0 0 0 0-7.7z"/></svg>`,
+ chef:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 10a4 4 0 1 1 4-6 4 4 0 0 1 4 0 4 4 0 1 1 4 6v9H6v-9z"/><path d="M8 15h8"/></svg>`,
+ drink:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M7 8h10l-1 13H8L7 8zM8 4h8M15 4l3-3"/></svg>`,
+ fries:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="m6 8 2 13h8l2-13H6zM8 8 7 2M11 8V1M14 8l1-7M17 8l2-6"/></svg>`,
+ plus:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg>`
+};
 
-const root = document.getElementById("categories");
+const menuStack = document.getElementById("menuStack");
+const landing = document.getElementById("landing");
+const app = document.getElementById("app");
+const content = document.getElementById("categoryContent");
+const headTitle = document.getElementById("headTitle");
 
-function productHTML(item){
-  const [name, ingredients, image] = item;
-  return `
-    <div class="product">
-      <button class="product-toggle" type="button">
-        <strong>${name}</strong><span>＋</span>
-      </button>
-      <div class="product-detail">
-        <p class="ingredients">${ingredients}</p>
-        ${image ? `<div class="photo-slot"><img src="${image}" alt="${name}" loading="lazy"></div>` : ""}
-      </div>
-    </div>`;
+const viewer = document.getElementById("viewer");
+const viewerImage = document.getElementById("viewerImage");
+const viewerCounter = document.getElementById("viewerCounter");
+let viewerItems = [];
+let viewerIndex = 0;
+let touchStartY = null;
+
+function renderLanding(){
+  menuStack.innerHTML = CATEGORIES.map(c=>`
+    <button class="menu-choice" data-id="${c.id}">
+      <span class="choice-icon">${ICONS[c.icon]}</span>
+      <span class="choice-copy">
+        <strong>${c.title}</strong>
+        <small>${c.sub}</small>
+      </span>
+      <span class="choice-arrow">›</span>
+    </button>
+  `).join("");
+
+  menuStack.querySelectorAll(".menu-choice").forEach(btn=>{
+    btn.addEventListener("click",()=>openCategory(btn.dataset.id,true));
+  });
 }
 
-DATA.forEach((cat,i)=>{
-  const section = document.createElement("section");
-  section.className="category";
-  let body = "";
+function openCategory(id, push=true){
+  const cat=CATEGORIES.find(c=>c.id===id);
+  if(!cat) return;
+  landing.classList.add("hidden");
+  app.classList.remove("hidden");
+  headTitle.textContent=cat.title;
+  document.title=`${cat.title} | İtalyan Chef Pizza`;
 
-  if(cat.type==="campaign"){
-    body = `<div class="campaign-grid">` + cat.items.map(x=>`
-      <article class="campaign">
-        <small>${x.label}</small>
-        <h3>${x.name}</h3>
-        <div class="campaign-price">${x.price}</div>
-      </article>`).join("") + `</div>`;
-  } else if(cat.type==="pizza"){
-    body = `
-      <div class="price-strip">
-        <div class="price-chip"><small>Orta Boy</small><strong>${cat.prices[0]}</strong></div>
-        <div class="price-chip"><small>Büyük Boy</small><strong>${cat.prices[1]}</strong></div>
-      </div>
-      <div class="product-list">${cat.items.map(productHTML).join("")}</div>`;
-  } else {
-    body = `<div class="simple-list">` + cat.items.map(x=>`
-      <div class="simple-row"><span>${x[0]}</span><strong>${x[1]}</strong></div>`).join("") + `</div>`;
+  let html=`
+    <section class="category-hero">
+      <h1>${cat.title}</h1>
+      <p>${cat.type==="pizza" ? "Bir pizzaya dokun; hazırladığımız premium ürün görselini tam ekran incele." : cat.description || cat.sub}</p>
+      ${cat.prices ? `
+        <div class="price-band">
+          <div class="price-cell"><span>ORTA BOY</span><strong>${cat.prices[0]}</strong></div>
+          <div class="price-cell"><span>BÜYÜK BOY</span><strong>${cat.prices[1]}</strong></div>
+        </div>`:""}
+    </section>`;
+
+  if(cat.type==="pizza"){
+    html+=`<div class="product-grid">`+cat.products.map((p,i)=>`
+      <article class="product-card" data-index="${i}">
+        <div class="thumb"><img src="${p[2]}" alt="${p[0]}" loading="lazy"></div>
+        <div class="prod-copy">
+          <strong>${p[0]}</strong>
+          <p>${p[1]}</p>
+          <div class="prod-price">${cat.prices[0]} <span>•</span> ${cat.prices[1]}</div>
+        </div>
+        <div class="prod-go">›</div>
+      </article>
+    `).join("")+`</div>`;
   }
 
-  section.innerHTML = `
-    <button class="category-toggle" type="button">
-      <span class="cat-index">${String(i+1).padStart(2,"0")}</span>
-      <span class="cat-copy"><strong>${cat.title}</strong><small>${cat.sub}</small></span>
-      <span class="chev">⌄</span>
-    </button>
-    <div class="category-panel"><div class="panel-inner">${body}</div></div>`;
-  root.appendChild(section);
-});
+  if(cat.type==="campaigns"){
+    html+=`<div class="campaign-grid">`+cat.campaigns.map(c=>`
+      <article class="campaign-card">
+        <span class="campaign-label">${c[0]}</span>
+        <h3>${c[1]}</h3>
+        <p>Ekonomik pizza kampanyası</p>
+        <div class="campaign-price"><span>Kampanya fiyatı</span><strong>${c[2]}</strong></div>
+      </article>
+    `).join("")+`</div>`;
+  }
 
-document.querySelectorAll(".category-toggle").forEach(btn=>{
-  btn.addEventListener("click",()=>{
-    const cat = btn.closest(".category");
-    const wasOpen = cat.classList.contains("open");
+  if(cat.type==="poster"){
+    html+=`
+      <article class="poster-card" id="singlePoster">
+        <img src="${cat.poster}" alt="${cat.title}">
+        <div class="poster-hint">Tam ekran görmek için görsele dokun.</div>
+      </article>`;
+  }
 
-    document.querySelectorAll(".category.open").forEach(open=>{
-      if(open!==cat){
-        open.classList.remove("open");
-        open.querySelector(".category-panel").style.maxHeight=null;
-      }
+  content.innerHTML=html;
+  window.scrollTo({top:0,behavior:"instant"});
+
+  if(cat.type==="pizza"){
+    content.querySelectorAll(".product-card").forEach(card=>{
+      card.addEventListener("click",()=>{
+        viewerItems=cat.products.map(p=>({title:p[0],src:p[2]}));
+        openViewer(Number(card.dataset.index));
+      });
     });
-
-    cat.classList.toggle("open",!wasOpen);
-    const panel = cat.querySelector(".category-panel");
-    panel.style.maxHeight = !wasOpen ? panel.scrollHeight+"px" : null;
-
-    if(!wasOpen){
-      setTimeout(()=>cat.scrollIntoView({behavior:"smooth",block:"start"}),120);
-    }
-  });
-});
-
-document.addEventListener("click",e=>{
-  const btn=e.target.closest(".product-toggle");
-  if(!btn) return;
-  const product=btn.closest(".product");
-  product.classList.toggle("open");
-  const panel=product.closest(".category-panel");
-  if(panel && product.closest(".category").classList.contains("open")){
-    panel.style.maxHeight=panel.scrollHeight+"px";
+  } else if(cat.type==="poster"){
+    document.getElementById("singlePoster").addEventListener("click",()=>{
+      viewerItems=[{title:cat.title,src:cat.poster}];
+      openViewer(0);
+    });
   }
+
+  if(push) history.pushState({category:id},"","#"+id);
+}
+
+function showLanding(push=true){
+  closeViewer();
+  app.classList.add("hidden");
+  landing.classList.remove("hidden");
+  document.title="İtalyan Chef Pizza | Dijital Menü";
+  if(push) history.pushState({home:true}," ",location.pathname);
+}
+
+function openViewer(index){
+  viewerIndex=Math.max(0,Math.min(index,viewerItems.length-1));
+  updateViewer();
+  viewer.classList.remove("hidden");
+  document.body.style.overflow="hidden";
+}
+function closeViewer(){
+  viewer.classList.add("hidden");
+  document.body.style.overflow="";
+}
+function updateViewer(){
+  const item=viewerItems[viewerIndex];
+  if(!item) return;
+  viewerImage.src=item.src;
+  viewerImage.alt=item.title;
+  viewerCounter.textContent=`${viewerIndex+1} / ${viewerItems.length}`;
+  viewer.style.setProperty("--viewer-bg",`url("${item.src}")`);
+}
+function moveViewer(step){
+  if(viewerItems.length<=1) return;
+  viewerIndex=(viewerIndex+step+viewerItems.length)%viewerItems.length;
+  updateViewer();
+}
+
+document.getElementById("backBtn").addEventListener("click",()=>showLanding(true));
+document.getElementById("homeBtn").addEventListener("click",()=>showLanding(true));
+document.getElementById("viewerClose").addEventListener("click",closeViewer);
+document.getElementById("prevBtn").addEventListener("click",()=>moveViewer(-1));
+document.getElementById("nextBtn").addEventListener("click",()=>moveViewer(1));
+
+viewer.addEventListener("click",e=>{
+  if(e.target===viewer || e.target.classList.contains("viewer-inner")) closeViewer();
 });
+viewer.addEventListener("touchstart",e=>{
+  touchStartY=e.changedTouches[0].clientY;
+},{passive:true});
+viewer.addEventListener("touchend",e=>{
+  if(touchStartY===null) return;
+  const dy=e.changedTouches[0].clientY-touchStartY;
+  if(Math.abs(dy)>55) moveViewer(dy<0 ? 1 : -1);
+  touchStartY=null;
+},{passive:true});
+
+document.addEventListener("keydown",e=>{
+  if(viewer.classList.contains("hidden")) return;
+  if(e.key==="Escape") closeViewer();
+  if(e.key==="ArrowUp"||e.key==="ArrowLeft") moveViewer(-1);
+  if(e.key==="ArrowDown"||e.key==="ArrowRight") moveViewer(1);
+});
+
+window.addEventListener("popstate",()=>{
+  const hash=location.hash.replace("#","");
+  const cat=CATEGORIES.find(c=>c.id===hash);
+  if(cat) openCategory(hash,false);
+  else showLanding(false);
+});
+
+// Deep links: /#ekonomik gibi adresler direkt kategoriyi açar.
+renderLanding();
+const initial=location.hash.replace("#","");
+if(CATEGORIES.some(c=>c.id===initial)) openCategory(initial,false);
 </script>
 </body>
 </html>
