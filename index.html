@@ -209,7 +209,12 @@ a{text-decoration:none;color:inherit}
 .category-hero h1{
   margin:0;
   font-family:Georgia,"Times New Roman",serif;
-  font-size:34px;line-height:1.05;
+  font-size:clamp(22px,7.2vw,34px);
+  line-height:1;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  max-width:100%;
 }
 .category-hero p{
   color:var(--muted);
@@ -786,6 +791,39 @@ a{text-decoration:none;color:inherit}
   .landing-tools{gap:6px}.tool-chip,.tool-btn{font-size:8.8px;padding:7px}.cross-sell-item b{font-size:8.8px}
 }
 
+
+/* ===== SADELİK / TEK SATIR BAŞLIK FIX ===== */
+.category-hero{
+  padding:18px 17px 14px;
+}
+.category-hero h1{
+  letter-spacing:-.015em;
+}
+.premium-hero{
+  margin:10px 12px 6px;
+  padding:18px 16px 17px;
+}
+.premium-hero h1{
+  font-size:clamp(21px,6.6vw,32px);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  max-width:100%;
+}
+.premium-eyebrow{
+  margin-bottom:7px;
+  font-size:9px;
+  letter-spacing:.13em;
+}
+.price-band,
+.price-cell{
+  display:none!important;
+}
+@media(max-width:360px){
+  .category-hero h1{font-size:clamp(20px,6.6vw,29px)}
+  .premium-hero h1{font-size:clamp(19px,6vw,27px)}
+}
+
 </style>
 </head>
 
@@ -1264,11 +1302,6 @@ function openCategory(id, push=true){
     <section class="category-hero${isPremium ? " premium-hero" : ""}">
       ${isPremium ? `<div class="premium-eyebrow">✦ ŞEFİN İMZA SERİSİ ✦</div>` : ""}
       <h1>${cat.title}</h1>
-      ${cat.prices ? `
-        <div class="price-band">
-          <div class="price-cell"><span>ORTA BOY</span><strong>${cat.prices[0]}</strong></div>
-          <div class="price-cell"><span>BÜYÜK BOY</span><strong>${cat.prices[1]}</strong></div>
-        </div>`:""}
     </section>`;
 
   if(cat.type==="pizza"){
