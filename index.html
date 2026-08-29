@@ -1529,10 +1529,12 @@ function openViewer(index){
   viewerIndex=Math.max(0,Math.min(index,viewerItems.length-1));
   updateViewer();
   viewer.classList.remove("hidden");
+  document.body.classList.add("viewer-open");
   document.body.style.overflow="hidden";
 }
 function closeViewer(){
   viewer.classList.add("hidden");
+  document.body.classList.remove("viewer-open");
   document.body.style.overflow="";
 }
 function updateViewer(){
@@ -1775,6 +1777,27 @@ if(directPizza){
 /* Ana Menü kapalıysa parent ile birlikte kesinlikle görünmez. */
 #landing.hidden #storeStatus{
   display:none!important;
+}
+</style>
+
+
+<style>
+/* ===== FOTOĞRAF GÖRÜNTÜLEYİCİ SADELİK FIX =====
+   Alt oklar / başlık / sayaç / noktalar / paylaş butonu kaldırıldı.
+   Gezinme yatay kaydırma ile devam eder. */
+#viewer .viewer-nav,
+#viewer .viewer-share{
+  display:none!important;
+}
+
+/* Fotoğraf açıkken alttaki site navigasyonu da arkadan görünmesin. */
+body.viewer-open .bottom-nav{
+  display:none!important;
+}
+
+/* Alt kontrol alanı kalktığı için görseli gerçek merkeze al. */
+#viewer .viewer-inner{
+  padding:12px 10px max(12px, env(safe-area-inset-bottom))!important;
 }
 </style>
 
