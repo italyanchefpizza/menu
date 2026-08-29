@@ -395,7 +395,10 @@ a{text-decoration:none;color:inherit}
 }
 .bottom-nav svg{width:21px;height:21px;color:var(--orange)}
 .bottom-nav .order{
-  margin:0 3px;border-radius:12px;background:var(--orange);color:white;
+  margin:0 3px;border-radius:12px;
+  background:linear-gradient(135deg,#e95b18,#c98a27);
+  color:white;
+  box-shadow:0 7px 22px rgba(234,91,24,.22);
 }
 .bottom-nav .order svg{color:white}
 
@@ -479,9 +482,12 @@ a{text-decoration:none;color:inherit}
     YOL TARİFİ
   </a>
 
-  <a class="order" href="tel:05333822104">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 8h12l-1 13H7L6 8z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg>
-    SİPARİŞ
+  <a class="order" target="_blank" rel="noopener"
+     href="https://search.google.com/local/writereview?placeid=ChIJc1n9vJ3fyhQRMnqYBJrC7aw">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-2.9-5.6 2.9 1.1-6.2L3 9.6l6.2-.9L12 3z"/>
+    </svg>
+    PUAN VER
   </a>
 </nav>
 
@@ -623,7 +629,6 @@ function renderLanding(){
       <span class="choice-icon">${ICONS[c.icon]}</span>
       <span class="choice-copy">
         <strong>${c.title}</strong>
-        <small>${c.sub}</small>
       </span>
       <span class="choice-arrow">›</span>
     </button>
@@ -778,3 +783,8 @@ if(CATEGORIES.some(c=>c.id===initial)) openCategory(initial,false);
 </script>
 </body>
 </html>
+
+<style>
+.menu-choice{min-height:56px}
+.choice-copy strong{font-size:16px}
+</style>
