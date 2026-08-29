@@ -1485,6 +1485,12 @@ function openCategory(id, push=true){
       </article>`;
   }
 
+  /* Her kategori/sayfanın en altında site imzası */
+  html+=`
+    <div class="site-signature page-signature" aria-label="Site imzası">
+      powered by <span>Akif Yalçın</span>
+    </div>`;
+
   content.innerHTML=html;
   window.scrollTo({top:0,behavior:"instant"});
   content.querySelectorAll("[data-cross]").forEach(btn=>btn.addEventListener("click",()=>{
@@ -1734,6 +1740,13 @@ if(directPizza){
   transform:none!important;
   flex:none!important;
   pointer-events:none;
+}
+</style>
+
+
+<style>
+.page-signature{
+  margin:16px 0 82px;
 }
 </style>
 
