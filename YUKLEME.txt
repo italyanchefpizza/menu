@@ -1,0 +1,9 @@
+GitHub repo ana dizinine şu 5 dosyayı yükle / güncelle:
+- index.html
+- manifest.webmanifest
+- sw.js
+- icon-192.png
+- icon-512.png
+
+Mevcut .webp görsellerine dokunma.
+GitHub Pages güncellendikten sonra Android Chrome'da PWA kurulum seçeneği birkaç ziyarette görünebilir.

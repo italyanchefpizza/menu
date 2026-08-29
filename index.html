@@ -6,6 +6,12 @@
 <meta name="theme-color" content="#0b0806">
 <meta name="description" content="İtalyan Chef Pizza dijital menü">
 <title>İtalyan Chef Pizza | Dijital Menü</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
 
 <style>
 :root{
@@ -616,6 +622,80 @@ a{text-decoration:none;color:inherit}
 }
 .thumb{position:relative}
 
+
+/* ===== SALES UX v2: daily favorites / reviews / PWA / badges / dots ===== */
+.daily-block{
+  margin:-7px 0 13px;
+  padding:13px;
+  border:1px solid rgba(237,177,88,.25);
+  border-radius:18px;
+  background:linear-gradient(150deg,rgba(18,12,8,.68),rgba(54,31,14,.42));
+  backdrop-filter:blur(13px);-webkit-backdrop-filter:blur(13px);
+  box-shadow:0 12px 34px rgba(0,0,0,.24);
+}
+.landing-section-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}
+.landing-section-head strong{font-family:Georgia,"Times New Roman",serif;font-size:17px;color:#fff2dc}
+.landing-section-head small{font-size:9px;letter-spacing:.08em;color:#d4af74;text-transform:uppercase}
+.daily-favorites{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+.daily-fav{
+  position:relative;min-height:118px;border:1px solid rgba(244,205,145,.22);border-radius:14px;overflow:hidden;
+  background:#17100b;cursor:pointer;text-align:left;padding:0;box-shadow:0 8px 20px rgba(0,0,0,.22)
+}
+.daily-fav img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.92) brightness(.72)}
+.daily-fav:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 25%,rgba(7,5,3,.90) 100%)}
+.daily-fav-copy{position:absolute;z-index:2;left:8px;right:7px;bottom:8px}
+.daily-fav-copy b{display:block;font-size:10px;line-height:1.15;color:#fff;max-height:25px;overflow:hidden}
+.daily-fav-copy span{display:block;margin-top:4px;color:#f1bd6b;font-size:8px;font-weight:800}
+.surprise-btn{
+  width:100%;margin-top:9px;min-height:43px;border-radius:13px;border:1px solid rgba(249,190,91,.53);
+  color:#fff3df;font-weight:850;letter-spacing:.01em;cursor:pointer;
+  background:radial-gradient(circle at 15% 50%,rgba(244,137,32,.26),transparent 28%),linear-gradient(105deg,rgba(76,40,15,.87),rgba(28,17,9,.88));
+  box-shadow:0 0 22px rgba(226,119,25,.10)
+}
+.surprise-btn:active{transform:scale(.985)}
+
+.google-proof{
+  margin:13px 0 3px;padding:14px;border-radius:18px;border:1px solid rgba(237,187,111,.26);
+  background:rgba(13,9,6,.68);backdrop-filter:blur(13px);-webkit-backdrop-filter:blur(13px)
+}
+.google-top{display:flex;align-items:center;gap:11px}
+.google-g{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:#fff;color:#4285f4;font-weight:950;font-size:20px}
+.google-rating{flex:1}
+.google-rating-line{display:flex;align-items:baseline;gap:7px}
+.google-rating-line strong{font-size:23px;color:#fff}
+.google-stars{color:#fbbc04;letter-spacing:1px;font-size:13px}
+.google-rating small{display:block;color:#c8b7a1;font-size:10px;margin-top:1px}
+.google-actions{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:11px}
+.google-actions a{display:flex;align-items:center;justify-content:center;min-height:38px;border-radius:11px;border:1px solid rgba(245,197,124,.25);font-size:10px;font-weight:800;background:rgba(255,255,255,.04)}
+.google-actions a:last-child{background:linear-gradient(135deg,#e95b18,#c98a27);border-color:transparent;color:#fff}
+
+.pwa-install{
+  width:100%;margin-top:9px;min-height:40px;border-radius:12px;border:1px solid rgba(242,193,113,.23);
+  background:rgba(255,255,255,.035);color:#e8d5bb;font-size:10px;font-weight:800;cursor:pointer
+}
+
+.popular-badge{
+  position:absolute;z-index:4;right:9px;top:8px;padding:5px 7px;border-radius:999px;
+  background:linear-gradient(135deg,#a76016,#e0a43f);color:#fff4d6;font-size:7.5px;font-weight:950;letter-spacing:.055em;
+  box-shadow:0 6px 16px rgba(215,144,47,.21);pointer-events:none
+}
+.product-card.has-popular{border-color:rgba(227,169,77,.38)}
+.viewer-popular{
+  position:absolute;z-index:6;top:max(64px,calc(env(safe-area-inset-top) + 54px));left:50%;transform:translateX(-50%);
+  padding:7px 11px;border-radius:999px;color:#fff3d2;font-size:8px;font-weight:950;letter-spacing:.08em;
+  background:linear-gradient(135deg,rgba(164,91,18,.94),rgba(220,156,54,.94));box-shadow:0 8px 26px rgba(0,0,0,.35)
+}
+
+.viewer-nav{min-width:170px;justify-content:center}
+.viewer-status{display:flex;min-width:64px;flex-direction:column;align-items:center;gap:4px}
+.viewer-dots{display:flex;align-items:center;justify-content:center;gap:4px;max-width:94px;overflow:hidden}
+.viewer-dot{width:5px;height:5px;border-radius:50%;border:0;padding:0;background:rgba(255,255,255,.28);cursor:pointer;flex:0 0 auto}
+.viewer-dot.active{width:13px;border-radius:999px;background:linear-gradient(90deg,#e95b18,#e1a33c);box-shadow:0 0 9px rgba(234,117,32,.30)}
+
+@media(max-width:370px){
+  .daily-fav{min-height:105px}.daily-fav-copy b{font-size:9px}.google-proof{padding:12px}
+}
+
 </style>
 </head>
 
@@ -631,7 +711,31 @@ a{text-decoration:none;color:inherit}
       <div class="brand-tag">Lezzetin İtalyan imzası</div>
     </div>
 
+    <section class="daily-block" aria-label="Bugünün Favorileri">
+      <div class="landing-section-head">
+        <strong>Bugünün Favorileri</strong>
+        <small id="favoriteDate">Her gün yenilenir</small>
+      </div>
+      <div class="daily-favorites" id="dailyFavorites"></div>
+      <button class="surprise-btn" id="surpriseBtn" type="button">✦ Kararsızım — Şef Seçsin</button>
+    </section>
+
     <div class="menu-stack" id="menuStack"></div>
+
+    <section class="google-proof" aria-label="Google değerlendirmeleri">
+      <div class="google-top">
+        <div class="google-g">G</div>
+        <div class="google-rating">
+          <div class="google-rating-line"><strong>4.8</strong><span class="google-stars">★★★★★</span></div>
+          <small>Google • 24 değerlendirme</small>
+        </div>
+      </div>
+      <div class="google-actions">
+        <a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=%C4%B0TALYAN%20CHEF%20P%C4%B0ZZA%20%C3%87ay%C4%B1rova&query_place_id=ChIJc1n9vJ3fyhQRMnqYBJrC7aw">Yorumları Gör</a>
+        <a target="_blank" rel="noopener" href="https://search.google.com/local/writereview?placeid=ChIJc1n9vJ3fyhQRMnqYBJrC7aw">Yorum Yaz</a>
+      </div>
+      <button class="pwa-install" id="installBtn" type="button" hidden>▣ Ana Ekrana Ekle</button>
+    </section>
   </div>
 </section>
 
@@ -662,10 +766,14 @@ a{text-decoration:none;color:inherit}
     <button class="viewer-close" id="viewerClose" aria-label="Kapat">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6 6 18"/></svg>
     </button>
+    <div id="viewerPopular" class="viewer-popular hidden">★ EN ÇOK TERCİH EDİLEN</div>
     <img id="viewerImage" alt="">
     <div class="viewer-nav">
       <button id="prevBtn" aria-label="Önceki">‹</button>
-      <span id="viewerCounter">1 / 1</span>
+      <div class="viewer-status">
+        <span id="viewerCounter">1 / 1</span>
+        <div class="viewer-dots" id="viewerDots" aria-label="Galeri ilerlemesi"></div>
+      </div>
       <button id="nextBtn" aria-label="Sonraki">›</button>
     </div>
   </div>
@@ -822,6 +930,73 @@ const ICONS = {
  plus:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg>`
 };
 
+
+const POPULAR = {
+  "ekonomik": new Set(["Ekonomik Pizza","Üç Malzemeli Pizza","Sucuk Sever Pizza"]),
+  "sevilen": new Set(["Sevilen Dörtlü Pizza","Sevilen Chef Pizza","Benim Karışık Pizza"]),
+  "bol-malzemeli": new Set(["Karışık Pizza","Tavuklu Pizza","Dört Peynirli Pizza"]),
+  "chef": new Set(["Chef Süperos Pizza","Chef Et Dolusu Pizza","Kavurmalı Pizza"])
+};
+const isPopular=(categoryId,name)=>Boolean(POPULAR[categoryId]?.has(name));
+
+function pizzaCatalog(){
+  return CATEGORIES.filter(c=>c.type==="pizza").flatMap(c=>
+    c.products.map((p,index)=>({categoryId:c.id,categoryTitle:c.title,index,name:p[0],desc:p[1],src:p[2],prices:c.prices,popular:isPopular(c.id,p[0])}))
+  );
+}
+function seededRandom(seed){
+  let t=seed>>>0;
+  return ()=>{t+=0x6D2B79F5;let r=Math.imul(t^(t>>>15),1|t);r^=r+Math.imul(r^(r>>>7),61|r);return((r^(r>>>14))>>>0)/4294967296};
+}
+function dailyFavorites(){
+  const d=new Date();
+  const seed=d.getFullYear()*10000+(d.getMonth()+1)*100+d.getDate();
+  const rnd=seededRandom(seed);
+  const cats=CATEGORIES.filter(c=>c.type==="pizza").map(c=>c.id);
+  cats.sort(()=>rnd()-.5);
+  return cats.slice(0,3).map(id=>{
+    const choices=pizzaCatalog().filter(x=>x.categoryId===id);
+    return choices[Math.floor(rnd()*choices.length)];
+  });
+}
+function viewerItemsForCategory(cat){
+  const items=cat.products.map((p,index)=>({title:p[0],src:p[2],popular:isPopular(cat.id,p[0]),categoryId:cat.id,index}));
+  if(cat.extraPoster) items.push({title:cat.extraPosterTitle||"Ekstra Malzemeler",src:cat.extraPoster,popular:false,extra:true});
+  return items;
+}
+function openPizza(categoryId,index){
+  const cat=CATEGORIES.find(c=>c.id===categoryId);
+  if(!cat||cat.type!=="pizza") return;
+  viewerItems=viewerItemsForCategory(cat);
+  openViewer(index);
+}
+let lastSurprise="";
+function surpriseMe(){
+  const chef=CATEGORIES.find(c=>c.id==="chef");
+  const otherCats=CATEGORIES.filter(c=>c.type==="pizza"&&c.id!=="chef");
+  let cat=Math.random()<.72?chef:otherCats[Math.floor(Math.random()*otherCats.length)];
+  let idx=Math.floor(Math.random()*cat.products.length);
+  let key=cat.id+":"+idx;
+  for(let i=0;i<7&&key===lastSurprise;i++){
+    cat=Math.random()<.72?chef:otherCats[Math.floor(Math.random()*otherCats.length)];
+    idx=Math.floor(Math.random()*cat.products.length); key=cat.id+":"+idx;
+  }
+  lastSurprise=key;
+  const name=cat.products[idx][0];
+  showToast(`Şef seçti: ${name}`);
+  setTimeout(()=>openPizza(cat.id,idx),240);
+}
+function renderDailyFavorites(){
+  const host=document.getElementById("dailyFavorites");
+  if(!host) return;
+  const favs=dailyFavorites();
+  host.innerHTML=favs.map(f=>`<button class="daily-fav" data-cat="${f.categoryId}" data-index="${f.index}" type="button"><img src="${f.src}" alt="${f.name}" loading="eager"><span class="daily-fav-copy"><b>${f.name}</b><span>${f.prices[0]} • ${f.prices[1]}</span></span></button>`).join("");
+  host.querySelectorAll(".daily-fav").forEach(btn=>btn.addEventListener("click",()=>openPizza(btn.dataset.cat,Number(btn.dataset.index))));
+  const d=new Date();
+  const label=document.getElementById("favoriteDate");
+  if(label) label.textContent=d.toLocaleDateString("tr-TR",{day:"2-digit",month:"short"});
+}
+
 const menuStack = document.getElementById("menuStack");
 const landing = document.getElementById("landing");
 const app = document.getElementById("app");
@@ -831,6 +1006,8 @@ const headTitle = document.getElementById("headTitle");
 const viewer = document.getElementById("viewer");
 const viewerImage = document.getElementById("viewerImage");
 const viewerCounter = document.getElementById("viewerCounter");
+const viewerDots = document.getElementById("viewerDots");
+const viewerPopular = document.getElementById("viewerPopular");
 let viewerItems = [];
 let viewerIndex = 0;
 let touchStartX = null;
@@ -885,7 +1062,8 @@ function openCategory(id, push=true){
       </article>` : "";
 
     html+=`<div class="product-grid">`+cat.products.map((p,i)=>`
-      <article class="product-card${isPremium ? " premium-product" : ""}" data-index="${i}">
+      <article class="product-card${isPremium ? " premium-product" : ""}${isPopular(cat.id,p[0]) ? " has-popular" : ""}" data-index="${i}">
+        ${isPopular(cat.id,p[0]) ? `<span class="popular-badge">★ EN ÇOK TERCİH EDİLEN</span>` : ""}
         <div class="thumb"><img src="${p[2]}" alt="${p[0]}" loading="lazy"></div>
         <div class="prod-copy">
           <strong>${p[0]}</strong>
@@ -922,10 +1100,7 @@ function openCategory(id, push=true){
   if(cat.type==="pizza"){
     content.querySelectorAll(".product-card").forEach(card=>{
       card.addEventListener("click",()=>{
-        viewerItems=cat.products.map(p=>({title:p[0],src:p[2]}));
-        if(cat.extraPoster){
-          viewerItems.push({title:cat.extraPosterTitle || "Ekstra Malzemeler",src:cat.extraPoster});
-        }
+        viewerItems=viewerItemsForCategory(cat);
         openViewer(Number(card.dataset.index));
       });
     });
@@ -937,6 +1112,10 @@ function openCategory(id, push=true){
   }
 
   if(push) history.pushState({category:id},"","#"+id);
+}
+
+function showToast(message){
+  const t=document.getElementById("toast"); if(!t)return; t.textContent=message; t.classList.add("show"); clearTimeout(showToast.timer); showToast.timer=setTimeout(()=>t.classList.remove("show"),1800);
 }
 
 function showLanding(push=true){
@@ -964,6 +1143,11 @@ function updateViewer(){
   viewerImage.alt=item.title;
   viewerCounter.textContent=`${viewerIndex+1} / ${viewerItems.length}`;
   viewer.style.setProperty("--viewer-bg",`url("${item.src}")`);
+  viewerPopular.classList.toggle("hidden",!item.popular);
+  viewerDots.innerHTML=viewerItems.map((_,i)=>`<button type="button" class="viewer-dot${i===viewerIndex ? " active" : ""}" data-dot="${i}" aria-label="${i+1}. ürüne git"></button>`).join("");
+  viewerDots.querySelectorAll(".viewer-dot").forEach(dot=>dot.addEventListener("click",()=>{
+    const target=Number(dot.dataset.dot); if(target===viewerIndex)return; viewerIndex=target; updateViewer();
+  }));
 }
 function moveViewer(step){
   if(viewerItems.length<=1) return;
@@ -1016,6 +1200,30 @@ document.addEventListener("keydown",e=>{
   if(e.key==="ArrowLeft") moveViewer(-1);
   if(e.key==="ArrowRight") moveViewer(1);
 });
+
+
+document.getElementById("surpriseBtn")?.addEventListener("click",surpriseMe);
+renderDailyFavorites();
+
+let deferredInstallPrompt=null;
+const installBtn=document.getElementById("installBtn");
+window.addEventListener("beforeinstallprompt",e=>{
+  e.preventDefault(); deferredInstallPrompt=e; if(installBtn) installBtn.hidden=false;
+});
+installBtn?.addEventListener("click",async()=>{
+  if(deferredInstallPrompt){
+    deferredInstallPrompt.prompt();
+    await deferredInstallPrompt.userChoice;
+    deferredInstallPrompt=null; installBtn.hidden=true; return;
+  }
+  const isIOS=/iphone|ipad|ipod/i.test(navigator.userAgent);
+  showToast(isIOS?"Safari: Paylaş → Ana Ekrana Ekle":"Tarayıcı menüsü → Ana ekrana ekle");
+});
+window.addEventListener("appinstalled",()=>{ if(installBtn) installBtn.hidden=true; showToast("Menü ana ekrana eklendi"); });
+
+if("serviceWorker" in navigator){
+  window.addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));
+}
 
 window.addEventListener("popstate",()=>{
   const hash=location.hash.replace("#","");
