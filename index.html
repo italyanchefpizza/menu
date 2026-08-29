@@ -824,6 +824,110 @@ a{text-decoration:none;color:inherit}
   .premium-hero h1{font-size:clamp(19px,6vw,27px)}
 }
 
+
+/* ===== LANDING SADELİK + CTA FIX ===== */
+.landing-logo{
+  margin-bottom:18px;
+}
+
+/* Eski iki kolon yerine arama tek satır tam genişlik */
+.landing-tools{
+  display:block!important;
+  margin:-4px 0 13px!important;
+}
+#searchToggle{
+  width:100%;
+  min-height:39px;
+  font-weight:800;
+}
+
+/* Açık/Kapalı artık akışta yer kaplamıyor; sağ üstte kompakt durum rozeti */
+#storeStatus{
+  position:fixed;
+  top:calc(env(safe-area-inset-top) + 12px);
+  right:12px;
+  z-index:45;
+  width:auto;
+  min-width:74px;
+  min-height:31px;
+  padding:6px 10px;
+  border-radius:999px;
+  gap:6px;
+  background:rgba(12,9,7,.72);
+  border-color:rgba(238,190,115,.20);
+  box-shadow:0 8px 24px rgba(0,0,0,.22);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+}
+#storeStatus .status-dot{
+  width:6px;
+  height:6px;
+}
+#storeStatusText{
+  font-size:8.5px;
+  font-weight:800;
+  letter-spacing:.025em;
+}
+
+/* Yanında İyi Gider: dikkat çekici fakat premium, yavaş gold glow */
+.cross-sell{
+  position:relative;
+  overflow:hidden;
+  border-color:rgba(235,177,82,.52)!important;
+  background:
+    radial-gradient(circle at 12% 50%,rgba(221,130,31,.12),transparent 28%),
+    linear-gradient(145deg,rgba(38,23,12,.82),rgba(14,10,7,.90))!important;
+  box-shadow:
+    0 0 0 1px rgba(244,192,104,.06),
+    0 0 22px rgba(223,139,39,.16),
+    0 14px 34px rgba(0,0,0,.24)!important;
+  animation:crossSellGlow 3.2s ease-in-out infinite alternate;
+}
+.cross-sell::before{
+  content:"";
+  position:absolute;
+  inset:-40% -25%;
+  pointer-events:none;
+  background:linear-gradient(
+    110deg,
+    transparent 38%,
+    rgba(255,205,120,.11) 49%,
+    transparent 60%
+  );
+  transform:translateX(-55%);
+  animation:crossSellSweep 4.8s ease-in-out infinite;
+}
+.cross-sell > *{
+  position:relative;
+  z-index:1;
+}
+.cross-sell-head strong{
+  color:#fff1d7!important;
+}
+@keyframes crossSellGlow{
+  from{
+    border-color:rgba(235,177,82,.38);
+    box-shadow:0 0 0 1px rgba(244,192,104,.04),0 0 14px rgba(223,139,39,.10),0 14px 34px rgba(0,0,0,.24);
+  }
+  to{
+    border-color:rgba(245,190,92,.68);
+    box-shadow:0 0 0 1px rgba(244,192,104,.08),0 0 30px rgba(223,139,39,.23),0 14px 34px rgba(0,0,0,.24);
+  }
+}
+@keyframes crossSellSweep{
+  0%,30%{transform:translateX(-55%)}
+  70%,100%{transform:translateX(58%)}
+}
+
+@media(max-width:370px){
+  #storeStatus{
+    right:9px;
+    min-width:68px;
+    padding:5px 8px;
+  }
+  #storeStatusText{font-size:8px}
+}
+
 </style>
 </head>
 
@@ -836,7 +940,6 @@ a{text-decoration:none;color:inherit}
       <div class="brand-kicker">İTALYAN</div>
       <div class="brand-main"><span>CHEF</span> PİZZA</div>
       <div class="brand-rule"><i></i></div>
-      <div class="brand-tag">Lezzetin İtalyan imzası</div>
     </div>
 
     <div class="landing-tools">
@@ -1170,8 +1273,8 @@ function openPoster(id,titleOverride){
   viewerItems=[{title:titleOverride||cat.title,src:cat.poster,popular:false,categoryId:cat.id,index:0,poster:true}];openViewer(0);
 }
 function crossSellHTML(){
-  return `<section class="cross-sell" aria-label="Bunun yanına iyi gider">
-    <div class="cross-sell-head"><strong>Bunun Yanına İyi Gider</strong><small>Tamamlayıcılar</small></div>
+  return `<section class="cross-sell" aria-label="Yanında iyi gider">
+    <div class="cross-sell-head"><strong>Yanında İyi Gider</strong><small>Tamamlayıcılar</small></div>
     <div class="cross-sell-grid">
       <button class="cross-sell-item" type="button" data-cross="yan-urunler" data-title="Patates"><b>Patates</b><span>130 TL</span></button>
       <button class="cross-sell-item" type="button" data-cross="yan-urunler" data-title="Sufle"><b>Sufle</b><span>120 TL</span></button>
