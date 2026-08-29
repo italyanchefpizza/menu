@@ -416,6 +416,129 @@ a{text-decoration:none;color:inherit}
   .product-grid{grid-template-columns:1fr 1fr}
   .campaign-grid{grid-template-columns:1fr 1fr}
 }
+
+/* ===== FINAL FIX: CHEF PREMIUM + YATAY GALERİ ===== */
+.premium-choice{
+  position:relative;
+  overflow:hidden;
+  border-color:rgba(247,190,83,.86)!important;
+  background:
+    radial-gradient(circle at 13% 50%,rgba(255,162,32,.23),transparent 27%),
+    linear-gradient(105deg,rgba(63,35,12,.84),rgba(22,14,8,.72))!important;
+  box-shadow:
+    0 0 0 1px rgba(255,184,62,.10),
+    0 0 28px rgba(234,126,25,.22),
+    0 12px 32px rgba(0,0,0,.30)!important;
+}
+.premium-choice::before{
+  content:"";
+  position:absolute;
+  inset:-45% -25%;
+  pointer-events:none;
+  background:
+    radial-gradient(circle at 15% 50%,rgba(255,201,90,.32),transparent 15%),
+    linear-gradient(110deg,transparent 36%,rgba(255,198,91,.16) 48%,transparent 60%);
+  transform:translateX(-45%);
+  animation:premiumSweep 3.8s ease-in-out infinite;
+}
+.premium-choice::after{
+  content:"";
+  position:absolute;
+  width:74px;height:74px;
+  left:-20px;bottom:-45px;
+  border-radius:50%;
+  pointer-events:none;
+  background:radial-gradient(circle,rgba(246,119,20,.44),rgba(246,119,20,0) 69%);
+  animation:emberPulse 2.3s ease-in-out infinite alternate;
+}
+.premium-choice .choice-icon{
+  color:#ffd779;
+  border-color:rgba(255,204,103,.72);
+  box-shadow:0 0 18px rgba(237,151,41,.24);
+}
+.premium-choice .choice-copy strong{
+  color:#fff6e4;
+  text-shadow:0 0 16px rgba(255,185,67,.20);
+}
+.premium-choice .choice-arrow{color:#ffd980}
+@keyframes premiumSweep{
+  0%,20%{transform:translateX(-52%)}
+  58%,100%{transform:translateX(62%)}
+}
+@keyframes emberPulse{
+  from{opacity:.42;transform:scale(.82)}
+  to{opacity:.88;transform:scale(1.18)}
+}
+
+.premium-hero{
+  position:relative;
+  overflow:hidden;
+  margin:12px 12px 6px;
+  padding:22px 17px 18px;
+  border:1px solid rgba(231,169,70,.47);
+  border-radius:22px;
+  background:
+    radial-gradient(circle at 80% -10%,rgba(234,102,21,.20),transparent 34%),
+    linear-gradient(145deg,rgba(48,28,13,.88),rgba(13,10,7,.92));
+  box-shadow:0 17px 45px rgba(0,0,0,.28),0 0 28px rgba(216,132,39,.09);
+}
+.premium-hero::after{
+  content:"";
+  position:absolute;
+  inset:auto -20% -58% -20%;
+  height:160px;
+  pointer-events:none;
+  background:radial-gradient(ellipse at center,rgba(231,92,18,.22),transparent 67%);
+}
+.premium-eyebrow{
+  position:relative;z-index:1;
+  display:inline-flex;
+  color:#efbd62;
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:.15em;
+  margin-bottom:8px;
+}
+.premium-hero h1,
+.premium-hero p,
+.premium-hero .price-band{position:relative;z-index:1}
+.premium-hero h1{color:#fff5e1}
+.premium-hero .price-cell{
+  border-color:rgba(240,178,77,.58);
+  background:linear-gradient(180deg,rgba(59,35,16,.78),rgba(25,17,10,.70));
+  box-shadow:inset 0 1px rgba(255,221,157,.06);
+}
+
+.premium-product{
+  border-color:rgba(221,159,61,.42);
+  background:
+    radial-gradient(circle at 0 50%,rgba(224,122,24,.10),transparent 30%),
+    linear-gradient(110deg,rgba(44,27,13,.95),rgba(14,10,7,.95));
+}
+.premium-product .prod-go,
+.premium-product .prod-price{color:#f2bd62}
+.premium-product .thumb{border-color:rgba(239,181,88,.31)}
+
+#viewer{
+  touch-action:pan-y pinch-zoom;
+}
+#viewerImage{
+  will-change:transform,opacity;
+}
+.viewer-nav button{
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:29px;
+  line-height:1;
+  padding-bottom:3px;
+}
+.swipe-tip{
+  letter-spacing:.09em;
+}
+
+/* Ana ekranda gerçekten yalnızca ana başlık: boş dikey alanı dengeler. */
+.menu-choice{min-height:58px}
+.choice-copy strong{font-size:16px}
+
 </style>
 </head>
 
@@ -458,15 +581,15 @@ a{text-decoration:none;color:inherit}
 <!-- Tam ekran premium poster -->
 <div id="viewer" class="hidden" aria-modal="true" role="dialog">
   <div class="viewer-inner">
-    <div class="swipe-tip">YUKARI / AŞAĞI KAYDIR</div>
+    <div class="swipe-tip">KAYDIRARAK İNCELEYİN</div>
     <button class="viewer-close" id="viewerClose" aria-label="Kapat">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6 6 18"/></svg>
     </button>
     <img id="viewerImage" alt="">
     <div class="viewer-nav">
-      <button id="prevBtn" aria-label="Önceki">↑</button>
+      <button id="prevBtn" aria-label="Önceki">‹</button>
       <span id="viewerCounter">1 / 1</span>
-      <button id="nextBtn" aria-label="Sonraki">↓</button>
+      <button id="nextBtn" aria-label="Sonraki">›</button>
     </div>
   </div>
 </div>
@@ -621,11 +744,11 @@ const viewerImage = document.getElementById("viewerImage");
 const viewerCounter = document.getElementById("viewerCounter");
 let viewerItems = [];
 let viewerIndex = 0;
-let touchStartY = null;
+let touchStartX = null;
 
 function renderLanding(){
   menuStack.innerHTML = CATEGORIES.map(c=>`
-    <button class="menu-choice" data-id="${c.id}">
+    <button class="menu-choice${c.id==="chef" ? " premium-choice" : ""}" data-id="${c.id}">
       <span class="choice-icon">${ICONS[c.icon]}</span>
       <span class="choice-copy">
         <strong>${c.title}</strong>
@@ -647,10 +770,12 @@ function openCategory(id, push=true){
   headTitle.textContent=cat.title;
   document.title=`${cat.title} | İtalyan Chef Pizza`;
 
+  const isPremium = cat.id==="chef";
   let html=`
-    <section class="category-hero">
+    <section class="category-hero${isPremium ? " premium-hero" : ""}">
+      ${isPremium ? `<div class="premium-eyebrow">✦ ŞEFİN İMZA SERİSİ ✦</div>` : ""}
       <h1>${cat.title}</h1>
-      <p>${cat.type==="pizza" ? "Bir pizzaya dokun; hazırladığımız premium ürün görselini tam ekran incele." : cat.description || cat.sub}</p>
+      <p>${isPremium ? "En zengin içerikler, şef dokunuşu ve premium seri." : (cat.type==="pizza" ? "Bir pizzaya dokun; premium ürün görselini tam ekran incele." : cat.description || cat.sub)}</p>
       ${cat.prices ? `
         <div class="price-band">
           <div class="price-cell"><span>ORTA BOY</span><strong>${cat.prices[0]}</strong></div>
@@ -660,7 +785,7 @@ function openCategory(id, push=true){
 
   if(cat.type==="pizza"){
     html+=`<div class="product-grid">`+cat.products.map((p,i)=>`
-      <article class="product-card" data-index="${i}">
+      <article class="product-card${isPremium ? " premium-product" : ""}" data-index="${i}">
         <div class="thumb"><img src="${p[2]}" alt="${p[0]}" loading="lazy"></div>
         <div class="prod-copy">
           <strong>${p[0]}</strong>
@@ -739,8 +864,28 @@ function updateViewer(){
 }
 function moveViewer(step){
   if(viewerItems.length<=1) return;
-  viewerIndex=(viewerIndex+step+viewerItems.length)%viewerItems.length;
-  updateViewer();
+
+  const direction = step > 0 ? -1 : 1;
+  const out = viewerImage.animate(
+    [
+      {transform:"translateX(0)", opacity:1},
+      {transform:`translateX(${direction*42}px)`, opacity:.18}
+    ],
+    {duration:145,easing:"ease-in",fill:"forwards"}
+  );
+
+  out.onfinish=()=>{
+    viewerIndex=(viewerIndex+step+viewerItems.length)%viewerItems.length;
+    updateViewer();
+
+    viewerImage.animate(
+      [
+        {transform:`translateX(${-direction*48}px)`, opacity:.12},
+        {transform:"translateX(0)", opacity:1}
+      ],
+      {duration:190,easing:"cubic-bezier(.2,.75,.25,1)",fill:"forwards"}
+    );
+  };
 }
 
 document.getElementById("backBtn").addEventListener("click",()=>showLanding(true));
@@ -753,20 +898,20 @@ viewer.addEventListener("click",e=>{
   if(e.target===viewer || e.target.classList.contains("viewer-inner")) closeViewer();
 });
 viewer.addEventListener("touchstart",e=>{
-  touchStartY=e.changedTouches[0].clientY;
+  touchStartX=e.changedTouches[0].clientX;
 },{passive:true});
 viewer.addEventListener("touchend",e=>{
-  if(touchStartY===null) return;
-  const dy=e.changedTouches[0].clientY-touchStartY;
-  if(Math.abs(dy)>55) moveViewer(dy<0 ? 1 : -1);
-  touchStartY=null;
+  if(touchStartX===null) return;
+  const dx=e.changedTouches[0].clientX-touchStartX;
+  if(Math.abs(dx)>55) moveViewer(dx<0 ? 1 : -1);
+  touchStartX=null;
 },{passive:true});
 
 document.addEventListener("keydown",e=>{
   if(viewer.classList.contains("hidden")) return;
   if(e.key==="Escape") closeViewer();
-  if(e.key==="ArrowUp"||e.key==="ArrowLeft") moveViewer(-1);
-  if(e.key==="ArrowDown"||e.key==="ArrowRight") moveViewer(1);
+  if(e.key==="ArrowLeft") moveViewer(-1);
+  if(e.key==="ArrowRight") moveViewer(1);
 });
 
 window.addEventListener("popstate",()=>{
@@ -784,7 +929,3 @@ if(CATEGORIES.some(c=>c.id===initial)) openCategory(initial,false);
 </body>
 </html>
 
-<style>
-.menu-choice{min-height:56px}
-.choice-copy strong{font-size:16px}
-</style>
