@@ -961,6 +961,11 @@ a{text-decoration:none;color:inherit}
 
 <body>
 
+<div class="tool-chip global-store-status" id="storeStatus" aria-live="polite">
+  <span class="status-dot"></span>
+  <span id="storeStatusText">Çalışma saati kontrol ediliyor</span>
+</div>
+
 <!-- İlk açılış: blur arka plan + kategori yönlendirmesi -->
 <section id="landing">
   <div class="landing-inner">
@@ -971,10 +976,6 @@ a{text-decoration:none;color:inherit}
     </div>
 
     <div class="landing-tools">
-      <div class="tool-chip" id="storeStatus" aria-live="polite">
-        <span class="status-dot"></span>
-        <span id="storeStatusText">Çalışma saati kontrol ediliyor</span>
-      </div>
       <button class="tool-btn" id="searchToggle" type="button" aria-controls="searchPanel" aria-expanded="false">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
         Pizza veya Malzeme Ara
@@ -1714,6 +1715,25 @@ if(directPizza){
 }
 #storeStatusText{
   text-align:center;
+}
+</style>
+
+
+<style>
+#storeStatus.global-store-status{
+  position:fixed!important;
+  top:calc(env(safe-area-inset-top) + 12px)!important;
+  right:12px!important;
+  left:auto!important;
+  bottom:auto!important;
+  z-index:9999!important;
+  width:auto!important;
+  min-width:74px!important;
+  min-height:31px!important;
+  margin:0!important;
+  transform:none!important;
+  flex:none!important;
+  pointer-events:none;
 }
 </style>
 
