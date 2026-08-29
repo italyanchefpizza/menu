@@ -1444,9 +1444,11 @@ function openCategory(id, push=true){
   document.title=`${cat.title} | İtalyan Chef Pizza`;
 
   const isPremium = cat.id==="chef";
+  const isCampaign = cat.id==="kampanyalar";
   let html=`
-    <section class="category-hero${isPremium ? " premium-hero" : ""}">
+    <section class="category-hero${isPremium ? " premium-hero" : ""}${isCampaign ? " campaign-hero" : ""}">
       ${isPremium ? `<div class="premium-eyebrow">✦ ŞEFİN İMZA SERİSİ ✦</div>` : ""}
+      ${isCampaign ? `<div class="campaign-eyebrow">✦ FIRSAT MENÜLERİ ✦</div>` : ""}
       <h1>${cat.title}</h1>
     </section>`;
 
@@ -1917,6 +1919,138 @@ body.viewer-open .bottom-nav{
   .campaign-poster-grid{
     grid-template-columns:1fr 1fr!important;
   }
+}
+</style>
+
+
+<style>
+/* ===== KAMPANYALAR — PREMIUM HERO ===== */
+.campaign-hero{
+  position:relative!important;
+  overflow:hidden!important;
+  margin:12px 12px 8px!important;
+  padding:19px 17px 17px!important;
+  border:1px solid rgba(232,163,57,.52)!important;
+  border-radius:22px!important;
+  background:
+    radial-gradient(circle at 82% -18%,rgba(226,91,21,.24),transparent 38%),
+    radial-gradient(circle at 10% 120%,rgba(231,151,44,.13),transparent 42%),
+    linear-gradient(145deg,rgba(51,28,12,.92),rgba(14,9,6,.95))!important;
+  box-shadow:
+    0 18px 44px rgba(0,0,0,.30),
+    0 0 30px rgba(222,131,33,.11)!important;
+}
+.campaign-hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  opacity:.34;
+  background:
+    linear-gradient(110deg,transparent 0 40%,rgba(255,215,143,.08) 49%,transparent 58%),
+    repeating-linear-gradient(135deg,rgba(255,255,255,.018) 0 1px,transparent 1px 8px);
+}
+.campaign-hero::after{
+  content:"";
+  position:absolute;
+  width:170px;
+  height:170px;
+  right:-62px;
+  bottom:-104px;
+  border-radius:50%;
+  pointer-events:none;
+  background:radial-gradient(circle,rgba(226,81,17,.24),transparent 67%);
+}
+.campaign-eyebrow{
+  position:relative;
+  z-index:1;
+  display:inline-flex;
+  margin-bottom:7px;
+  color:#efbd62;
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+}
+.campaign-hero h1{
+  position:relative;
+  z-index:1;
+  color:#fff4dd!important;
+  font-size:clamp(25px,8vw,38px)!important;
+  line-height:1!important;
+  white-space:nowrap!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+  text-shadow:0 2px 18px rgba(0,0,0,.25);
+}
+
+/* Kampanya posterleri: aynı premium çerçeve dili, daha derli toplu */
+.campaign-poster-grid{
+  gap:16px!important;
+  padding-top:8px!important;
+}
+.campaign-poster-card{
+  border:1px solid rgba(235,172,72,.48)!important;
+  border-radius:19px!important;
+  box-shadow:
+    0 15px 34px rgba(0,0,0,.32),
+    0 0 0 1px rgba(255,207,128,.04),
+    0 0 20px rgba(216,126,32,.08)!important;
+  transition:transform .16s ease,border-color .16s ease,box-shadow .16s ease;
+}
+.campaign-poster-card:active{
+  transform:scale(.988)!important;
+  border-color:rgba(246,190,95,.72)!important;
+  box-shadow:
+    0 10px 24px rgba(0,0,0,.30),
+    0 0 24px rgba(225,143,42,.16)!important;
+}
+
+/* ===== ÖDEME — SÜREKLİ 360° GOLDEN ORBIT ===== */
+#paymentMethodsBtn.landing-payment-chip{
+  isolation:isolate!important;
+  overflow:visible!important;
+  border-color:rgba(238,190,115,.18)!important;
+  box-shadow:
+    0 8px 24px rgba(0,0,0,.22),
+    0 0 13px rgba(232,164,61,.10)!important;
+}
+#paymentMethodsBtn.landing-payment-chip::before{
+  content:"";
+  position:absolute;
+  inset:-3px;
+  border-radius:999px;
+  pointer-events:none;
+  background:conic-gradient(
+    from 0deg,
+    rgba(255,206,112,.08) 0deg,
+    rgba(255,206,112,.08) 248deg,
+    rgba(255,224,158,.95) 292deg,
+    rgba(235,151,42,1) 330deg,
+    rgba(255,206,112,.08) 360deg
+  );
+  -webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 2px),#000 calc(100% - 2px));
+  mask:radial-gradient(farthest-side,transparent calc(100% - 2px),#000 calc(100% - 2px));
+  filter:drop-shadow(0 0 4px rgba(239,169,58,.56));
+  animation:paymentGoldOrbit 2.6s linear infinite;
+  z-index:-1;
+}
+#paymentMethodsBtn.landing-payment-chip::after{
+  content:"";
+  position:absolute;
+  inset:-6px;
+  border-radius:999px;
+  pointer-events:none;
+  box-shadow:0 0 15px rgba(230,150,43,.18);
+  animation:paymentGoldBreath 1.8s ease-in-out infinite alternate;
+  z-index:-2;
+}
+@keyframes paymentGoldOrbit{
+  to{transform:rotate(360deg)}
+}
+@keyframes paymentGoldBreath{
+  from{opacity:.35}
+  to{opacity:.88}
 }
 </style>
 
