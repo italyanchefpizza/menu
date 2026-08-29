@@ -585,29 +585,39 @@ a{text-decoration:none;color:inherit}
 }
 .kampanya-choice .choice-arrow{color:#ffd18b}
 
-/* Gold pulse loader for gallery back button */
-#prevBtn{
+/* Gold pulse loader for actual page back button */
+#backBtn{
   position:relative;
   overflow:visible;
+  isolation:isolate;
 }
-#prevBtn::before{
+#backBtn::before{
   content:"";
   position:absolute;
-  inset:-3px;
+  inset:-4px;
   border-radius:999px;
   pointer-events:none;
-  background:conic-gradient(from 0deg, rgba(255,217,140,0) 0deg, rgba(255,217,140,0) 250deg, rgba(255,201,107,.98) 310deg, rgba(234,146,39,.98) 344deg, rgba(255,217,140,0) 360deg);
-  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #000 calc(100% - 3px));
-  mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #000 calc(100% - 3px));
+  background:conic-gradient(
+    from 0deg,
+    rgba(255,217,140,0) 0deg,
+    rgba(255,217,140,0) 245deg,
+    rgba(255,205,116,.95) 302deg,
+    rgba(234,146,39,1) 342deg,
+    rgba(255,217,140,0) 360deg
+  );
+  -webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 3px),#000 calc(100% - 3px));
+  mask:radial-gradient(farthest-side,transparent calc(100% - 3px),#000 calc(100% - 3px));
   opacity:0;
-  transform:rotate(0deg) scale(1);
+  transform:rotate(0deg);
+  filter:drop-shadow(0 0 5px rgba(238,165,62,.38));
   animation:goldOrbitPulse 3.8s cubic-bezier(.22,.61,.36,1) infinite;
+  z-index:-1;
 }
 @keyframes goldOrbitPulse{
-  0%,62%{opacity:0;transform:rotate(0deg) scale(1)}
-  68%{opacity:1}
-  68%,92%{opacity:1;transform:rotate(360deg) scale(1.02)}
-  100%{opacity:0;transform:rotate(360deg) scale(1.02)}
+  0%,60%{opacity:0;transform:rotate(0deg)}
+  66%{opacity:1}
+  66%,92%{opacity:1;transform:rotate(360deg)}
+  100%{opacity:0;transform:rotate(360deg)}
 }
 
 
