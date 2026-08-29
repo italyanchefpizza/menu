@@ -2054,6 +2054,104 @@ body.viewer-open .bottom-nav{
 }
 </style>
 
+
+<style>
+/* ===== İÇ MENÜ BAŞLIKLARI — ORTA HİZALAMA =====
+   Sadece kategori/iç menü hero alanlarını etkiler.
+   Ana menü kartlarına dokunmaz. */
+.category-hero{
+  text-align:center!important;
+}
+.category-hero h1{
+  width:100%!important;
+  text-align:center!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+}
+.premium-eyebrow,
+.campaign-eyebrow{
+  display:flex!important;
+  width:100%!important;
+  justify-content:center!important;
+  text-align:center!important;
+}
+</style>
+
+
+<style>
+/* ===== ÖDEME BUTONU — SNAKE / CHASING GOLD BORDER =====
+   Sabit ince altın hat + çevresinde kendini kovalayan kısa parlak segment. */
+#paymentMethodsBtn.landing-payment-chip{
+  position:absolute!important;
+  isolation:isolate!important;
+  overflow:visible!important;
+  border:1px solid rgba(232,176,83,.28)!important;
+  box-shadow:
+    0 8px 24px rgba(0,0,0,.22),
+    0 0 10px rgba(229,153,45,.08)!important;
+}
+
+/* Hareket eden kısa "snake" segment */
+#paymentMethodsBtn.landing-payment-chip::before{
+  content:""!important;
+  position:absolute!important;
+  inset:-3px!important;
+  border-radius:999px!important;
+  pointer-events:none!important;
+  z-index:-1!important;
+
+  /* Çoğu şeffaf; yalnızca kısa, kuyruklu altın parça görünür */
+  background:conic-gradient(
+    from 0deg,
+    transparent 0deg 286deg,
+    rgba(225,143,35,.08) 286deg,
+    rgba(236,163,52,.34) 300deg,
+    rgba(248,194,91,.72) 316deg,
+    rgba(255,226,163,1) 330deg,
+    rgba(255,246,214,1) 338deg,
+    rgba(245,183,71,.72) 346deg,
+    rgba(228,145,34,.18) 355deg,
+    transparent 360deg
+  )!important;
+
+  -webkit-mask:radial-gradient(
+    farthest-side,
+    transparent calc(100% - 2px),
+    #000 calc(100% - 2px)
+  )!important;
+  mask:radial-gradient(
+    farthest-side,
+    transparent calc(100% - 2px),
+    #000 calc(100% - 2px)
+  )!important;
+
+  filter:
+    drop-shadow(0 0 3px rgba(255,205,112,.85))
+    drop-shadow(0 0 7px rgba(227,145,38,.48))!important;
+
+  animation:paymentSnakeChase 2.15s linear infinite!important;
+  transform-origin:center center!important;
+}
+
+/* Statik dış glow; artık nefes/spin atmıyor */
+#paymentMethodsBtn.landing-payment-chip::after{
+  content:""!important;
+  position:absolute!important;
+  inset:-5px!important;
+  border-radius:999px!important;
+  pointer-events:none!important;
+  z-index:-2!important;
+  box-shadow:0 0 12px rgba(232,157,49,.13)!important;
+  opacity:1!important;
+  animation:none!important;
+}
+
+@keyframes paymentSnakeChase{
+  from{transform:rotate(0deg)}
+  to{transform:rotate(360deg)}
+}
+</style>
+
 </body>
 </html>
 
