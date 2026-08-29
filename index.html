@@ -711,6 +711,80 @@ a{text-decoration:none;color:inherit}
   .daily-fav{min-height:105px}.daily-fav-copy b{font-size:9px}.google-proof{padding:12px}
 }
 
+
+/* ===== FINAL UX POLISH v4 ===== */
+.landing-tools{
+  display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:-8px 0 13px;
+}
+.tool-chip,.tool-btn{
+  min-height:39px;border-radius:12px;border:1px solid rgba(239,193,120,.24);
+  background:rgba(14,10,7,.62);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  display:flex;align-items:center;justify-content:center;gap:7px;padding:8px 10px;
+  color:#e7d7c2;font-size:9.5px;font-weight:800;letter-spacing:.02em;
+}
+.tool-btn{cursor:pointer}.tool-btn:active{transform:scale(.985)}
+.tool-btn svg{width:14px;height:14px;flex:0 0 auto;color:#e8ad55}
+.status-dot{width:7px;height:7px;border-radius:50%;flex:0 0 auto;background:#8f8b83;box-shadow:0 0 0 3px rgba(143,139,131,.08)}
+.tool-chip.open .status-dot{background:#47c778;box-shadow:0 0 0 3px rgba(71,199,120,.10),0 0 10px rgba(71,199,120,.28)}
+.tool-chip.closed .status-dot{background:#d96956;box-shadow:0 0 0 3px rgba(217,105,86,.10)}
+#storeStatusText{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+.search-panel{
+  margin:-5px 0 13px;border:1px solid rgba(237,184,101,.25);border-radius:16px;
+  background:rgba(12,8,6,.86);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  overflow:hidden;box-shadow:0 14px 34px rgba(0,0,0,.28)
+}
+.search-row{display:grid;grid-template-columns:18px 1fr 34px;gap:8px;align-items:center;padding:10px 10px 9px 12px;border-bottom:1px solid rgba(234,181,99,.13)}
+.search-row svg{width:16px;height:16px;color:#d9a658}
+.search-row input{min-width:0;border:0;outline:0;background:transparent;color:#fff4e3;font-size:13px;font-weight:650}
+.search-row input::placeholder{color:#9e8d78}
+.search-close{width:32px;height:32px;border-radius:9px;border:0;background:rgba(255,255,255,.045);color:#d8c5ad;cursor:pointer;font-size:17px}
+.search-results{max-height:300px;overflow:auto;padding:6px}
+.search-empty{padding:18px 12px;text-align:center;color:#a9957d;font-size:10px}
+.search-result{width:100%;display:grid;grid-template-columns:48px 1fr auto;align-items:center;gap:10px;padding:7px;border:0;border-bottom:1px solid rgba(255,255,255,.045);background:transparent;color:#fff;text-align:left;cursor:pointer}
+.search-result:last-child{border-bottom:0}.search-result img{width:48px;height:48px;border-radius:10px;object-fit:cover}
+.search-result b{display:block;font-size:11px}.search-result small{display:block;margin-top:3px;color:#a99378;font-size:8.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.search-result span{font-size:16px;color:#e7ad55}
+
+.google-g{width:30px!important;height:30px!important;border-radius:10px!important;font-size:16px!important}
+.google-rating-line strong{font-size:20px!important}.google-stars{font-size:11px!important}
+.google-actions a{min-height:36px!important}
+.pwa-install{display:flex;align-items:center;justify-content:center;gap:6px;letter-spacing:.02em}
+.pwa-install svg{width:13px;height:13px}
+
+.viewer-share{
+  position:absolute;top:max(12px,env(safe-area-inset-top));left:12px;z-index:6;width:40px;height:40px;
+  border-radius:50%;border:1px solid rgba(255,255,255,.20);background:rgba(0,0,0,.46);color:#f3e6d4;
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);display:grid;place-items:center;cursor:pointer
+}
+.viewer-share svg{width:17px;height:17px}.viewer-share:active{transform:scale(.96)}
+.viewer-nav{min-width:224px!important;padding:7px 10px!important}
+.viewer-status{min-width:122px!important;max-width:142px}
+.viewer-title{display:block;width:100%;color:#f4e5d1;font-size:8.5px;font-weight:800;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#viewerCounter{font-size:9px!important}.viewer-popular{display:none!important}
+
+.cross-sell{margin:0 14px 30px;padding:13px;border:1px solid rgba(233,178,94,.22);border-radius:17px;background:linear-gradient(145deg,rgba(35,22,13,.75),rgba(14,10,7,.86))}
+.cross-sell-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:9px}
+.cross-sell-head strong{font-family:Georgia,"Times New Roman",serif;font-size:15px;color:#f6ead8}
+.cross-sell-head small{color:#b69a75;font-size:8px;letter-spacing:.07em;text-transform:uppercase}
+.cross-sell-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
+.cross-sell-item{min-width:0;border:1px solid rgba(241,198,130,.18);border-radius:12px;background:rgba(255,255,255,.035);padding:9px 7px;color:#eee0cc;text-align:center;cursor:pointer}
+.cross-sell-item b{display:block;font-size:9.5px;line-height:1.15}.cross-sell-item span{display:block;margin-top:4px;color:#e7ad55;font-size:8px;font-weight:850}
+.cross-sell-item:active{transform:scale(.98)}
+
+.update-banner{
+  position:fixed;left:50%;bottom:calc(82px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:110;
+  width:min(calc(100% - 28px),420px);min-height:44px;border-radius:13px;border:1px solid rgba(240,191,111,.24);
+  background:rgba(14,10,7,.94);box-shadow:0 16px 40px rgba(0,0,0,.38);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  padding:7px 8px 7px 12px;display:flex;align-items:center;justify-content:space-between;gap:10px
+}
+.update-banner span{font-size:9.5px;color:#e3d2ba;font-weight:750}
+.update-banner button{border:0;border-radius:9px;min-height:30px;padding:0 11px;background:linear-gradient(135deg,#d86b1d,#d59a35);color:#fff;font-size:9px;font-weight:900;cursor:pointer}
+
+@media(max-width:370px){
+  .landing-tools{gap:6px}.tool-chip,.tool-btn{font-size:8.8px;padding:7px}.cross-sell-item b{font-size:8.8px}
+}
+
 </style>
 </head>
 
@@ -725,6 +799,26 @@ a{text-decoration:none;color:inherit}
       <div class="brand-rule"><i></i></div>
       <div class="brand-tag">Lezzetin İtalyan imzası</div>
     </div>
+
+    <div class="landing-tools">
+      <div class="tool-chip" id="storeStatus" aria-live="polite">
+        <span class="status-dot"></span>
+        <span id="storeStatusText">Çalışma saati kontrol ediliyor</span>
+      </div>
+      <button class="tool-btn" id="searchToggle" type="button" aria-controls="searchPanel" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+        Menüde Ara
+      </button>
+    </div>
+
+    <section class="search-panel" id="searchPanel" hidden>
+      <div class="search-row">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+        <input id="menuSearch" type="search" inputmode="search" autocomplete="off" placeholder="Pizza veya malzeme ara">
+        <button class="search-close" id="searchClose" type="button" aria-label="Aramayı kapat">×</button>
+      </div>
+      <div class="search-results" id="searchResults"></div>
+    </section>
 
     <section class="daily-block" aria-label="Bugünün Favorileri">
       <div class="landing-section-head">
@@ -749,7 +843,10 @@ a{text-decoration:none;color:inherit}
         <a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=%C4%B0TALYAN%20CHEF%20P%C4%B0ZZA%20%C3%87ay%C4%B1rova&query_place_id=ChIJc1n9vJ3fyhQRMnqYBJrC7aw">Yorumları Gör</a>
         <a target="_blank" rel="noopener" href="https://search.google.com/local/writereview?placeid=ChIJc1n9vJ3fyhQRMnqYBJrC7aw">Yorum Yaz</a>
       </div>
-      <button class="pwa-install" id="installBtn" type="button" hidden>▣ Ana Ekrana Ekle</button>
+      <button class="pwa-install" id="installBtn" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12"/><path d="m8 11 4 4 4-4"/><path d="M5 19h14"/></svg>
+        Menüyü Telefona Ekle
+      </button>
     </section>
   </div>
 </section>
@@ -766,8 +863,8 @@ a{text-decoration:none;color:inherit}
       <small>İtalyan Chef Pizza</small>
     </div>
 
-    <button class="icon-btn" id="homeBtn" aria-label="Ana menü">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10.5V20h13v-9.5"/></svg>
+    <button class="icon-btn" id="appSearchBtn" aria-label="Menüde ara">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
     </button>
   </header>
 
@@ -778,6 +875,9 @@ a{text-decoration:none;color:inherit}
 <div id="viewer" class="hidden" aria-modal="true" role="dialog">
   <div class="viewer-inner">
     <div class="swipe-tip">KAYDIRARAK İNCELEYİN</div>
+    <button class="viewer-share" id="viewerShare" aria-label="Ürünü paylaş">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="m8.2 10.8 7.5-4.4M8.2 13.2l7.5 4.4"/></svg>
+    </button>
     <button class="viewer-close" id="viewerClose" aria-label="Kapat">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6 6 18"/></svg>
     </button>
@@ -786,6 +886,7 @@ a{text-decoration:none;color:inherit}
     <div class="viewer-nav">
       <button id="prevBtn" aria-label="Önceki">‹</button>
       <div class="viewer-status">
+        <span class="viewer-title" id="viewerTitle">Ürün</span>
         <span id="viewerCounter">1 / 1</span>
         <div class="viewer-dots" id="viewerDots" aria-label="Galeri ilerlemesi"></div>
       </div>
@@ -813,6 +914,11 @@ a{text-decoration:none;color:inherit}
     PUAN VER
   </a>
 </nav>
+
+<div class="update-banner hidden" id="updateBanner">
+  <span>Menünün yeni sürümü hazır.</span>
+  <button id="updateBtn" type="button">Güncelle</button>
+</div>
 
 <div class="toast" id="toast"></div>
 
@@ -954,6 +1060,104 @@ const POPULAR = {
 };
 const isPopular=(categoryId,name)=>Boolean(POPULAR[categoryId]?.has(name));
 
+
+const STORE_HOURS={
+  0:{open:660,close:1440},
+  1:{open:660,close:1440},
+  2:{open:660,close:1440},
+  3:{open:660,close:1440},
+  4:{open:660,close:1440},
+  5:{open:660,close:1500},
+  6:{open:660,close:1500}
+};
+
+function istanbulNowParts(){
+  const parts=new Intl.DateTimeFormat("en-GB",{
+    timeZone:"Europe/Istanbul",weekday:"short",year:"numeric",month:"2-digit",day:"2-digit",
+    hour:"2-digit",minute:"2-digit",hourCycle:"h23"
+  }).formatToParts(new Date());
+  const map=Object.fromEntries(parts.map(p=>[p.type,p.value]));
+  const dayMap={Sun:0,Mon:1,Tue:2,Wed:3,Thu:4,Fri:5,Sat:6};
+  return {day:dayMap[map.weekday],year:Number(map.year),month:Number(map.month),date:Number(map.day),hour:Number(map.hour),minute:Number(map.minute)};
+}
+function formatCloseMinute(minute){
+  const h=Math.floor((minute%1440)/60),m=minute%60;
+  return `${String(h).padStart(2,"0")}:${String(m).padStart(2,"0")}`;
+}
+function renderStoreStatus(){
+  const host=document.getElementById("storeStatus"),label=document.getElementById("storeStatusText");
+  if(!host||!label)return;
+  const now=istanbulNowParts(),minute=now.hour*60+now.minute,today=STORE_HOURS[now.day],prev=STORE_HOURS[(now.day+6)%7];
+  const carried=minute<today.open&&prev.close>1440&&minute+1440<prev.close;
+  const openNow=carried||(minute>=today.open&&minute<Math.min(today.close,1440));
+  const closeMinute=carried?prev.close:today.close;
+  host.classList.toggle("open",openNow);host.classList.toggle("closed",!openNow);
+  label.textContent=openNow?`Açık • ${formatCloseMinute(closeMinute)}'a kadar`:`Kapalı • 11:00'de açılır`;
+}
+setInterval(renderStoreStatus,60000);
+
+function normalizeTR(value){
+  return String(value||"").toLocaleLowerCase("tr-TR").normalize("NFD").replace(/[\u0300-\u036f]/g,"");
+}
+function searchPizza(query){
+  const q=normalizeTR(query).trim();
+  if(!q)return [];
+  return pizzaCatalog().filter(x=>normalizeTR(`${x.name} ${x.desc} ${x.categoryTitle}`).includes(q)).slice(0,10);
+}
+function renderSearchResults(query){
+  const host=document.getElementById("searchResults");if(!host)return;
+  const results=searchPizza(query);
+  if(!query.trim()){host.innerHTML='<div class="search-empty">Pizza adı veya malzeme yazın.</div>';return}
+  if(!results.length){host.innerHTML='<div class="search-empty">Eşleşen pizza bulunamadı.</div>';return}
+  host.innerHTML=results.map(r=>`
+    <button class="search-result" type="button" data-cat="${r.categoryId}" data-index="${r.index}">
+      <img src="${r.src}" alt="${r.name}">
+      <span><b>${r.name}</b><small>${r.categoryTitle} • ${r.desc}</small></span><span>›</span>
+    </button>`).join("");
+  host.querySelectorAll(".search-result").forEach(btn=>btn.addEventListener("click",()=>{
+    closeSearch();openCategory(btn.dataset.cat,true);setTimeout(()=>openPizza(btn.dataset.cat,Number(btn.dataset.index)),40);
+  }));
+}
+function openSearch(){
+  const panel=document.getElementById("searchPanel"),btn=document.getElementById("searchToggle");if(!panel)return;
+  panel.hidden=false;btn?.setAttribute("aria-expanded","true");
+  const input=document.getElementById("menuSearch");renderSearchResults(input?.value||"");setTimeout(()=>input?.focus(),40);
+}
+function closeSearch(){
+  document.getElementById("searchPanel")?.setAttribute("hidden","");
+  document.getElementById("searchToggle")?.setAttribute("aria-expanded","false");
+}
+function openPoster(id,titleOverride){
+  const cat=CATEGORIES.find(c=>c.id===id);if(!cat||cat.type!=="poster")return;
+  viewerItems=[{title:titleOverride||cat.title,src:cat.poster,popular:false,categoryId:cat.id,index:0,poster:true}];openViewer(0);
+}
+function crossSellHTML(){
+  return `<section class="cross-sell" aria-label="Bunun yanına iyi gider">
+    <div class="cross-sell-head"><strong>Bunun Yanına İyi Gider</strong><small>Tamamlayıcılar</small></div>
+    <div class="cross-sell-grid">
+      <button class="cross-sell-item" type="button" data-cross="yan-urunler" data-title="Patates"><b>Patates</b><span>130 TL</span></button>
+      <button class="cross-sell-item" type="button" data-cross="yan-urunler" data-title="Sufle"><b>Sufle</b><span>120 TL</span></button>
+      <button class="cross-sell-item" type="button" data-cross="icecekler" data-title="1 Litre İçecek"><b>1 L İçecek</b><span>90 TL</span></button>
+    </div>
+  </section>`;
+}
+function currentViewerShareURL(item){
+  const url=new URL(location.href);url.searchParams.delete("pizza");
+  if(item?.categoryId&&Number.isInteger(item.index)&&!item.extra&&!item.poster){
+    url.hash=item.categoryId;url.searchParams.set("pizza",`${item.categoryId}:${item.index}`);
+  }
+  return url.toString();
+}
+async function shareCurrentViewerItem(){
+  const item=viewerItems[viewerIndex];if(!item)return;
+  const url=currentViewerShareURL(item),data={title:`${item.title} | İtalyan Chef Pizza`,text:`${item.title} — İtalyan Chef Pizza`,url};
+  try{
+    if(navigator.share)await navigator.share(data);
+    else{await navigator.clipboard.writeText(url);showToast("Ürün bağlantısı kopyalandı")}
+  }catch(err){if(err?.name!=="AbortError")showToast("Paylaşım açılamadı")}
+}
+
+
 function pizzaCatalog(){
   return CATEGORIES.filter(c=>c.type==="pizza").flatMap(c=>
     c.products.map((p,index)=>({categoryId:c.id,categoryTitle:c.title,index,name:p[0],desc:p[1],src:p[2],prices:c.prices,popular:isPopular(c.id,p[0])}))
@@ -964,8 +1168,8 @@ function seededRandom(seed){
   return ()=>{t+=0x6D2B79F5;let r=Math.imul(t^(t>>>15),1|t);r^=r+Math.imul(r^(r>>>7),61|r);return((r^(r>>>14))>>>0)/4294967296};
 }
 function dailyFavorites(){
-  const d=new Date();
-  const seed=d.getFullYear()*10000+(d.getMonth()+1)*100+d.getDate();
+  const d=istanbulNowParts();
+  const seed=d.year*10000+d.month*100+d.date;
   const rnd=seededRandom(seed);
   const cats=CATEGORIES.filter(c=>c.type==="pizza").map(c=>c.id);
   cats.sort(()=>rnd()-.5);
@@ -1007,9 +1211,12 @@ function renderDailyFavorites(){
   const favs=dailyFavorites();
   host.innerHTML=favs.map(f=>`<button class="daily-fav" data-cat="${f.categoryId}" data-index="${f.index}" type="button"><img src="${f.src}" alt="${f.name}" loading="eager"><span class="daily-fav-copy"><b>${f.name}</b><span>${f.prices[0]} • ${f.prices[1]}</span></span></button>`).join("");
   host.querySelectorAll(".daily-fav").forEach(btn=>btn.addEventListener("click",()=>openPizza(btn.dataset.cat,Number(btn.dataset.index))));
-  const d=new Date();
+  const d=istanbulNowParts();
   const label=document.getElementById("favoriteDate");
-  if(label) label.textContent=d.toLocaleDateString("tr-TR",{day:"2-digit",month:"short"});
+  if(label){
+    const dt=new Date(Date.UTC(d.year,d.month-1,d.date,12));
+    label.textContent=dt.toLocaleDateString("tr-TR",{day:"2-digit",month:"short",timeZone:"UTC"});
+  }
 }
 
 const menuStack = document.getElementById("menuStack");
@@ -1021,6 +1228,7 @@ const headTitle = document.getElementById("headTitle");
 const viewer = document.getElementById("viewer");
 const viewerImage = document.getElementById("viewerImage");
 const viewerCounter = document.getElementById("viewerCounter");
+const viewerTitle = document.getElementById("viewerTitle");
 const viewerDots = document.getElementById("viewerDots");
 const viewerPopular = document.getElementById("viewerPopular");
 let viewerItems = [];
@@ -1087,7 +1295,7 @@ function openCategory(id, push=true){
         </div>
         <div class="prod-go">›</div>
       </article>
-    `).join("")+extraCard+`</div>`;
+    `).join("")+extraCard+`</div>`+crossSellHTML();
   }
 
   if(cat.type==="campaigns"){
@@ -1111,6 +1319,9 @@ function openCategory(id, push=true){
 
   content.innerHTML=html;
   window.scrollTo({top:0,behavior:"instant"});
+  content.querySelectorAll("[data-cross]").forEach(btn=>btn.addEventListener("click",()=>{
+    openPoster(btn.dataset.cross,btn.dataset.title);
+  }));
 
   if(cat.type==="pizza"){
     content.querySelectorAll(".product-card").forEach(card=>{
@@ -1156,6 +1367,7 @@ function updateViewer(){
   if(!item) return;
   viewerImage.src=item.src;
   viewerImage.alt=item.title;
+  viewerTitle.textContent=item.title;
   viewerCounter.textContent=`${viewerIndex+1} / ${viewerItems.length}`;
   viewer.style.setProperty("--viewer-bg",`url("${item.src}")`);
   viewerPopular.classList.toggle("hidden",!item.popular);
@@ -1191,8 +1403,14 @@ function moveViewer(step){
 }
 
 document.getElementById("backBtn").addEventListener("click",()=>showLanding(true));
-document.getElementById("homeBtn").addEventListener("click",()=>showLanding(true));
 document.getElementById("viewerClose").addEventListener("click",closeViewer);
+document.getElementById("viewerShare").addEventListener("click",shareCurrentViewerItem);
+document.getElementById("searchToggle")?.addEventListener("click",()=>{
+  const panel=document.getElementById("searchPanel");if(panel?.hidden)openSearch();else closeSearch();
+});
+document.getElementById("searchClose")?.addEventListener("click",closeSearch);
+document.getElementById("menuSearch")?.addEventListener("input",e=>renderSearchResults(e.target.value));
+document.getElementById("appSearchBtn")?.addEventListener("click",()=>{showLanding(true);setTimeout(openSearch,60)});
 document.getElementById("prevBtn").addEventListener("click",()=>moveViewer(-1));
 document.getElementById("nextBtn").addEventListener("click",()=>moveViewer(1));
 
@@ -1222,22 +1440,33 @@ renderDailyFavorites();
 
 let deferredInstallPrompt=null;
 const installBtn=document.getElementById("installBtn");
-window.addEventListener("beforeinstallprompt",e=>{
-  e.preventDefault(); deferredInstallPrompt=e; if(installBtn) installBtn.hidden=false;
-});
+const isStandalone=window.matchMedia("(display-mode: standalone)").matches||window.navigator.standalone===true;
+if(installBtn)installBtn.hidden=isStandalone;
+window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();deferredInstallPrompt=e;if(installBtn&&!isStandalone)installBtn.hidden=false});
 installBtn?.addEventListener("click",async()=>{
-  if(deferredInstallPrompt){
-    deferredInstallPrompt.prompt();
-    await deferredInstallPrompt.userChoice;
-    deferredInstallPrompt=null; installBtn.hidden=true; return;
-  }
+  if(deferredInstallPrompt){deferredInstallPrompt.prompt();await deferredInstallPrompt.userChoice;deferredInstallPrompt=null;return}
   const isIOS=/iphone|ipad|ipod/i.test(navigator.userAgent);
-  showToast(isIOS?"Safari: Paylaş → Ana Ekrana Ekle":"Tarayıcı menüsü → Ana ekrana ekle");
+  showToast(isIOS?"Safari: Paylaş → Ana Ekrana Ekle":"Tarayıcı menüsü → Uygulamayı yükle");
 });
-window.addEventListener("appinstalled",()=>{ if(installBtn) installBtn.hidden=true; showToast("Menü ana ekrana eklendi"); });
+window.addEventListener("appinstalled",()=>{if(installBtn)installBtn.hidden=true;showToast("Menü telefona eklendi")});
 
+let refreshing=false;
 if("serviceWorker" in navigator){
-  window.addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));
+  window.addEventListener("load",async()=>{
+    try{
+      const reg=await navigator.serviceWorker.register("sw.js");
+      const banner=document.getElementById("updateBanner"),updateBtn=document.getElementById("updateBtn");
+      const showUpdate=()=>{if(reg.waiting)banner?.classList.remove("hidden")};
+      showUpdate();
+      reg.addEventListener("updatefound",()=>{
+        const worker=reg.installing;
+        worker?.addEventListener("statechange",()=>{if(worker.state==="installed"&&navigator.serviceWorker.controller)banner?.classList.remove("hidden")});
+      });
+      updateBtn?.addEventListener("click",()=>{if(reg.waiting)reg.waiting.postMessage({type:"SKIP_WAITING"});else location.reload()});
+      navigator.serviceWorker.addEventListener("controllerchange",()=>{if(refreshing)return;refreshing=true;location.reload()});
+      setInterval(()=>reg.update().catch(()=>{}),15*60*1000);
+    }catch(e){}
+  });
 }
 
 window.addEventListener("popstate",()=>{
@@ -1247,10 +1476,23 @@ window.addEventListener("popstate",()=>{
   else showLanding(false);
 });
 
-// Deep links: /#ekonomik gibi adresler direkt kategoriyi açar.
+// Deep links: kategori ve tek ürün paylaşımı.
 renderLanding();
+renderStoreStatus();
+renderSearchResults("");
+
+const directPizza=new URLSearchParams(location.search).get("pizza");
 const initial=location.hash.replace("#","");
-if(CATEGORIES.some(c=>c.id===initial)) openCategory(initial,false);
+if(CATEGORIES.some(c=>c.id===initial))openCategory(initial,false);
+
+if(directPizza){
+  const [catId,indexRaw]=directPizza.split(":"),idx=Number(indexRaw);
+  const cat=CATEGORIES.find(c=>c.id===catId&&c.type==="pizza");
+  if(cat&&Number.isInteger(idx)&&idx>=0&&idx<cat.products.length){
+    if(initial!==catId)openCategory(catId,false);
+    setTimeout(()=>openPizza(catId,idx),80);
+  }
+}
 </script>
 </body>
 </html>
