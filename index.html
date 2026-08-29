@@ -539,6 +539,65 @@ a{text-decoration:none;color:inherit}
 .menu-choice{min-height:58px}
 .choice-copy strong{font-size:16px}
 
+
+/* Kampanya + Chef premium landing effects */
+.kampanya-choice{
+  position:relative;
+  overflow:hidden;
+  border-color:rgba(255,166,72,.70)!important;
+  background:
+    radial-gradient(circle at 12% 50%,rgba(255,124,34,.18),transparent 25%),
+    linear-gradient(105deg,rgba(64,31,12,.82),rgba(24,14,8,.72))!important;
+  box-shadow:
+    0 0 0 1px rgba(255,145,48,.08),
+    0 0 22px rgba(242,111,31,.16),
+    0 10px 26px rgba(0,0,0,.28)!important;
+}
+.kampanya-choice::before{
+  content:"";
+  position:absolute;
+  inset:-40% -20%;
+  pointer-events:none;
+  background:linear-gradient(110deg,transparent 35%,rgba(255,179,92,.12) 49%,transparent 62%);
+  transform:translateX(-46%);
+  animation:premiumSweep 4.2s ease-in-out infinite;
+}
+.kampanya-choice .choice-icon{
+  color:#ffc777;
+  border-color:rgba(255,187,98,.65);
+  box-shadow:0 0 14px rgba(238,140,37,.18);
+}
+.kampanya-choice .choice-copy strong{
+  color:#fff2df;
+  text-shadow:0 0 10px rgba(255,177,65,.14);
+}
+.kampanya-choice .choice-arrow{color:#ffd18b}
+
+/* Gold pulse loader for gallery back button */
+#prevBtn{
+  position:relative;
+  overflow:visible;
+}
+#prevBtn::before{
+  content:"";
+  position:absolute;
+  inset:-3px;
+  border-radius:999px;
+  pointer-events:none;
+  background:conic-gradient(from 0deg, rgba(255,217,140,0) 0deg, rgba(255,217,140,0) 250deg, rgba(255,201,107,.98) 310deg, rgba(234,146,39,.98) 344deg, rgba(255,217,140,0) 360deg);
+  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #000 calc(100% - 3px));
+  mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #000 calc(100% - 3px));
+  opacity:0;
+  transform:rotate(0deg) scale(1);
+  animation:goldOrbitPulse 3.8s cubic-bezier(.22,.61,.36,1) infinite;
+}
+@keyframes goldOrbitPulse{
+  0%,62%{opacity:0;transform:rotate(0deg) scale(1)}
+  68%{opacity:1}
+  68%,92%{opacity:1;transform:rotate(360deg) scale(1.02)}
+  100%{opacity:0;transform:rotate(360deg) scale(1.02)}
+}
+
 </style>
 </head>
 
@@ -632,6 +691,26 @@ const CATEGORIES = [
     ]
   },
   {
+    id:"chef",
+    title:"Chef Süperos Pizzaları",
+    sub:"Orta 330 TL • Büyük 390 TL",
+    icon:"chef",
+    type:"pizza",
+    prices:["330 TL","390 TL"],
+    products:[
+      ["Bol Pizza","Pizza sosu, mozzarella, sucuk, sosis, jambon, mantar, yeşil biber, soğan, mısır, domates, kekik, susam","bol.webp"],
+      ["Chef Süperos Pizza","Pizza sosu, mozzarella, sucuk, sosis, mantar, mısır, zeytin, köz biber, jalapeno, domates","chef-superos.webp"],
+      ["Etlim Pizza","Pizza sosu, mozzarella, et döner, soğan, domates","etlim.webp"],
+      ["Acılı Chef Pizza","Pizza sosu, mozzarella, küp sucuk, mantar, jalapeno, zeytin, köz biber, kekik","acili-chef.webp"],
+      ["İtalyan Chef Pizza","Pizza sosu, mozzarella, küp sucuk, mantar, zeytin, köz biber, kekik","italyan-chef.webp"],
+      ["Chef Et Dolusu Pizza","Pizza sosu, mozzarella, sucuk, sosis, jambon, pastırma, jalapeno biber","chef-et-dolusu.webp"],
+      ["Chef Pastırmalı Pizza","Pizza sosu, mozzarella, sucuk, pastırma, mantar, yeşil biber","chef-pastirmali.webp"],
+      ["Balıklı Pizza","Pizza sosu, mozzarella, ton balığı, mısır, soğan","balikli.webp"],
+      ["Turkishim Pizza","Pizza sosu, mozzarella, sucuk, pastırma, mantar, yeşil biber, beyaz peynir","turkishim.webp"],
+      ["Kavurmalı Pizza","Pizza sosu, mozzarella, kavurma, soğan, köz biber, yöresel baharat","kavurmali.webp"]
+    ]
+  },
+  {
     id:"ekonomik",
     title:"Ekonomik Pizzalar",
     sub:"Orta 230 TL • Büyük 280 TL",
@@ -672,26 +751,6 @@ const CATEGORIES = [
       ["Tavuklu Pizza","Pizza sosu, mozzarella, sosis, tavuk döner, domates","tavuklu.webp"],
       ["Dört Peynirli Pizza","Pizza sosu, mozzarella, kaşar, beyaz peynir, parmesan","dort-peynirli.webp"],
       ["Sebzeli Pizza","Pizza sosu, mozzarella, soğan, mantar, yeşil biber, mısır, domates","sebzeli.webp"]
-    ]
-  },
-  {
-    id:"chef",
-    title:"Chef Süperos Pizzaları",
-    sub:"Orta 330 TL • Büyük 390 TL",
-    icon:"chef",
-    type:"pizza",
-    prices:["330 TL","390 TL"],
-    products:[
-      ["Bol Pizza","Pizza sosu, mozzarella, sucuk, sosis, jambon, mantar, yeşil biber, soğan, mısır, domates, kekik, susam","bol.webp"],
-      ["Chef Süperos Pizza","Pizza sosu, mozzarella, sucuk, sosis, mantar, mısır, zeytin, köz biber, jalapeno, domates","chef-superos.webp"],
-      ["Etlim Pizza","Pizza sosu, mozzarella, et döner, soğan, domates","etlim.webp"],
-      ["Acılı Chef Pizza","Pizza sosu, mozzarella, küp sucuk, mantar, jalapeno, zeytin, köz biber, kekik","acili-chef.webp"],
-      ["İtalyan Chef Pizza","Pizza sosu, mozzarella, küp sucuk, mantar, zeytin, köz biber, kekik","italyan-chef.webp"],
-      ["Chef Et Dolusu Pizza","Pizza sosu, mozzarella, sucuk, sosis, jambon, pastırma, jalapeno biber","chef-et-dolusu.webp"],
-      ["Chef Pastırmalı Pizza","Pizza sosu, mozzarella, sucuk, pastırma, mantar, yeşil biber","chef-pastirmali.webp"],
-      ["Balıklı Pizza","Pizza sosu, mozzarella, ton balığı, mısır, soğan","balikli.webp"],
-      ["Turkishim Pizza","Pizza sosu, mozzarella, sucuk, pastırma, mantar, yeşil biber, beyaz peynir","turkishim.webp"],
-      ["Kavurmalı Pizza","Pizza sosu, mozzarella, kavurma, soğan, köz biber, yöresel baharat","kavurmali.webp"]
     ]
   },
   {
@@ -748,7 +807,7 @@ let touchStartX = null;
 
 function renderLanding(){
   menuStack.innerHTML = CATEGORIES.map(c=>`
-    <button class="menu-choice${c.id==="chef" ? " premium-choice" : ""}" data-id="${c.id}">
+    <button class="menu-choice${c.id==="chef" ? " premium-choice" : ""}${c.id==="kampanyalar" ? " kampanya-choice" : ""}" data-id="${c.id}">
       <span class="choice-icon">${ICONS[c.icon]}</span>
       <span class="choice-copy">
         <strong>${c.title}</strong>
