@@ -598,6 +598,24 @@ a{text-decoration:none;color:inherit}
   100%{opacity:0;transform:rotate(360deg) scale(1.02)}
 }
 
+
+.extra-product-card{
+  border-color:rgba(232,174,99,.42)!important;
+  background:linear-gradient(180deg,rgba(255,229,196,.08),rgba(28,16,10,.88))!important;
+}
+.extra-product-card .extra-thumb::after{
+  content:"EKSTRA";
+  position:absolute;
+  top:10px;right:10px;
+  font-size:.7rem;font-weight:800;letter-spacing:.14em;
+  color:#fff0d2;
+  background:linear-gradient(135deg,#d67a23,#f3bd69);
+  border-radius:999px;
+  padding:6px 10px;
+  box-shadow:0 8px 20px rgba(214,122,35,.24);
+}
+.thumb{position:relative}
+
 </style>
 </head>
 
@@ -696,7 +714,10 @@ const CATEGORIES = [
     sub:"Orta 330 TL • Büyük 390 TL",
     icon:"chef",
     type:"pizza",
-    prices:["330 TL","390 TL"],
+    prices:["330 TL","390 TL"],,
+    extraPosterTitle:"Ekstra Malzemeler",
+    extraPoster:"ekstralar.webp",
+    extraPosterDescription:"Pizzanı tamamlamak için ekstra malzemeler ve kenar seçenekleri"
     products:[
       ["Bol Pizza","Pizza sosu, mozzarella, sucuk, sosis, jambon, mantar, yeşil biber, soğan, mısır, domates, kekik, susam","bol.webp"],
       ["Chef Süperos Pizza","Pizza sosu, mozzarella, sucuk, sosis, mantar, mısır, zeytin, köz biber, jalapeno, domates","chef-superos.webp"],
@@ -716,7 +737,10 @@ const CATEGORIES = [
     sub:"Orta 230 TL • Büyük 280 TL",
     icon:"pizza",
     type:"pizza",
-    prices:["230 TL","280 TL"],
+    prices:["230 TL","280 TL"],,
+    extraPosterTitle:"Ekstra Malzemeler",
+    extraPoster:"ekstralar.webp",
+    extraPosterDescription:"Pizzanı tamamlamak için ekstra malzemeler ve kenar seçenekleri"
     products:[
       ["Ekonomik Pizza","Pizza sosu, mozzarella, sucuk, mantar, mısır","ekonomik.webp"],
       ["Üç Malzemeli Pizza","Pizza sosu, mozzarella, sucuk, mantar","uc-malzemeli.webp"],
@@ -730,7 +754,10 @@ const CATEGORIES = [
     sub:"Orta 230 TL • Büyük 280 TL",
     icon:"heart",
     type:"pizza",
-    prices:["230 TL","280 TL"],
+    prices:["230 TL","280 TL"],,
+    extraPosterTitle:"Ekstra Malzemeler",
+    extraPoster:"ekstralar.webp",
+    extraPosterDescription:"Pizzanı tamamlamak için ekstra malzemeler ve kenar seçenekleri"
     products:[
       ["Sevilen Dörtlü Pizza","Pizza sosu, mozzarella, sosis, sucuk, mantar, mısır","sevilen-dortlu.webp"],
       ["Sevilen Chef Pizza","Pizza sosu, mozzarella, sucuk, mantar, jambon, zeytin","sevilen-chef.webp"],
@@ -745,7 +772,10 @@ const CATEGORIES = [
     sub:"Orta 290 TL • Büyük 340 TL",
     icon:"pizza",
     type:"pizza",
-    prices:["290 TL","340 TL"],
+    prices:["290 TL","340 TL"],,
+    extraPosterTitle:"Ekstra Malzemeler",
+    extraPoster:"ekstralar.webp",
+    extraPosterDescription:"Pizzanı tamamlamak için ekstra malzemeler ve kenar seçenekleri"
     products:[
       ["Karışık Pizza","Pizza sosu, mozzarella, sucuk, sosis, mantar, mısır, domates, zeytin","karisik.webp"],
       ["Tavuklu Pizza","Pizza sosu, mozzarella, sosis, tavuk döner, domates","tavuklu.webp"],
@@ -843,6 +873,17 @@ function openCategory(id, push=true){
     </section>`;
 
   if(cat.type==="pizza"){
+    const extraCard = cat.extraPoster ? `
+      <article class="product-card extra-product-card${isPremium ? " premium-product" : ""}" data-index="${cat.products.length}">
+        <div class="thumb extra-thumb"><img src="${cat.extraPoster}" alt="${cat.extraPosterTitle || "Ekstra Malzemeler"}" loading="lazy"></div>
+        <div class="prod-copy">
+          <strong>${cat.extraPosterTitle || "Ekstra Malzemeler"}</strong>
+          <p>${cat.extraPosterDescription || "Ekstra malzemeler ve kenar seçeneklerini incele."}</p>
+          <div class="prod-price">Ekstra Malzeme <span>•</span> Kenar Seçenekleri</div>
+        </div>
+        <div class="prod-go">›</div>
+      </article>` : "";
+
     html+=`<div class="product-grid">`+cat.products.map((p,i)=>`
       <article class="product-card${isPremium ? " premium-product" : ""}" data-index="${i}">
         <div class="thumb"><img src="${p[2]}" alt="${p[0]}" loading="lazy"></div>
@@ -853,7 +894,7 @@ function openCategory(id, push=true){
         </div>
         <div class="prod-go">›</div>
       </article>
-    `).join("")+`</div>`;
+    `).join("")+extraCard+`</div>`;
   }
 
   if(cat.type==="campaigns"){
@@ -882,6 +923,9 @@ function openCategory(id, push=true){
     content.querySelectorAll(".product-card").forEach(card=>{
       card.addEventListener("click",()=>{
         viewerItems=cat.products.map(p=>({title:p[0],src:p[2]}));
+        if(cat.extraPoster){
+          viewerItems.push({title:cat.extraPosterTitle || "Ekstra Malzemeler",src:cat.extraPoster});
+        }
         openViewer(Number(card.dataset.index));
       });
     });
