@@ -961,13 +961,12 @@ a{text-decoration:none;color:inherit}
 
 <body>
 
-<div class="tool-chip global-store-status" id="storeStatus" aria-live="polite">
-  <span class="status-dot"></span>
-  <span id="storeStatusText">Çalışma saati kontrol ediliyor</span>
-</div>
-
 <!-- İlk açılış: blur arka plan + kategori yönlendirmesi -->
 <section id="landing">
+  <div class="tool-chip landing-store-status" id="storeStatus" aria-live="polite">
+    <span class="status-dot"></span>
+    <span id="storeStatusText">Çalışma saati kontrol ediliyor</span>
+  </div>
   <div class="landing-inner">
     <div class="brand landing-logo">
       <div class="brand-kicker">İTALYAN</div>
@@ -1747,6 +1746,35 @@ if(directPizza){
 <style>
 .page-signature{
   margin:16px 0 82px;
+}
+</style>
+
+
+<style>
+/* ===== AÇIK/KAPALI — KESİN FIX =====
+   Sadece ANA MENÜ içinde. Scroll ile kullanıcıyı takip etmez. */
+#landing{
+  position:relative!important;
+}
+#storeStatus.landing-store-status{
+  position:absolute!important;
+  top:calc(env(safe-area-inset-top) + 12px)!important;
+  right:12px!important;
+  left:auto!important;
+  bottom:auto!important;
+  z-index:40!important;
+  display:flex!important;
+  width:auto!important;
+  min-width:74px!important;
+  min-height:31px!important;
+  margin:0!important;
+  transform:none!important;
+  flex:none!important;
+  pointer-events:none!important;
+}
+/* Ana Menü kapalıysa parent ile birlikte kesinlikle görünmez. */
+#landing.hidden #storeStatus{
+  display:none!important;
 }
 </style>
 
