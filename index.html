@@ -1216,6 +1216,12 @@ const POPULAR = {
   "chef": new Set(["Chef Süperos Pizza","Chef Et Dolusu Pizza","Kavurmalı Pizza"])
 };
 const isPopular=(categoryId,name)=>Boolean(POPULAR[categoryId]?.has(name));
+const SPICY_PIZZAS=new Set([
+  "Acılı Chef Pizza"
+]);
+const isSpicy=(name)=>SPICY_PIZZAS.has(name);
+
+
 
 
 function istanbulNowParts(){
@@ -1247,6 +1253,7 @@ function renderStoreStatus(){
   label.textContent=openNow?"Açık":"Kapalı";
 }
 setInterval(renderStoreStatus,60000);
+setInterval(()=>{ if(!landing.classList.contains("hidden")){ renderLanding(); renderDailyFavorites(); } },1800000);
 
 function normalizeTR(value){
   return String(value||"").toLocaleLowerCase("tr-TR").normalize("NFD").replace(/[\u0300-\u036f]/g,"");
@@ -1323,10 +1330,25 @@ function dailyFavorites(){
   const d=istanbulNowParts();
   const seed=d.year*10000+d.month*100+d.date;
   const rnd=seededRandom(seed);
+  const catalog=pizzaCatalog();
+
+  // Öğlen: ekonomik / en sevilen seçeneklere ağırlık ver.
+  if(d.hour>=11 && d.hour<16){
+    const pool=catalog.filter(x=>x.categoryId==="ekonomik"||x.categoryId==="sevilen");
+    return [...pool].sort(()=>rnd()-.5).slice(0,3);
+  }
+
+  // Gece: müşterinin hızlı karar vermesi için popüler pizzaları öne çıkar.
+  if(d.hour>=22 || d.hour<1){
+    const popular=catalog.filter(x=>x.popular);
+    if(popular.length>=3) return [...popular].sort(()=>rnd()-.5).slice(0,3);
+  }
+
+  // Diğer saatlerde günlük dengeli rotasyon.
   const cats=CATEGORIES.filter(c=>c.type==="pizza").map(c=>c.id);
   cats.sort(()=>rnd()-.5);
   return cats.slice(0,3).map(id=>{
-    const choices=pizzaCatalog().filter(x=>x.categoryId===id);
+    const choices=catalog.filter(x=>x.categoryId===id);
     return choices[Math.floor(rnd()*choices.length)];
   });
 }
@@ -1387,8 +1409,34 @@ let viewerItems = [];
 let viewerIndex = 0;
 let touchStartX = null;
 
+function smartLandingCategories(){
+  const {hour}=istanbulNowParts();
+  let order;
+
+  // 11:00–15:59 → ekonomik ve hızlı karar verilen seçenekler önde
+  if(hour>=11 && hour<16){
+    order=["ekonomik","sevilen","kampanyalar","chef","bol-malzemeli","icecekler","yan-urunler","ekstralar"];
+  }
+  // 16:00–21:59 → kampanyalar ve premium seri önde
+  else if(hour>=16 && hour<22){
+    order=["kampanyalar","chef","sevilen","bol-malzemeli","ekonomik","icecekler","yan-urunler","ekstralar"];
+  }
+  // 22:00–00:59 → hızlı karar: sevilenler + şef serisi + kampanyalar
+  else if(hour>=22 || hour<1){
+    order=["sevilen","chef","kampanyalar","ekonomik","bol-malzemeli","icecekler","yan-urunler","ekstralar"];
+  }
+  // Kapalı / sabah saatleri → standart düzen
+  else{
+    order=["kampanyalar","chef","ekonomik","sevilen","bol-malzemeli","icecekler","yan-urunler","ekstralar"];
+  }
+
+  const rank=new Map(order.map((id,i)=>[id,i]));
+  return [...CATEGORIES].sort((a,b)=>(rank.get(a.id)??99)-(rank.get(b.id)??99));
+}
+
 function renderLanding(){
-  menuStack.innerHTML = CATEGORIES.map(c=>`
+  const smartCategories=smartLandingCategories();
+  menuStack.innerHTML = smartCategories.map(c=>`
     <button class="menu-choice${c.id==="chef" ? " premium-choice" : ""}${c.id==="kampanyalar" ? " kampanya-choice" : ""}" data-id="${c.id}">
       <span class="choice-icon">${ICONS[c.icon]}</span>
       <span class="choice-copy">
@@ -1433,8 +1481,9 @@ function openCategory(id, push=true){
       </article>` : "";
 
     html+=`<div class="product-grid">`+cat.products.map((p,i)=>`
-      <article class="product-card${isPremium ? " premium-product" : ""}${isPopular(cat.id,p[0]) ? " has-popular" : ""}" data-index="${i}">
+      <article class="product-card${isPremium ? " premium-product" : ""}${isPopular(cat.id,p[0]) ? " has-popular" : ""}${isSpicy(p[0]) ? " has-spicy" : ""}" data-index="${i}">
         ${isPopular(cat.id,p[0]) ? `<span class="popular-badge">★ EN ÇOK TERCİH EDİLEN</span>` : ""}
+        ${isSpicy(p[0]) ? `<span class="spicy-badge">🌶 ACILI</span>` : ""}
         <div class="thumb"><img src="${p[2]}" alt="${p[0]}" loading="lazy"></div>
         <div class="prod-copy">
           <strong>${p[0]}</strong>
@@ -2106,6 +2155,34 @@ body.viewer-open .bottom-nav{
   opacity:1!important;
   animation:none!important;
   z-index:-1!important;
+}
+</style>
+
+
+<style>
+/* ===== ACILI ÜRÜN ROZETİ ===== */
+.spicy-badge{
+  position:absolute;
+  top:8px;
+  left:8px;
+  z-index:4;
+  display:inline-flex;
+  align-items:center;
+  gap:4px;
+  padding:4px 7px;
+  border-radius:999px;
+  border:1px solid rgba(255,116,65,.55);
+  background:linear-gradient(145deg,rgba(96,20,10,.96),rgba(47,12,8,.96));
+  color:#ffd7c7;
+  box-shadow:
+    0 5px 14px rgba(0,0,0,.28),
+    0 0 13px rgba(229,67,27,.16);
+  font-size:7.5px;
+  font-weight:900;
+  letter-spacing:.055em;
+  line-height:1;
+  white-space:nowrap;
+  pointer-events:none;
 }
 </style>
 
