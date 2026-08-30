@@ -7,6 +7,17 @@
 <meta name="description" content="İtalyan Chef Pizza dijital menü">
 <title>İtalyan Chef Pizza | Dijital Menü</title>
 
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CF84B9JFWN"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-CF84B9JFWN', {
+  anonymize_ip: true
+});
+</script>
+
 
 <style>
 :root{
@@ -997,8 +1008,8 @@ a{text-decoration:none;color:inherit}
         </div>
       </div>
       <div class="google-actions">
-        <a target="_blank" rel="noopener" href="https://search.google.com/local/reviews?placeid=ChIJc1n9vJ3fyhQRMnqYBJrC7aw">Yorumları Gör</a>
-        <a target="_blank" rel="noopener" href="https://search.google.com/local/writereview?placeid=ChIJc1n9vJ3fyhQRMnqYBJrC7aw">Yorum Yaz</a>
+        <a id="reviewsReadBtn" target="_blank" rel="noopener" href="https://search.google.com/local/reviews?placeid=ChIJc1n9vJ3fyhQRMnqYBJrC7aw">Yorumları Gör</a>
+        <a id="reviewsWriteBtn" target="_blank" rel="noopener" href="https://search.google.com/local/writereview?placeid=ChIJc1n9vJ3fyhQRMnqYBJrC7aw">Yorum Yaz</a>
       </div>
     </section>
 
@@ -1062,7 +1073,7 @@ a{text-decoration:none;color:inherit}
     ANA MENÜ
   </a>
 
-  <a class="order" target="_blank" rel="noopener"
+  <a class="order" id="reviewNavBtn" target="_blank" rel="noopener"
      href="https://search.google.com/local/writereview?placeid=ChIJc1n9vJ3fyhQRMnqYBJrC7aw">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
       <path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-2.9-5.6 2.9 1.1-6.2L3 9.6l6.2-.9L12 3z"/>
@@ -1070,7 +1081,7 @@ a{text-decoration:none;color:inherit}
     PUAN VER
   </a>
 
-  <a href="tel:+905370177541" aria-label="Ara">
+  <a id="callNavBtn" href="tel:+905370177541" aria-label="Ara">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
       <path d="M6.6 10.8c1.8 3.6 3 4.8 6.6 6.6l2.2-2.2c.3-.3.7-.4 1.1-.2 1.2.4 2.5.7 3.8.7.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.8 21 3 13.2 3 3.7c0-.6.4-1 1-1h3.3c.6 0 1 .4 1 1 0 1.3.2 2.6.7 3.8.1.4 0 .8-.3 1.1z"/>
     </svg>
@@ -1080,6 +1091,31 @@ a{text-decoration:none;color:inherit}
 <div class="toast" id="toast"></div>
 
 <script>
+const GA_MEASUREMENT_ID="G-CF84B9JFWN";
+
+function trackEvent(name,params={}){
+  if(typeof window.gtag!=="function") return;
+  window.gtag("event",name,params);
+}
+
+function safeSearchTerm(value){
+  const term=String(value||"").trim().slice(0,60);
+  if(!term) return "";
+  // E-posta / telefon gibi kişisel bilgi görünüyorsa Analytics'e gönderme.
+  if(term.includes("@") || /\d{7,}/.test(term.replace(/\s/g,""))) return "";
+  return term;
+}
+
+let searchAnalyticsTimer=null;
+function queueSearchAnalytics(value){
+  clearTimeout(searchAnalyticsTimer);
+  const term=safeSearchTerm(value);
+  if(term.length<2) return;
+  searchAnalyticsTimer=setTimeout(()=>{
+    trackEvent("search",{search_term:term});
+  },900);
+}
+
 const CATEGORIES = [
   {
     id:"kampanyalar",
@@ -1274,6 +1310,14 @@ function renderSearchResults(query){
       <span><b>${r.name}</b><small>${r.categoryTitle} • ${r.desc}</small></span><span>›</span>
     </button>`).join("");
   host.querySelectorAll(".search-result").forEach(btn=>btn.addEventListener("click",()=>{
+    const selected=results.find(r=>r.categoryId===btn.dataset.cat && r.index===Number(btn.dataset.index));
+    if(selected){
+      trackEvent("search_result_click",{
+        search_term:safeSearchTerm(query),
+        pizza_name:selected.name,
+        category_name:selected.categoryTitle
+      });
+    }
     closeSearch();openCategory(btn.dataset.cat,true);setTimeout(()=>openPizza(btn.dataset.cat,Number(btn.dataset.index)),40);
   }));
 }
@@ -1353,7 +1397,15 @@ function dailyFavorites(){
   });
 }
 function viewerItemsForCategory(cat){
-  const items=cat.products.map((p,index)=>({title:p[0],src:p[2],popular:isPopular(cat.id,p[0]),categoryId:cat.id,index}));
+  const items=cat.products.map((p,index)=>({
+    title:p[0],
+    src:p[2],
+    popular:isPopular(cat.id,p[0]),
+    categoryId:cat.id,
+    categoryName:cat.title,
+    index,
+    analyticsType:"pizza"
+  }));
   if(cat.extraPoster) items.push({title:cat.extraPosterTitle||"Ekstra Malzemeler",src:cat.extraPoster,popular:false,extra:true});
   return items;
 }
@@ -1365,6 +1417,7 @@ function openPizza(categoryId,index){
 }
 let lastSurprise="";
 function surpriseMe(){
+  trackEvent("surprise_click",{location:"home"});
   const chef=CATEGORIES.find(c=>c.id==="chef");
   const otherCats=CATEGORIES.filter(c=>c.type==="pizza"&&c.id!=="chef");
   let cat=Math.random()<.72?chef:otherCats[Math.floor(Math.random()*otherCats.length)];
@@ -1454,6 +1507,11 @@ function renderLanding(){
 function openCategory(id, push=true){
   const cat=CATEGORIES.find(c=>c.id===id);
   if(!cat) return;
+  trackEvent("category_open",{
+    category_id:cat.id,
+    category_name:cat.title,
+    category_type:cat.type
+  });
   landing.classList.add("hidden");
   app.classList.remove("hidden");
   headTitle.textContent=cat.title;
@@ -1532,7 +1590,15 @@ function openCategory(id, push=true){
     });
   } else if(cat.type==="campaigns"){
     const openCampaign=(index)=>{
-      viewerItems=cat.campaigns.map(c=>({title:c[0],src:c[3]}));
+      viewerItems=cat.campaigns.map((c,campaignIndex)=>({
+        title:c[0],
+        src:c[3],
+        analyticsType:"campaign",
+        campaignIndex,
+        campaignName:c[0],
+        campaignDescription:c[1],
+        campaignPrice:c[2]
+      }));
       openViewer(index);
     };
     content.querySelectorAll(".campaign-poster-card").forEach(card=>{
@@ -1581,6 +1647,23 @@ function closeViewer(){
 function updateViewer(){
   const item=viewerItems[viewerIndex];
   if(!item) return;
+
+  if(item.analyticsType==="pizza"){
+    trackEvent("pizza_view",{
+      pizza_name:item.title,
+      category_id:item.categoryId||"",
+      category_name:item.categoryName||"",
+      pizza_index:Number(item.index??0)+1
+    });
+  }else if(item.analyticsType==="campaign"){
+    trackEvent("campaign_view",{
+      campaign_name:item.campaignName||item.title,
+      campaign_description:item.campaignDescription||"",
+      campaign_price:item.campaignPrice||"",
+      campaign_index:Number(item.campaignIndex??0)+1
+    });
+  }
+
   viewer.classList.toggle("single-viewer",viewerItems.length<=1);
   viewerImage.src=item.src;
   viewerImage.alt=item.title;
@@ -1620,6 +1703,7 @@ function moveViewer(step){
 }
 
 document.getElementById("paymentMethodsBtn")?.addEventListener("click",()=>{
+  trackEvent("payment_click",{location:"home_top"});
   viewerItems=[{
     src:"odeme-yontemleri.webp",
     title:"Ödeme Yöntemleri",
@@ -1641,8 +1725,23 @@ document.getElementById("searchToggle")?.addEventListener("click",()=>{
   const panel=document.getElementById("searchPanel");if(panel?.hidden)openSearch();else closeSearch();
 });
 document.getElementById("searchClose")?.addEventListener("click",closeSearch);
-document.getElementById("menuSearch")?.addEventListener("input",e=>renderSearchResults(e.target.value));
+document.getElementById("menuSearch")?.addEventListener("input",e=>{
+  renderSearchResults(e.target.value);
+  queueSearchAnalytics(e.target.value);
+});
 document.getElementById("appSearchBtn")?.addEventListener("click",()=>{showLanding(true);setTimeout(openSearch,60)});
+document.getElementById("callNavBtn")?.addEventListener("click",()=>{
+  trackEvent("call_click",{location:"bottom_nav"});
+});
+document.getElementById("reviewNavBtn")?.addEventListener("click",()=>{
+  trackEvent("review_click",{action:"write",location:"bottom_nav"});
+});
+document.getElementById("reviewsReadBtn")?.addEventListener("click",()=>{
+  trackEvent("review_click",{action:"read",location:"home_google"});
+});
+document.getElementById("reviewsWriteBtn")?.addEventListener("click",()=>{
+  trackEvent("review_click",{action:"write",location:"home_google"});
+});
 document.getElementById("prevBtn").addEventListener("click",()=>moveViewer(-1));
 document.getElementById("nextBtn").addEventListener("click",()=>moveViewer(1));
 
