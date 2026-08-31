@@ -7,6 +7,35 @@
 <meta name="description" content="İtalyan Chef Pizza dijital menü">
 <title>İtalyan Chef Pizza | Dijital Menü</title>
 
+<link rel="canonical" href="https://italyanchefpizza.github.io/menu/">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="color-scheme" content="dark">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="tr_TR">
+<meta property="og:site_name" content="İtalyan Chef Pizza">
+<meta property="og:title" content="İtalyan Chef Pizza | Dijital Menü">
+<meta property="og:description" content="İtalyan Chef Pizza dijital menüsü. Pizzalar, fırsat menüleri, içecekler ve yan ürünleri inceleyin.">
+<meta property="og:url" content="https://italyanchefpizza.github.io/menu/">
+<meta property="og:image" content="https://italyanchefpizza.github.io/menu/ekonomik.webp?v=20260831-3">
+<meta property="og:image:alt" content="İtalyan Chef Pizza dijital menü">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="İtalyan Chef Pizza | Dijital Menü">
+<meta name="twitter:description" content="Pizzalar, fırsat menüleri, içecekler ve yan ürünler.">
+<meta name="twitter:image" content="https://italyanchefpizza.github.io/menu/ekonomik.webp?v=20260831-3">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b0806'/%3E%3Ctext x='32' y='44' font-size='36' text-anchor='middle'%3E%F0%9F%8D%95%3C/text%3E%3C/svg%3E">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Restaurant",
+  "name": "İtalyan Chef Pizza",
+  "url": "https://italyanchefpizza.github.io/menu/",
+  "menu": "https://italyanchefpizza.github.io/menu/",
+  "servesCuisine": ["Pizza", "İtalyan"],
+  "priceRange": "₺₺"
+}
+</script>
+
+
 <!-- Google Analytics 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-CF84B9JFWN"></script>
 <script>
@@ -17,8 +46,6 @@ gtag('config', 'G-CF84B9JFWN', {
   anonymize_ip: true
 });
 </script>
-
-
 <style>
 :root{
   --bg:#0b0806;
@@ -102,7 +129,7 @@ a{text-decoration:none;color:inherit}
   inset:-24px;
   background-image:
     linear-gradient(rgba(5,3,2,.44),rgba(5,3,2,.62)),
-    url("ekonomik.webp");
+    url("ekonomik.webp?v=20260831-3");
   background-position:center 42%;
   background-size:cover;
   filter:blur(11px) saturate(.86);
@@ -945,6 +972,445 @@ a{text-decoration:none;color:inherit}
   font-weight:650;
 }
 
+.viewer-close,
+.viewer-share{
+  box-sizing:border-box;
+}
+.viewer-share{
+  box-shadow:0 10px 28px rgba(0,0,0,.34);
+}
+.viewer-nav{
+  max-width:calc(100% - 116px);
+}
+.tool-chip{
+  justify-content:center;
+}
+#storeStatusText{
+  text-align:center;
+}
+
+.page-signature{
+  margin:16px 0 82px;
+}
+
+/* ===== AÇIK/KAPALI — KESİN FIX =====
+   Sadece ANA MENÜ içinde. Scroll ile kullanıcıyı takip etmez. */
+#landing{
+  position:relative!important;
+}
+#storeStatus.landing-store-status{
+  position:absolute!important;
+  top:calc(env(safe-area-inset-top) + 12px)!important;
+  right:12px!important;
+  left:auto!important;
+  bottom:auto!important;
+  z-index:40!important;
+  display:flex!important;
+  width:auto!important;
+  min-width:74px!important;
+  min-height:31px!important;
+  margin:0!important;
+  transform:none!important;
+  flex:none!important;
+  pointer-events:none!important;
+}
+/* Ana Menü kapalıysa parent ile birlikte kesinlikle görünmez. */
+#landing.hidden #storeStatus{
+  display:none!important;
+}
+
+/* ===== FOTOĞRAF GÖRÜNTÜLEYİCİ SADELİK FIX =====
+   Alt oklar / başlık / sayaç / noktalar kaldırıldı; paylaş butonu korunur.
+   Gezinme yatay kaydırma ile devam eder. */
+#viewer .viewer-nav{
+  display:none!important;
+}
+
+/* Fotoğraf açıkken alttaki site navigasyonu da arkadan görünmesin. */
+body.viewer-open .bottom-nav{
+  display:none!important;
+}
+
+/* Alt kontrol alanı kalktığı için görseli gerçek merkeze al. */
+#viewer .viewer-inner{
+  padding:12px 10px max(12px, env(safe-area-inset-bottom))!important;
+}
+
+/* ===== ANA MENÜ / ÖDEME YÖNTEMLERİ ===== */
+#paymentMethodsBtn.landing-payment-chip{
+  position:absolute!important;
+  top:calc(env(safe-area-inset-top) + 12px)!important;
+  left:12px!important;
+  right:auto!important;
+  bottom:auto!important;
+  z-index:40!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:6px!important;
+  width:auto!important;
+  min-width:82px!important;
+  min-height:31px!important;
+  margin:0!important;
+  padding:6px 10px!important;
+  border-radius:999px!important;
+  color:rgba(255,239,211,.9)!important;
+  background:rgba(12,9,7,.72)!important;
+  border:1px solid rgba(238,190,115,.25)!important;
+  box-shadow:0 8px 24px rgba(0,0,0,.22)!important;
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  font-size:8.5px!important;
+  font-weight:800!important;
+  letter-spacing:.025em!important;
+  cursor:pointer!important;
+}
+#paymentMethodsBtn.landing-payment-chip svg{
+  width:13px!important;
+  height:13px!important;
+  color:var(--orange)!important;
+  flex:0 0 auto!important;
+}
+#paymentMethodsBtn.landing-payment-chip:active{
+  transform:scale(.97)!important;
+}
+#landing.hidden #paymentMethodsBtn{
+  display:none!important;
+}
+
+/* Tek görsellik ekranlarda "kaydır" mesajı gereksiz. */
+#viewer.single-viewer .swipe-tip{
+  display:none!important;
+}
+
+/* ===== KAMPANYALAR / GÖRSEL ENTEGRASYON ===== */
+.campaign-poster-grid{
+  grid-template-columns:1fr!important;
+  gap:14px!important;
+  padding:10px 14px 28px!important;
+}
+.campaign-poster-card{
+  position:relative!important;
+  overflow:hidden!important;
+  padding:0!important;
+  border-radius:16px!important;
+  border:1px solid rgba(238,178,88,.36)!important;
+  background:#090705!important;
+  box-shadow:
+    0 0 0 1px rgba(255,190,96,.04),
+    0 12px 28px rgba(0,0,0,.34)!important;
+  cursor:pointer!important;
+  -webkit-tap-highlight-color:transparent;
+}
+.campaign-poster-card img{
+  display:block!important;
+  width:100%!important;
+  height:auto!important;
+  object-fit:contain!important;
+}
+.campaign-poster-card:active{
+  transform:scale(.992);
+}
+@media(min-width:620px){
+  .campaign-poster-grid{
+    grid-template-columns:1fr 1fr!important;
+  }
+}
+
+/* ===== KAMPANYALAR — PREMIUM HERO ===== */
+.campaign-hero{
+  position:relative!important;
+  overflow:hidden!important;
+  margin:12px 12px 8px!important;
+  padding:19px 17px 17px!important;
+  border:1px solid rgba(232,163,57,.52)!important;
+  border-radius:22px!important;
+  background:
+    radial-gradient(circle at 82% -18%,rgba(226,91,21,.24),transparent 38%),
+    radial-gradient(circle at 10% 120%,rgba(231,151,44,.13),transparent 42%),
+    linear-gradient(145deg,rgba(51,28,12,.92),rgba(14,9,6,.95))!important;
+  box-shadow:
+    0 18px 44px rgba(0,0,0,.30),
+    0 0 30px rgba(222,131,33,.11)!important;
+}
+.campaign-hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  opacity:.34;
+  background:
+    linear-gradient(110deg,transparent 0 40%,rgba(255,215,143,.08) 49%,transparent 58%),
+    repeating-linear-gradient(135deg,rgba(255,255,255,.018) 0 1px,transparent 1px 8px);
+}
+.campaign-hero::after{
+  content:"";
+  position:absolute;
+  width:170px;
+  height:170px;
+  right:-62px;
+  bottom:-104px;
+  border-radius:50%;
+  pointer-events:none;
+  background:radial-gradient(circle,rgba(226,81,17,.24),transparent 67%);
+}
+.campaign-eyebrow{
+  position:relative;
+  z-index:1;
+  display:inline-flex;
+  margin-bottom:7px;
+  color:#efbd62;
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+}
+.campaign-hero h1{
+  position:relative;
+  z-index:1;
+  color:#fff4dd!important;
+  font-size:clamp(25px,8vw,38px)!important;
+  line-height:1!important;
+  white-space:nowrap!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+  text-shadow:0 2px 18px rgba(0,0,0,.25);
+}
+
+/* Kampanya posterleri: aynı premium çerçeve dili, daha derli toplu */
+.campaign-poster-grid{
+  gap:16px!important;
+  padding-top:8px!important;
+}
+.campaign-poster-card{
+  border:1px solid rgba(235,172,72,.48)!important;
+  border-radius:19px!important;
+  box-shadow:
+    0 15px 34px rgba(0,0,0,.32),
+    0 0 0 1px rgba(255,207,128,.04),
+    0 0 20px rgba(216,126,32,.08)!important;
+  transition:transform .16s ease,border-color .16s ease,box-shadow .16s ease;
+}
+.campaign-poster-card:active{
+  transform:scale(.988)!important;
+  border-color:rgba(246,190,95,.72)!important;
+  box-shadow:
+    0 10px 24px rgba(0,0,0,.30),
+    0 0 24px rgba(225,143,42,.16)!important;
+}
+
+/* ===== İÇ MENÜ BAŞLIKLARI — ORTA HİZALAMA =====
+   Sadece kategori/iç menü hero alanlarını etkiler.
+   Ana menü kartlarına dokunmaz. */
+.category-hero{
+  text-align:center!important;
+}
+.category-hero h1{
+  width:100%!important;
+  text-align:center!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+}
+.premium-eyebrow,
+.campaign-eyebrow{
+  display:flex!important;
+  width:100%!important;
+  justify-content:center!important;
+  text-align:center!important;
+}
+
+/* ===== ÖDEME BUTONU — SÜPEROS İLE AYNI STATİK PREMIUM GLOW ===== */
+#paymentMethodsBtn.landing-payment-chip{
+  isolation:isolate!important;
+  overflow:hidden!important;
+  border:1px solid rgba(231,169,70,.47)!important;
+  background:
+    radial-gradient(circle at 80% -10%,rgba(234,102,21,.20),transparent 34%),
+    linear-gradient(145deg,rgba(48,28,13,.88),rgba(13,10,7,.92))!important;
+  box-shadow:
+    0 17px 45px rgba(0,0,0,.28),
+    0 0 28px rgba(216,132,39,.09)!important;
+}
+
+/* Önceki orbit / snake animasyonlarını tamamen kapat */
+#paymentMethodsBtn.landing-payment-chip::before{
+  content:none!important;
+  display:none!important;
+  animation:none!important;
+}
+#paymentMethodsBtn.landing-payment-chip::after{
+  content:""!important;
+  display:block!important;
+  position:absolute!important;
+  inset:auto -20% -58% -20%!important;
+  height:58px!important;
+  border-radius:0!important;
+  pointer-events:none!important;
+  background:radial-gradient(ellipse at center,rgba(231,92,18,.22),transparent 67%)!important;
+  box-shadow:none!important;
+  opacity:1!important;
+  animation:none!important;
+  z-index:-1!important;
+}
+
+/* ===== ACILI ÜRÜN ROZETİ ===== */
+.spicy-badge{
+  position:absolute;
+  top:8px;
+  left:8px;
+  z-index:4;
+  display:inline-flex;
+  align-items:center;
+  gap:4px;
+  padding:4px 7px;
+  border-radius:999px;
+  border:1px solid rgba(255,116,65,.55);
+  background:linear-gradient(145deg,rgba(96,20,10,.96),rgba(47,12,8,.96));
+  color:#ffd7c7;
+  box-shadow:
+    0 5px 14px rgba(0,0,0,.28),
+    0 0 13px rgba(229,67,27,.16);
+  font-size:7.5px;
+  font-weight:900;
+  letter-spacing:.055em;
+  line-height:1;
+  white-space:nowrap;
+  pointer-events:none;
+}
+
+/* ===== SATIŞ ODAKLI MENÜ GELİŞTİRMELERİ ===== */
+
+/* Şefin önerisi: yalnızca seçili iki premium üründe, abartısız */
+.chef-recommend-badge{
+  position:absolute;
+  top:8px;
+  right:8px;
+  z-index:4;
+  display:inline-flex;
+  align-items:center;
+  padding:4px 7px;
+  border-radius:999px;
+  border:1px solid rgba(237,188,99,.50);
+  background:linear-gradient(145deg,rgba(60,38,15,.96),rgba(24,16,9,.96));
+  color:#f6d596;
+  box-shadow:0 5px 15px rgba(0,0,0,.26),0 0 12px rgba(221,151,47,.12);
+  font-size:7px;
+  font-weight:900;
+  letter-spacing:.06em;
+  line-height:1;
+  white-space:nowrap;
+  pointer-events:none;
+}
+.product-card.has-chef-recommend{
+  border-color:rgba(226,168,73,.48);
+}
+
+/* Kampanya posterinin altında müşteriye net içerik */
+.campaign-poster-card{
+  overflow:hidden!important;
+}
+.campaign-clarity{
+  padding:11px 12px 12px;
+  text-align:left;
+  background:
+    linear-gradient(180deg,rgba(35,22,12,.98),rgba(16,11,7,.98));
+  border-top:1px solid rgba(229,169,74,.24);
+}
+.campaign-clarity-title{
+  color:#f3d49c;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:14px;
+  font-weight:800;
+  margin-bottom:5px;
+}
+.campaign-pizza-content{
+  color:#eee1ce;
+  font-size:10px;
+  line-height:1.35;
+}
+.campaign-pizza-content b{
+  color:#f0b75d;
+}
+.campaign-fixed-note{
+  display:inline-flex;
+  margin-top:7px;
+  padding:4px 7px;
+  border-radius:999px;
+  border:1px solid rgba(236,172,75,.32);
+  background:rgba(211,132,35,.09);
+  color:#d9b77d;
+  font-size:7.5px;
+  font-weight:900;
+  letter-spacing:.055em;
+  text-transform:uppercase;
+}
+
+/* Tam ekran kampanyada da yanlış seçim beklentisini engelle */
+.viewer-campaign-notice{
+  position:absolute;
+  z-index:8;
+  left:50%;
+  bottom:calc(18px + env(safe-area-inset-bottom));
+  transform:translateX(-50%);
+  width:max-content;
+  max-width:calc(100% - 28px);
+  padding:7px 10px;
+  border-radius:12px;
+  border:1px solid rgba(238,187,103,.34);
+  background:rgba(13,9,6,.82);
+  color:#f1e4d2;
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  box-shadow:0 8px 24px rgba(0,0,0,.34);
+  font-size:8px;
+  text-align:center;
+  white-space:nowrap;
+}
+.viewer-campaign-notice b{color:#efbd68}
+.viewer-campaign-notice span{
+  margin-left:7px;
+  color:#cda96d;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:.045em;
+}
+
+.category-hero p{display:none!important}
+.category-hero{padding-bottom:10px}
+
+/* ===== CLEAN FINAL FIXES ===== */
+#viewer .viewer-share{
+  display:grid!important;
+  right:14px!important;
+  bottom:calc(18px + env(safe-area-inset-bottom))!important;
+}
+.price-disclaimer{
+  margin:10px 18px 4px;
+  text-align:center;
+  color:rgba(232,216,194,.56);
+  font-size:8.5px;
+  line-height:1.45;
+  letter-spacing:.01em;
+}
+.price-disclaimer.page-price-disclaimer{margin:6px 18px 0}
+.product-card[role="button"]:focus-visible,
+.campaign-poster-card:focus-visible,
+.poster-card[role="button"]:focus-visible{
+  outline:2px solid rgba(242,195,107,.9);
+  outline-offset:2px;
+}
+.search-result-type{
+  display:inline-block!important;
+  margin-top:3px;
+  color:#d8ab67!important;
+  font-size:7.5px!important;
+  font-weight:850;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
 </style>
 </head>
 
@@ -1012,6 +1478,8 @@ a{text-decoration:none;color:inherit}
         <a id="reviewsWriteBtn" target="_blank" rel="noopener" href="https://search.google.com/local/writereview?placeid=ChIJc1n9vJ3fyhQRMnqYBJrC7aw">Yorum Yaz</a>
       </div>
     </section>
+
+    <div class="price-disclaimer">Menü fiyatları mağaza içi / dijital menü fiyatlarıdır. Paket servis platformlarında fiyatlar değişebilir.</div>
 
     <div class="site-signature" aria-label="Site imzası">
       powered by <span>Akif Yalçın</span>
@@ -1100,6 +1568,14 @@ const GA_MEASUREMENT_ID="G-CF84B9JFWN";
 function trackEvent(name,params={}){
   if(typeof window.gtag!=="function") return;
   window.gtag("event",name,params);
+}
+
+const ASSET_VERSION="20260831-3";
+function assetUrl(src){
+  const value=String(src||"");
+  if(!value || /^(?:https?:|data:|blob:)/i.test(value)) return value;
+  const path=value.split("?")[0];
+  return `${path}?v=${ASSET_VERSION}`;
 }
 
 function safeSearchTerm(value){
@@ -1250,10 +1726,10 @@ const ICONS = {
 
 
 const POPULAR = {
-  "ekonomik": new Set(["Ekonomik Pizza","Üç Malzemeli Pizza","Sucuk Sever Pizza"]),
-  "sevilen": new Set(["Sevilen Dörtlü Pizza","Sevilen Chef Pizza","Benim Karışık Pizza"]),
-  "bol-malzemeli": new Set(["Karışık Pizza","Tavuklu Pizza","Dört Peynirli Pizza"]),
-  "chef": new Set(["Chef Süperos Pizza","Chef Et Dolusu Pizza","Kavurmalı Pizza"])
+  "ekonomik": new Set(["Ekonomik Pizza"]),
+  "sevilen": new Set(["Sevilen Dörtlü Pizza"]),
+  "bol-malzemeli": new Set(["Karışık Pizza"]),
+  "chef": new Set(["Chef Süperos Pizza"])
 };
 const isPopular=(categoryId,name)=>Boolean(POPULAR[categoryId]?.has(name));
 const SPICY_PIZZAS=new Set([
@@ -1299,36 +1775,111 @@ function renderStoreStatus(){
   label.textContent=openNow?"Açık":"Kapalı";
 }
 setInterval(renderStoreStatus,60000);
-setInterval(()=>{ if(!landing.classList.contains("hidden")){ renderLanding(); renderDailyFavorites(); } },1800000);
+setInterval(()=>{ if(!landing.classList.contains("hidden")){ renderLanding(); renderDailyFavorites(); renderStoreStatus(); } },300000);
 
 function normalizeTR(value){
-  return String(value||"").toLocaleLowerCase("tr-TR").normalize("NFD").replace(/[\u0300-\u036f]/g,"");
+  return String(value||"")
+    .toLocaleLowerCase("tr-TR")
+    .replace(/ı/g,"i")
+    .replace(/ş/g,"s")
+    .replace(/ğ/g,"g")
+    .replace(/ü/g,"u")
+    .replace(/ö/g,"o")
+    .replace(/ç/g,"c")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g,"")
+    .replace(/[^a-z0-9\s]/g," ")
+    .replace(/\s+/g," ")
+    .trim();
 }
-function searchPizza(query){
-  const q=normalizeTR(query).trim();
-  if(!q)return [];
-  return pizzaCatalog().filter(x=>normalizeTR(`${x.name} ${x.desc} ${x.categoryTitle}`).includes(q)).slice(0,10);
+
+const SEARCH_POSTER_ITEMS = [
+  ["Patates","Patates kızartması","yan-urunler","Yan Ürünler"],
+  ["Sufle","Çikolatalı sufle","yan-urunler","Yan Ürünler"],
+  ["Sarımsaklı Ekmek","Sarımsaklı peynirli ekmek","yan-urunler","Yan Ürünler"],
+  ["Sucuklu Ekmek","Sucuklu peynirli ekmek","yan-urunler","Yan Ürünler"],
+  ["Coca-Cola","Kutu ve 1 litre Coca-Cola","icecekler","İçecekler"],
+  ["Fanta","Kutu ve 1 litre Fanta","icecekler","İçecekler"],
+  ["Sprite","Kutu ve 1 litre Sprite","icecekler","İçecekler"],
+  ["Fuse Tea","Kutu ve 1 litre Fuse Tea","icecekler","İçecekler"],
+  ["Ayran","Ayran ve 1 litre ayran","icecekler","İçecekler"],
+  ["Mozzarella","Ekstra mozzarella","ekstralar","Ekstra Malzemeler"],
+  ["Sucuk","Ekstra sucuk","ekstralar","Ekstra Malzemeler"],
+  ["Sosis","Ekstra sosis","ekstralar","Ekstra Malzemeler"],
+  ["Jambon","Ekstra jambon","ekstralar","Ekstra Malzemeler"],
+  ["Tavuk Döner","Ekstra tavuk döner","ekstralar","Ekstra Malzemeler"],
+  ["Pastırma","Ekstra pastırma","ekstralar","Ekstra Malzemeler"],
+  ["Et Döner","Ekstra et döner","ekstralar","Ekstra Malzemeler"],
+  ["Kavurma","Ekstra kavurma","ekstralar","Ekstra Malzemeler"],
+  ["Sebze Ürünleri","Ekstra sebze ürünleri","ekstralar","Ekstra Malzemeler"],
+  ["Bol Peynir Kenar","Bol peynir kenar seçeneği","ekstralar","Kenar Seçenekleri"],
+  ["Simit Kenar","Simit kenar seçeneği","ekstralar","Kenar Seçenekleri"],
+  ["Sarımsaklı Kenar","Sarımsaklı kenar seçeneği","ekstralar","Kenar Seçenekleri"]
+];
+
+function fullSearchCatalog(){
+  const pizzas=pizzaCatalog().map(x=>({...x,kind:"pizza",src:x.src,typeLabel:"Pizza"}));
+  const campaigns=CATEGORIES.find(c=>c.id==="kampanyalar")?.campaigns.map((c,index)=>({
+    kind:"campaign",categoryId:"kampanyalar",categoryTitle:"Fırsat Menüleri",index,
+    name:c[0],desc:`${c[1]} • Ekonomik Pizza: sucuk + mantar + mısır`,src:c[3],typeLabel:"Fırsat Menüsü"
+  }))||[];
+  const posterItems=SEARCH_POSTER_ITEMS.map(([name,desc,categoryId,categoryTitle])=>{
+    const cat=CATEGORIES.find(c=>c.id===categoryId);
+    return {kind:"poster",categoryId,categoryTitle,index:0,name,desc,src:cat?.poster||"",typeLabel:categoryTitle};
+  });
+  return [...pizzas,...campaigns,...posterItems];
 }
+
+function searchMenu(query){
+  const tokens=normalizeTR(query).split(" ").filter(Boolean);
+  if(!tokens.length)return [];
+  return fullSearchCatalog()
+    .map(item=>{
+      const hay=normalizeTR(`${item.name} ${item.desc} ${item.categoryTitle}`);
+      if(!tokens.every(t=>hay.includes(t))) return null;
+      const name=normalizeTR(item.name);
+      let score=0;
+      if(name===tokens.join(" ")) score+=100;
+      if(tokens.every(t=>name.includes(t))) score+=30;
+      score+=tokens.filter(t=>name.startsWith(t)).length*8;
+      return {...item,score};
+    })
+    .filter(Boolean)
+    .sort((a,b)=>b.score-a.score || a.name.localeCompare(b.name,"tr"))
+    .slice(0,12);
+}
+
 function renderSearchResults(query){
   const host=document.getElementById("searchResults");if(!host)return;
-  const results=searchPizza(query);
-  if(!query.trim()){host.innerHTML='<div class="search-empty">Pizza adı veya malzeme yazın.</div>';return}
-  if(!results.length){host.innerHTML='<div class="search-empty">Eşleşen pizza bulunamadı.</div>';return}
+  const results=searchMenu(query);
+  if(!query.trim()){host.innerHTML='<div class="search-empty">Pizza, malzeme, içecek veya yan ürün yazın.</div>';return}
+  if(!results.length){host.innerHTML='<div class="search-empty">Eşleşen menü öğesi bulunamadı.</div>';return}
   host.innerHTML=results.map(r=>`
-    <button class="search-result" type="button" data-cat="${r.categoryId}" data-index="${r.index}">
-      <img src="${r.src}" alt="${r.name}">
-      <span><b>${r.name}</b><small>${r.categoryTitle} • ${r.desc}</small></span><span>›</span>
+    <button class="search-result" type="button" data-kind="${r.kind}" data-cat="${r.categoryId}" data-index="${r.index}">
+      <img src="${assetUrl(r.src)}" alt="${r.name}" loading="lazy">
+      <span><b>${r.name}</b><small>${r.categoryTitle} • ${r.desc}</small><em class="search-result-type">${r.typeLabel||r.kind}</em></span><span>›</span>
     </button>`).join("");
   host.querySelectorAll(".search-result").forEach(btn=>btn.addEventListener("click",()=>{
-    const selected=results.find(r=>r.categoryId===btn.dataset.cat && r.index===Number(btn.dataset.index));
-    if(selected){
-      trackEvent("search_result_click",{
-        search_term:safeSearchTerm(query),
-        pizza_name:selected.name,
-        category_name:selected.categoryTitle
-      });
+    const selected=results.find(r=>r.kind===btn.dataset.kind && r.categoryId===btn.dataset.cat && r.index===Number(btn.dataset.index));
+    if(!selected)return;
+    trackEvent("search_result_click",{
+      search_term:safeSearchTerm(query),
+      item_name:selected.name,
+      item_type:selected.kind,
+      category_name:selected.categoryTitle,
+      menu_period:currentMenuPeriod()
+    });
+    closeSearch();
+    if(selected.kind==="pizza"){
+      openCategory(selected.categoryId,true);
+      setTimeout(()=>openPizza(selected.categoryId,selected.index),40);
+    }else if(selected.kind==="campaign"){
+      openCategory("kampanyalar",true);
+      setTimeout(()=>openCampaignViewer(selected.index),40);
+    }else{
+      openCategory(selected.categoryId,true);
+      setTimeout(()=>openPoster(selected.categoryId,selected.name,"search"),40);
     }
-    closeSearch();openCategory(btn.dataset.cat,true);setTimeout(()=>openPizza(btn.dataset.cat,Number(btn.dataset.index)),40);
   }));
 }
 function openSearch(){
@@ -1340,9 +1891,23 @@ function closeSearch(){
   document.getElementById("searchPanel")?.setAttribute("hidden","");
   document.getElementById("searchToggle")?.setAttribute("aria-expanded","false");
 }
-function openPoster(id,titleOverride){
+function openPoster(id,titleOverride,source="direct"){
   const cat=CATEGORIES.find(c=>c.id===id);if(!cat||cat.type!=="poster")return;
-  viewerItems=[{title:titleOverride||cat.title,src:cat.poster,popular:false,categoryId:cat.id,index:0,poster:true}];openViewer(0);
+  viewerItems=[{
+    title:titleOverride||cat.title,src:cat.poster,popular:false,categoryId:cat.id,categoryName:cat.title,index:0,
+    poster:true,analyticsType:"poster",source
+  }];
+  openViewer(0);
+}
+
+function openCampaignViewer(index){
+  const cat=CATEGORIES.find(c=>c.id==="kampanyalar");
+  if(!cat)return;
+  viewerItems=cat.campaigns.map((c,campaignIndex)=>({
+    title:c[0],src:c[3],analyticsType:"campaign",campaignIndex,
+    campaignName:c[0],campaignDescription:c[1],campaignPrice:c[2],categoryId:cat.id,categoryName:cat.title
+  }));
+  openViewer(index);
 }
 function crossSellHTML(){
   return `<section class="cross-sell" aria-label="Yanında iyi gider">
@@ -1365,8 +1930,16 @@ async function shareCurrentViewerItem(){
   const item=viewerItems[viewerIndex];if(!item)return;
   const url=currentViewerShareURL(item),data={title:`${item.title} | İtalyan Chef Pizza`,text:`${item.title} — İtalyan Chef Pizza`,url};
   try{
+    let method="native";
     if(navigator.share)await navigator.share(data);
-    else{await navigator.clipboard.writeText(url);showToast("Ürün bağlantısı kopyalandı")}
+    else{method="clipboard";await navigator.clipboard.writeText(url);showToast("Ürün bağlantısı kopyalandı")}
+    trackEvent("share_click",{
+      item_name:item.title||"",
+      item_type:item.analyticsType||"viewer",
+      category_name:item.categoryName||"",
+      method,
+      menu_period:currentMenuPeriod()
+    });
   }catch(err){if(err?.name!=="AbortError")showToast("Paylaşım açılamadı")}
 }
 
@@ -1440,6 +2013,12 @@ function surpriseMe(){
   }
   lastSurprise=key;
   const name=cat.products[idx][0];
+  trackEvent("surprise_result",{
+    pizza_name:name,
+    category_name:cat.title,
+    category_id:cat.id,
+    menu_period:currentMenuPeriod()
+  });
   showToast(`Şef seçti: ${name}`);
   setTimeout(()=>openPizza(cat.id,idx),240);
 }
@@ -1447,8 +2026,17 @@ function renderDailyFavorites(){
   const host=document.getElementById("dailyFavorites");
   if(!host) return;
   const favs=dailyFavorites();
-  host.innerHTML=favs.map(f=>`<button class="daily-fav" data-cat="${f.categoryId}" data-index="${f.index}" type="button"><img src="${f.src}" alt="${f.name}" loading="eager"><span class="daily-fav-copy"><b>${f.name}</b><span>${f.prices[0]} • ${f.prices[1]}</span></span></button>`).join("");
-  host.querySelectorAll(".daily-fav").forEach(btn=>btn.addEventListener("click",()=>openPizza(btn.dataset.cat,Number(btn.dataset.index))));
+  host.innerHTML=favs.map(f=>`<button class="daily-fav" data-cat="${f.categoryId}" data-index="${f.index}" type="button"><img src="${assetUrl(f.src)}" alt="${f.name}" loading="eager"><span class="daily-fav-copy"><b>${f.name}</b><span>${f.prices[0]} • ${f.prices[1]}</span></span></button>`).join("");
+  host.querySelectorAll(".daily-fav").forEach(btn=>btn.addEventListener("click",()=>{
+    const cat=btn.dataset.cat,index=Number(btn.dataset.index);
+    const selected=favs.find(f=>f.categoryId===cat&&f.index===index);
+    trackEvent("favorite_click",{
+      pizza_name:selected?.name||"",
+      category_name:selected?.categoryTitle||"",
+      menu_period:currentMenuPeriod()
+    });
+    openPizza(cat,index);
+  }));
   const d=istanbulNowParts();
   const label=document.getElementById("favoriteDate");
   if(label){
@@ -1475,13 +2063,13 @@ let viewerIndex = 0;
 let touchStartX = null;
 
 function currentMenuPeriod(){
-  const {hour}=istanbulNowParts();
+  const {hour,minute}=istanbulNowParts();
+  const now=hour*60+minute;
 
-  // İşletmeden alınan gerçek yoğunluk bilgisi:
-  // Öğlen 12–13, akşam 18–19 ve 21–23.
-  if(hour>=12 && hour<14) return "lunch_peak";
-  if(hour>=18 && hour<20) return "evening_peak";
-  if(hour>=21 && hour<24) return "night_peak";
+  // İşletmenin gerçek yoğunluk pencereleri.
+  if(now>=12*60 && now<13*60) return "lunch_peak";   // 12:00–12:59
+  if(now>=18*60 && now<19*60) return "evening_peak"; // 18:00–18:59
+  if(now>=21*60 && now<23*60) return "night_peak";   // 21:00–22:59
   return "standard";
 }
 
@@ -1489,15 +2077,15 @@ function smartLandingCategories(){
   const period=currentMenuPeriod();
   let order;
 
-  // 12:00–13:59 → en çok giden ekonomik ürünler önde.
+  // 12:00–12:59 → en çok giden ekonomik ürünler önde.
   if(period==="lunch_peak"){
     order=["ekonomik","sevilen","kampanyalar","chef","bol-malzemeli","icecekler","yan-urunler","ekstralar"];
   }
-  // 18:00–19:59 → kampanya + çok tercih edilen + ekonomik.
+  // 18:00–18:59 → kampanya + çok tercih edilen + ekonomik.
   else if(period==="evening_peak"){
     order=["kampanyalar","sevilen","ekonomik","chef","bol-malzemeli","icecekler","yan-urunler","ekstralar"];
   }
-  // 21:00–23:59 → hızlı karar için sevilenler ve kampanyalar önde.
+  // 21:00–22:59 → hızlı karar için sevilenler ve kampanyalar önde.
   else if(period==="night_peak"){
     order=["sevilen","kampanyalar","ekonomik","chef","bol-malzemeli","icecekler","yan-urunler","ekstralar"];
   }
@@ -1553,7 +2141,7 @@ function openCategory(id, push=true){
   if(cat.type==="pizza"){
     const extraCard = cat.extraPoster ? `
       <article class="product-card extra-product-card${isPremium ? " premium-product" : ""}" data-index="${cat.products.length}">
-        <div class="thumb extra-thumb"><img src="${cat.extraPoster}" alt="${cat.extraPosterTitle || "Ekstra Malzemeler"}" loading="lazy"></div>
+        <div class="thumb extra-thumb"><img src="${assetUrl(cat.extraPoster)}" alt="${cat.extraPosterTitle || "Ekstra Malzemeler"}" loading="lazy"></div>
         <div class="prod-copy">
           <strong>${cat.extraPosterTitle || "Ekstra Malzemeler"}</strong>
           <p>${cat.extraPosterDescription || "Ekstra malzemeler ve kenar seçeneklerini incele."}</p>
@@ -1563,11 +2151,11 @@ function openCategory(id, push=true){
       </article>` : "";
 
     html+=`<div class="product-grid">`+cat.products.map((p,i)=>`
-      <article class="product-card${isPremium ? " premium-product" : ""}${isPopular(cat.id,p[0]) ? " has-popular" : ""}${isSpicy(p[0]) ? " has-spicy" : ""}${isChefRecommended(p[0]) ? " has-chef-recommend" : ""}" data-index="${i}">
+      <article class="product-card${isPremium ? " premium-product" : ""}${isPopular(cat.id,p[0]) ? " has-popular" : ""}${isSpicy(p[0]) ? " has-spicy" : ""}${isChefRecommended(p[0]) ? " has-chef-recommend" : ""}" data-index="${i}" role="button" tabindex="0">
         ${isPopular(cat.id,p[0]) ? `<span class="popular-badge">★ EN ÇOK TERCİH EDİLEN</span>` : ""}
         ${isSpicy(p[0]) ? `<span class="spicy-badge">🌶 ACILI</span>` : ""}
         ${isChefRecommended(p[0]) ? `<span class="chef-recommend-badge">✦ ŞEFİN ÖNERİSİ</span>` : ""}
-        <div class="thumb"><img src="${p[2]}" alt="${p[0]}" loading="lazy"></div>
+        <div class="thumb"><img src="${assetUrl(p[2])}" alt="${p[0]}" loading="lazy"></div>
         <div class="prod-copy">
           <strong>${p[0]}</strong>
           <p>${p[1]}</p>
@@ -1581,7 +2169,7 @@ function openCategory(id, push=true){
   if(cat.type==="campaigns"){
     html+=`<div class="campaign-grid campaign-poster-grid">`+cat.campaigns.map((c,i)=>`
       <article class="campaign-card campaign-poster-card" data-campaign-index="${i}" role="button" tabindex="0" aria-label="${c[0]}: ${c[1]}, ${c[2]}. Kampanya içeriği sabittir.">
-        <img src="${c[3]}" alt="${c[0]} - ${c[1]} - Kampanya fiyatı ${c[2]}" loading="${i===0 ? "eager" : "lazy"}">
+        <img src="${assetUrl(c[3])}" alt="${c[0]} - ${c[1]} - Kampanya fiyatı ${c[2]}" loading="${i===0 ? "eager" : "lazy"}">
         <div class="campaign-clarity">
           <div class="campaign-clarity-title">${c[0]}</div>
           <div class="campaign-pizza-content"><b>Ekonomik Pizza:</b> sucuk + mantar + mısır</div>
@@ -1593,14 +2181,15 @@ function openCategory(id, push=true){
 
   if(cat.type==="poster"){
     html+=`
-      <article class="poster-card" id="singlePoster">
-        <img src="${cat.poster}" alt="${cat.title}">
+      <article class="poster-card" id="singlePoster" role="button" tabindex="0">
+        <img src="${assetUrl(cat.poster)}" alt="${cat.title}">
         <div class="poster-hint">Tam ekran görmek için görsele dokun.</div>
       </article>`;
   }
 
-  /* Her kategori/sayfanın en altında site imzası */
+  /* Her kategori/sayfanın en altında fiyat notu + site imzası */
   html+=`
+    <div class="price-disclaimer page-price-disclaimer">Menü fiyatları mağaza içi / dijital menü fiyatlarıdır. Paket servis platformlarında fiyatlar değişebilir.</div>
     <div class="site-signature page-signature" aria-label="Site imzası">
       powered by <span>Akif Yalçın</span>
     </div>`;
@@ -1608,58 +2197,69 @@ function openCategory(id, push=true){
   content.innerHTML=html;
   window.scrollTo({top:0,behavior:"instant"});
   content.querySelectorAll("[data-cross]").forEach(btn=>btn.addEventListener("click",()=>{
-    openPoster(btn.dataset.cross,btn.dataset.title);
+    trackEvent("cross_sell_click",{
+      item_name:btn.dataset.title||"",
+      destination_category:btn.dataset.cross||"",
+      source_category:cat.id,
+      source_category_name:cat.title,
+      menu_period:currentMenuPeriod()
+    });
+    openPoster(btn.dataset.cross,btn.dataset.title,"cross_sell");
   }));
 
   if(cat.type==="pizza"){
     content.querySelectorAll(".product-card").forEach(card=>{
-      card.addEventListener("click",()=>{
+      const openCard=()=>{
         viewerItems=viewerItemsForCategory(cat);
         openViewer(Number(card.dataset.index));
+      };
+      card.addEventListener("click",openCard);
+      card.addEventListener("keydown",e=>{
+        if(e.key==="Enter"||e.key===" "){e.preventDefault();openCard()}
       });
     });
   } else if(cat.type==="campaigns"){
-    const openCampaign=(index)=>{
-      viewerItems=cat.campaigns.map((c,campaignIndex)=>({
-        title:c[0],
-        src:c[3],
-        analyticsType:"campaign",
-        campaignIndex,
-        campaignName:c[0],
-        campaignDescription:c[1],
-        campaignPrice:c[2]
-      }));
-      openViewer(index);
-    };
     content.querySelectorAll(".campaign-poster-card").forEach(card=>{
-      card.addEventListener("click",()=>openCampaign(Number(card.dataset.campaignIndex)));
+      const openCard=()=>openCampaignViewer(Number(card.dataset.campaignIndex));
+      card.addEventListener("click",openCard);
       card.addEventListener("keydown",e=>{
-        if(e.key==="Enter"||e.key===" "){
-          e.preventDefault();
-          openCampaign(Number(card.dataset.campaignIndex));
-        }
+        if(e.key==="Enter"||e.key===" "){e.preventDefault();openCard()}
       });
     });
   } else if(cat.type==="poster"){
-    document.getElementById("singlePoster").addEventListener("click",()=>{
-      viewerItems=[{title:cat.title,src:cat.poster}];
-      openViewer(0);
+    const poster=document.getElementById("singlePoster");
+    const openCard=()=>openPoster(cat.id,cat.title,"category");
+    poster.addEventListener("click",openCard);
+    poster.addEventListener("keydown",e=>{
+      if(e.key==="Enter"||e.key===" "){e.preventDefault();openCard()}
     });
   }
 
-  if(push) history.pushState({category:id},"","#"+id);
+  if(push){
+    const target=`${location.pathname}#${id}`;
+    if(location.hash===`#${id}`) history.replaceState({category:id},"",target);
+    else history.pushState({category:id},"",target);
+  }
 }
 
 function showToast(message){
   const t=document.getElementById("toast"); if(!t)return; t.textContent=message; t.classList.add("show"); clearTimeout(showToast.timer); showToast.timer=setTimeout(()=>t.classList.remove("show"),1800);
 }
 
-function showLanding(push=true){
+function showLanding(historyMode="replace"){
   closeViewer();
+  closeSearch();
   app.classList.add("hidden");
   landing.classList.remove("hidden");
   document.title="İtalyan Chef Pizza | Dijital Menü";
-  if(push) history.pushState({home:true}," ",location.pathname);
+  renderLanding();
+  renderDailyFavorites();
+  renderStoreStatus();
+  if(historyMode!=="none"){
+    const target=location.pathname;
+    if(historyMode==="push") history.pushState({home:true},"",target);
+    else history.replaceState({home:true},"",target);
+  }
 }
 
 function openViewer(index){
@@ -1692,16 +2292,25 @@ function updateViewer(){
       campaign_name:item.campaignName||item.title,
       campaign_description:item.campaignDescription||"",
       campaign_price:item.campaignPrice||"",
-      campaign_index:Number(item.campaignIndex??0)+1
+      campaign_index:Number(item.campaignIndex??0)+1,
+      menu_period:currentMenuPeriod()
+    });
+  }else if(item.analyticsType==="poster"){
+    trackEvent("poster_view",{
+      item_name:item.title||"",
+      category_id:item.categoryId||"",
+      category_name:item.categoryName||"",
+      source:item.source||"direct",
+      menu_period:currentMenuPeriod()
     });
   }
 
   viewer.classList.toggle("single-viewer",viewerItems.length<=1);
-  viewerImage.src=item.src;
+  viewerImage.src=assetUrl(item.src);
   viewerImage.alt=item.title;
   viewerTitle.textContent=item.title;
   viewerCounter.textContent=`${viewerIndex+1} / ${viewerItems.length}`;
-  viewer.style.setProperty("--viewer-bg",`url("${item.src}")`);
+  viewer.style.setProperty("--viewer-bg",`url("${assetUrl(item.src)}")`);
   viewerPopular.classList.toggle("hidden",!item.popular);
   viewerCampaignNotice?.classList.toggle("hidden",item.analyticsType!=="campaign");
   viewerDots.innerHTML=viewerItems.map((_,i)=>`<button type="button" class="viewer-dot${i===viewerIndex ? " active" : ""}" data-dot="${i}" aria-label="${i+1}. ürüne git"></button>`).join("");
@@ -1740,17 +2349,21 @@ document.getElementById("paymentMethodsBtn")?.addEventListener("click",()=>{
   viewerItems=[{
     src:"odeme-yontemleri.webp",
     title:"Ödeme Yöntemleri",
-    popular:false
+    popular:false,
+    analyticsType:"poster",
+    categoryId:"odeme",
+    categoryName:"Ödeme Yöntemleri",
+    source:"payment_button"
   }];
   openViewer(0);
 });
 
-document.getElementById("backBtn").addEventListener("click",()=>showLanding(true));
+document.getElementById("backBtn").addEventListener("click",()=>showLanding("replace"));
 document.getElementById("bottomHome")?.addEventListener("click",e=>{
   e.preventDefault();
   closeViewer();
   closeSearch();
-  showLanding(true);
+  showLanding("replace");
 });
 document.getElementById("viewerClose").addEventListener("click",closeViewer);
 document.getElementById("viewerShare").addEventListener("click",shareCurrentViewerItem);
@@ -1762,7 +2375,7 @@ document.getElementById("menuSearch")?.addEventListener("input",e=>{
   renderSearchResults(e.target.value);
   queueSearchAnalytics(e.target.value);
 });
-document.getElementById("appSearchBtn")?.addEventListener("click",()=>{showLanding(true);setTimeout(openSearch,60)});
+document.getElementById("appSearchBtn")?.addEventListener("click",()=>{showLanding("replace");setTimeout(openSearch,60)});
 document.getElementById("callNavBtn")?.addEventListener("click",()=>{
   trackEvent("call_click",{location:"bottom_nav"});
 });
@@ -1802,24 +2415,28 @@ document.addEventListener("keydown",e=>{
 document.getElementById("surpriseBtn")?.addEventListener("click",surpriseMe);
 renderDailyFavorites();
 
-/* Eski PWA kurulumu daha önce açılmış cihazlarda kalmış olabilir.
-   Bir kez temizleyip siteyi normal web sayfası olarak bırakıyoruz. */
-if("serviceWorker" in navigator){
-  navigator.serviceWorker.getRegistrations()
-    .then(regs=>Promise.all(regs.map(reg=>reg.unregister())))
-    .catch(()=>{});
-}
-if("caches" in window){
-  caches.keys()
-    .then(keys=>Promise.all(keys.map(key=>caches.delete(key))))
-    .catch(()=>{});
-}
+/* Eski PWA kayıtlarını yalnızca bir kez temizle; her ziyarette cache silme. */
+(async()=>{
+  const flag="icp-pwa-cleaned-v2";
+  try{
+    if(localStorage.getItem(flag)==="1") return;
+    if("serviceWorker" in navigator){
+      const regs=await navigator.serviceWorker.getRegistrations();
+      await Promise.all(regs.map(reg=>reg.unregister()));
+    }
+    if("caches" in window){
+      const keys=await caches.keys();
+      await Promise.all(keys.filter(key=>/^icp-|italyan|chef/i.test(key)).map(key=>caches.delete(key)));
+    }
+    localStorage.setItem(flag,"1");
+  }catch(_err){}
+})();
 
 window.addEventListener("popstate",()=>{
   const hash=location.hash.replace("#","");
   const cat=CATEGORIES.find(c=>c.id===hash);
   if(cat) openCategory(hash,false);
-  else showLanding(false);
+  else showLanding("none");
 });
 
 // Deep links: kategori ve tek ürün paylaşımı.
@@ -1829,6 +2446,7 @@ renderSearchResults("");
 
 const directPizza=new URLSearchParams(location.search).get("pizza");
 const initial=location.hash.replace("#","");
+if(!initial && !directPizza) history.replaceState({home:true},"",location.pathname);
 if(CATEGORIES.some(c=>c.id===initial))openCategory(initial,false);
 
 if(directPizza){
@@ -1841,588 +2459,16 @@ if(directPizza){
 }
 </script>
 
-<style>
-.viewer-close,
-.viewer-share{
-  box-sizing:border-box;
-}
-.viewer-share{
-  box-shadow:0 10px 28px rgba(0,0,0,.34);
-}
-.viewer-nav{
-  max-width:calc(100% - 116px);
-}
-.tool-chip{
-  justify-content:center;
-}
-#storeStatusText{
-  text-align:center;
-}
-</style>
 
 
-<style>
-#storeStatus.global-store-status{
-  position:fixed!important;
-  top:calc(env(safe-area-inset-top) + 12px)!important;
-  right:12px!important;
-  left:auto!important;
-  bottom:auto!important;
-  z-index:9999!important;
-  width:auto!important;
-  min-width:74px!important;
-  min-height:31px!important;
-  margin:0!important;
-  transform:none!important;
-  flex:none!important;
-  pointer-events:none;
-}
-</style>
 
 
-<style>
-.page-signature{
-  margin:16px 0 82px;
-}
-</style>
 
 
-<style>
-/* ===== AÇIK/KAPALI — KESİN FIX =====
-   Sadece ANA MENÜ içinde. Scroll ile kullanıcıyı takip etmez. */
-#landing{
-  position:relative!important;
-}
-#storeStatus.landing-store-status{
-  position:absolute!important;
-  top:calc(env(safe-area-inset-top) + 12px)!important;
-  right:12px!important;
-  left:auto!important;
-  bottom:auto!important;
-  z-index:40!important;
-  display:flex!important;
-  width:auto!important;
-  min-width:74px!important;
-  min-height:31px!important;
-  margin:0!important;
-  transform:none!important;
-  flex:none!important;
-  pointer-events:none!important;
-}
-/* Ana Menü kapalıysa parent ile birlikte kesinlikle görünmez. */
-#landing.hidden #storeStatus{
-  display:none!important;
-}
-</style>
 
 
-<style>
-/* ===== FOTOĞRAF GÖRÜNTÜLEYİCİ SADELİK FIX =====
-   Alt oklar / başlık / sayaç / noktalar / paylaş butonu kaldırıldı.
-   Gezinme yatay kaydırma ile devam eder. */
-#viewer .viewer-nav,
-#viewer .viewer-share{
-  display:none!important;
-}
-
-/* Fotoğraf açıkken alttaki site navigasyonu da arkadan görünmesin. */
-body.viewer-open .bottom-nav{
-  display:none!important;
-}
-
-/* Alt kontrol alanı kalktığı için görseli gerçek merkeze al. */
-#viewer .viewer-inner{
-  padding:12px 10px max(12px, env(safe-area-inset-bottom))!important;
-}
-</style>
 
 
-<style>
-/* ===== ANA MENÜ / ÖDEME YÖNTEMLERİ ===== */
-#paymentMethodsBtn.landing-payment-chip{
-  position:absolute!important;
-  top:calc(env(safe-area-inset-top) + 12px)!important;
-  left:12px!important;
-  right:auto!important;
-  bottom:auto!important;
-  z-index:40!important;
-  display:flex!important;
-  align-items:center!important;
-  justify-content:center!important;
-  gap:6px!important;
-  width:auto!important;
-  min-width:82px!important;
-  min-height:31px!important;
-  margin:0!important;
-  padding:6px 10px!important;
-  border-radius:999px!important;
-  color:rgba(255,239,211,.9)!important;
-  background:rgba(12,9,7,.72)!important;
-  border:1px solid rgba(238,190,115,.25)!important;
-  box-shadow:0 8px 24px rgba(0,0,0,.22)!important;
-  backdrop-filter:blur(12px);
-  -webkit-backdrop-filter:blur(12px);
-  font-size:8.5px!important;
-  font-weight:800!important;
-  letter-spacing:.025em!important;
-  cursor:pointer!important;
-}
-#paymentMethodsBtn.landing-payment-chip svg{
-  width:13px!important;
-  height:13px!important;
-  color:var(--orange)!important;
-  flex:0 0 auto!important;
-}
-#paymentMethodsBtn.landing-payment-chip:active{
-  transform:scale(.97)!important;
-}
-#landing.hidden #paymentMethodsBtn{
-  display:none!important;
-}
-
-/* Tek görsellik ekranlarda "kaydır" mesajı gereksiz. */
-#viewer.single-viewer .swipe-tip{
-  display:none!important;
-}
-</style>
-
-
-<style>
-/* ===== KAMPANYALAR / GÖRSEL ENTEGRASYON ===== */
-.campaign-poster-grid{
-  grid-template-columns:1fr!important;
-  gap:14px!important;
-  padding:10px 14px 28px!important;
-}
-.campaign-poster-card{
-  position:relative!important;
-  overflow:hidden!important;
-  padding:0!important;
-  border-radius:16px!important;
-  border:1px solid rgba(238,178,88,.36)!important;
-  background:#090705!important;
-  box-shadow:
-    0 0 0 1px rgba(255,190,96,.04),
-    0 12px 28px rgba(0,0,0,.34)!important;
-  cursor:pointer!important;
-  -webkit-tap-highlight-color:transparent;
-}
-.campaign-poster-card img{
-  display:block!important;
-  width:100%!important;
-  height:auto!important;
-  object-fit:contain!important;
-}
-.campaign-poster-card:active{
-  transform:scale(.992);
-}
-@media(min-width:620px){
-  .campaign-poster-grid{
-    grid-template-columns:1fr 1fr!important;
-  }
-}
-</style>
-
-
-<style>
-/* ===== KAMPANYALAR — PREMIUM HERO ===== */
-.campaign-hero{
-  position:relative!important;
-  overflow:hidden!important;
-  margin:12px 12px 8px!important;
-  padding:19px 17px 17px!important;
-  border:1px solid rgba(232,163,57,.52)!important;
-  border-radius:22px!important;
-  background:
-    radial-gradient(circle at 82% -18%,rgba(226,91,21,.24),transparent 38%),
-    radial-gradient(circle at 10% 120%,rgba(231,151,44,.13),transparent 42%),
-    linear-gradient(145deg,rgba(51,28,12,.92),rgba(14,9,6,.95))!important;
-  box-shadow:
-    0 18px 44px rgba(0,0,0,.30),
-    0 0 30px rgba(222,131,33,.11)!important;
-}
-.campaign-hero::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-  opacity:.34;
-  background:
-    linear-gradient(110deg,transparent 0 40%,rgba(255,215,143,.08) 49%,transparent 58%),
-    repeating-linear-gradient(135deg,rgba(255,255,255,.018) 0 1px,transparent 1px 8px);
-}
-.campaign-hero::after{
-  content:"";
-  position:absolute;
-  width:170px;
-  height:170px;
-  right:-62px;
-  bottom:-104px;
-  border-radius:50%;
-  pointer-events:none;
-  background:radial-gradient(circle,rgba(226,81,17,.24),transparent 67%);
-}
-.campaign-eyebrow{
-  position:relative;
-  z-index:1;
-  display:inline-flex;
-  margin-bottom:7px;
-  color:#efbd62;
-  font-size:9px;
-  font-weight:900;
-  letter-spacing:.16em;
-  text-transform:uppercase;
-}
-.campaign-hero h1{
-  position:relative;
-  z-index:1;
-  color:#fff4dd!important;
-  font-size:clamp(25px,8vw,38px)!important;
-  line-height:1!important;
-  white-space:nowrap!important;
-  overflow:hidden!important;
-  text-overflow:ellipsis!important;
-  text-shadow:0 2px 18px rgba(0,0,0,.25);
-}
-
-/* Kampanya posterleri: aynı premium çerçeve dili, daha derli toplu */
-.campaign-poster-grid{
-  gap:16px!important;
-  padding-top:8px!important;
-}
-.campaign-poster-card{
-  border:1px solid rgba(235,172,72,.48)!important;
-  border-radius:19px!important;
-  box-shadow:
-    0 15px 34px rgba(0,0,0,.32),
-    0 0 0 1px rgba(255,207,128,.04),
-    0 0 20px rgba(216,126,32,.08)!important;
-  transition:transform .16s ease,border-color .16s ease,box-shadow .16s ease;
-}
-.campaign-poster-card:active{
-  transform:scale(.988)!important;
-  border-color:rgba(246,190,95,.72)!important;
-  box-shadow:
-    0 10px 24px rgba(0,0,0,.30),
-    0 0 24px rgba(225,143,42,.16)!important;
-}
-
-/* ===== ÖDEME — SÜREKLİ 360° GOLDEN ORBIT ===== */
-#paymentMethodsBtn.landing-payment-chip{
-  isolation:isolate!important;
-  overflow:visible!important;
-  border-color:rgba(238,190,115,.18)!important;
-  box-shadow:
-    0 8px 24px rgba(0,0,0,.22),
-    0 0 13px rgba(232,164,61,.10)!important;
-}
-#paymentMethodsBtn.landing-payment-chip::before{
-  content:"";
-  position:absolute;
-  inset:-3px;
-  border-radius:999px;
-  pointer-events:none;
-  background:conic-gradient(
-    from 0deg,
-    rgba(255,206,112,.08) 0deg,
-    rgba(255,206,112,.08) 248deg,
-    rgba(255,224,158,.95) 292deg,
-    rgba(235,151,42,1) 330deg,
-    rgba(255,206,112,.08) 360deg
-  );
-  -webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 2px),#000 calc(100% - 2px));
-  mask:radial-gradient(farthest-side,transparent calc(100% - 2px),#000 calc(100% - 2px));
-  filter:drop-shadow(0 0 4px rgba(239,169,58,.56));
-  animation:paymentGoldOrbit 2.6s linear infinite;
-  z-index:-1;
-}
-#paymentMethodsBtn.landing-payment-chip::after{
-  content:"";
-  position:absolute;
-  inset:-6px;
-  border-radius:999px;
-  pointer-events:none;
-  box-shadow:0 0 15px rgba(230,150,43,.18);
-  animation:paymentGoldBreath 1.8s ease-in-out infinite alternate;
-  z-index:-2;
-}
-@keyframes paymentGoldOrbit{
-  to{transform:rotate(360deg)}
-}
-@keyframes paymentGoldBreath{
-  from{opacity:.35}
-  to{opacity:.88}
-}
-</style>
-
-
-<style>
-/* ===== İÇ MENÜ BAŞLIKLARI — ORTA HİZALAMA =====
-   Sadece kategori/iç menü hero alanlarını etkiler.
-   Ana menü kartlarına dokunmaz. */
-.category-hero{
-  text-align:center!important;
-}
-.category-hero h1{
-  width:100%!important;
-  text-align:center!important;
-  margin-left:auto!important;
-  margin-right:auto!important;
-}
-.premium-eyebrow,
-.campaign-eyebrow{
-  display:flex!important;
-  width:100%!important;
-  justify-content:center!important;
-  text-align:center!important;
-}
-</style>
-
-
-<style>
-/* ===== ÖDEME BUTONU — SNAKE / CHASING GOLD BORDER =====
-   Sabit ince altın hat + çevresinde kendini kovalayan kısa parlak segment. */
-#paymentMethodsBtn.landing-payment-chip{
-  position:absolute!important;
-  isolation:isolate!important;
-  overflow:visible!important;
-  border:1px solid rgba(232,176,83,.28)!important;
-  box-shadow:
-    0 8px 24px rgba(0,0,0,.22),
-    0 0 10px rgba(229,153,45,.08)!important;
-}
-
-/* Hareket eden kısa "snake" segment */
-#paymentMethodsBtn.landing-payment-chip::before{
-  content:""!important;
-  position:absolute!important;
-  inset:-3px!important;
-  border-radius:999px!important;
-  pointer-events:none!important;
-  z-index:-1!important;
-
-  /* Çoğu şeffaf; yalnızca kısa, kuyruklu altın parça görünür */
-  background:conic-gradient(
-    from 0deg,
-    transparent 0deg 286deg,
-    rgba(225,143,35,.08) 286deg,
-    rgba(236,163,52,.34) 300deg,
-    rgba(248,194,91,.72) 316deg,
-    rgba(255,226,163,1) 330deg,
-    rgba(255,246,214,1) 338deg,
-    rgba(245,183,71,.72) 346deg,
-    rgba(228,145,34,.18) 355deg,
-    transparent 360deg
-  )!important;
-
-  -webkit-mask:radial-gradient(
-    farthest-side,
-    transparent calc(100% - 2px),
-    #000 calc(100% - 2px)
-  )!important;
-  mask:radial-gradient(
-    farthest-side,
-    transparent calc(100% - 2px),
-    #000 calc(100% - 2px)
-  )!important;
-
-  filter:
-    drop-shadow(0 0 3px rgba(255,205,112,.85))
-    drop-shadow(0 0 7px rgba(227,145,38,.48))!important;
-
-  animation:paymentSnakeChase 2.15s linear infinite!important;
-  transform-origin:center center!important;
-}
-
-/* Statik dış glow; artık nefes/spin atmıyor */
-#paymentMethodsBtn.landing-payment-chip::after{
-  content:""!important;
-  position:absolute!important;
-  inset:-5px!important;
-  border-radius:999px!important;
-  pointer-events:none!important;
-  z-index:-2!important;
-  box-shadow:0 0 12px rgba(232,157,49,.13)!important;
-  opacity:1!important;
-  animation:none!important;
-}
-
-@keyframes paymentSnakeChase{
-  from{transform:rotate(0deg)}
-  to{transform:rotate(360deg)}
-}
-</style>
-
-
-<style>
-/* ===== ÖDEME BUTONU — SÜPEROS İLE AYNI STATİK PREMIUM GLOW ===== */
-#paymentMethodsBtn.landing-payment-chip{
-  isolation:isolate!important;
-  overflow:hidden!important;
-  border:1px solid rgba(231,169,70,.47)!important;
-  background:
-    radial-gradient(circle at 80% -10%,rgba(234,102,21,.20),transparent 34%),
-    linear-gradient(145deg,rgba(48,28,13,.88),rgba(13,10,7,.92))!important;
-  box-shadow:
-    0 17px 45px rgba(0,0,0,.28),
-    0 0 28px rgba(216,132,39,.09)!important;
-}
-
-/* Önceki orbit / snake animasyonlarını tamamen kapat */
-#paymentMethodsBtn.landing-payment-chip::before{
-  content:none!important;
-  display:none!important;
-  animation:none!important;
-}
-#paymentMethodsBtn.landing-payment-chip::after{
-  content:""!important;
-  display:block!important;
-  position:absolute!important;
-  inset:auto -20% -58% -20%!important;
-  height:58px!important;
-  border-radius:0!important;
-  pointer-events:none!important;
-  background:radial-gradient(ellipse at center,rgba(231,92,18,.22),transparent 67%)!important;
-  box-shadow:none!important;
-  opacity:1!important;
-  animation:none!important;
-  z-index:-1!important;
-}
-</style>
-
-
-<style>
-/* ===== ACILI ÜRÜN ROZETİ ===== */
-.spicy-badge{
-  position:absolute;
-  top:8px;
-  left:8px;
-  z-index:4;
-  display:inline-flex;
-  align-items:center;
-  gap:4px;
-  padding:4px 7px;
-  border-radius:999px;
-  border:1px solid rgba(255,116,65,.55);
-  background:linear-gradient(145deg,rgba(96,20,10,.96),rgba(47,12,8,.96));
-  color:#ffd7c7;
-  box-shadow:
-    0 5px 14px rgba(0,0,0,.28),
-    0 0 13px rgba(229,67,27,.16);
-  font-size:7.5px;
-  font-weight:900;
-  letter-spacing:.055em;
-  line-height:1;
-  white-space:nowrap;
-  pointer-events:none;
-}
-</style>
-
-
-<style>
-/* ===== SATIŞ ODAKLI MENÜ GELİŞTİRMELERİ ===== */
-
-/* Şefin önerisi: yalnızca seçili iki premium üründe, abartısız */
-.chef-recommend-badge{
-  position:absolute;
-  top:8px;
-  right:8px;
-  z-index:4;
-  display:inline-flex;
-  align-items:center;
-  padding:4px 7px;
-  border-radius:999px;
-  border:1px solid rgba(237,188,99,.50);
-  background:linear-gradient(145deg,rgba(60,38,15,.96),rgba(24,16,9,.96));
-  color:#f6d596;
-  box-shadow:0 5px 15px rgba(0,0,0,.26),0 0 12px rgba(221,151,47,.12);
-  font-size:7px;
-  font-weight:900;
-  letter-spacing:.06em;
-  line-height:1;
-  white-space:nowrap;
-  pointer-events:none;
-}
-.product-card.has-chef-recommend{
-  border-color:rgba(226,168,73,.48);
-}
-
-/* Kampanya posterinin altında müşteriye net içerik */
-.campaign-poster-card{
-  overflow:hidden!important;
-}
-.campaign-clarity{
-  padding:11px 12px 12px;
-  text-align:left;
-  background:
-    linear-gradient(180deg,rgba(35,22,12,.98),rgba(16,11,7,.98));
-  border-top:1px solid rgba(229,169,74,.24);
-}
-.campaign-clarity-title{
-  color:#f3d49c;
-  font-family:Georgia,"Times New Roman",serif;
-  font-size:14px;
-  font-weight:800;
-  margin-bottom:5px;
-}
-.campaign-pizza-content{
-  color:#eee1ce;
-  font-size:10px;
-  line-height:1.35;
-}
-.campaign-pizza-content b{
-  color:#f0b75d;
-}
-.campaign-fixed-note{
-  display:inline-flex;
-  margin-top:7px;
-  padding:4px 7px;
-  border-radius:999px;
-  border:1px solid rgba(236,172,75,.32);
-  background:rgba(211,132,35,.09);
-  color:#d9b77d;
-  font-size:7.5px;
-  font-weight:900;
-  letter-spacing:.055em;
-  text-transform:uppercase;
-}
-
-/* Tam ekran kampanyada da yanlış seçim beklentisini engelle */
-.viewer-campaign-notice{
-  position:absolute;
-  z-index:8;
-  left:50%;
-  bottom:calc(18px + env(safe-area-inset-bottom));
-  transform:translateX(-50%);
-  width:max-content;
-  max-width:calc(100% - 28px);
-  padding:7px 10px;
-  border-radius:12px;
-  border:1px solid rgba(238,187,103,.34);
-  background:rgba(13,9,6,.82);
-  color:#f1e4d2;
-  backdrop-filter:blur(10px);
-  -webkit-backdrop-filter:blur(10px);
-  box-shadow:0 8px 24px rgba(0,0,0,.34);
-  font-size:8px;
-  text-align:center;
-  white-space:nowrap;
-}
-.viewer-campaign-notice b{color:#efbd68}
-.viewer-campaign-notice span{
-  margin-left:7px;
-  color:#cda96d;
-  font-weight:900;
-  text-transform:uppercase;
-  letter-spacing:.045em;
-}
-</style>
 
 </body>
 </html>
-
-
-<style>
-.category-hero p{display:none!important}
-.category-hero{padding-bottom:10px}
-</style>
